@@ -5,21 +5,21 @@
 body {
     width: 100%;
     margin: 0;
-    background:#FFF;
-    text-align: center;
-    color:#000;
+    background:#555;
+    color: #FFF;
+    text-align: center
 }
 
 img {
-    width: 320px;
-    height: 320px;
+    width: 100%;
+    max-width:500px;
 }
-#main_container {
-    display: flex;
-    flex-wrap:wrap;
-    width:100%;
-    max-width:1000px;
-    margin:0 auto;
+
+.label {
+    width: 100%;
+    margin: 9px auto;
+    font-size: 20px;
+    line-height: 40px;
 }
 
 .x{
@@ -28,10 +28,19 @@ img {
 }
 
 
-#tit {
+#header {
+    width:100%;
+    background-image:url(header.jpg);
+    background-size:1920px;
+    background-repeat:no-repeat;
+    color:#FFF;
     font-size:40px;
-    text-align:center;
-    line-height:200px;
+    line-height:300px;
+}
+
+.title {
+    width: 100%;
+    color: #FFF;
 }
 
 .c {
@@ -46,8 +55,8 @@ img {
 }
 
 </style>
-<div id=tit>酒のつまみになる話</div>
-<div style="width:100%;background:#AB3;margin:10px auto">ウォッカ 2015年産</div>
+<div id=header>酒のつまみ</div>
+<div class=label style="background:#AB3">ウォッカ 2015年産</div>
 <div class=x><img src=1.jpg></div>
 <div class=c>とても飲みやすい</div>
 <div class=x><img src=2.jpg></div>
@@ -57,7 +66,7 @@ img {
 <div class=x><img src=4.jpg></div>
 <div class=c>ごちそうさまでした</div>
 </div>
-<div style="width:100%;background:#AB3;margin:10px auto">ウォッカ 2015年産</div>
+<div class=label style="background:#DB3">ウォッカ 2015年産</div>
 <div class=x><img src=1.jpg></div>
 <div class=c>とても飲みやすい</div>
 <div class=x><img src=2.jpg></div>
