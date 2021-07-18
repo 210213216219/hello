@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset=UTF-8>
+<meta name=viewport content='initial-scale=1'>
+<div id=a style=width:100px;height:100px;background:red>
+<div>
+<span>x: </span>
+<span id=b>0</span>
+<span>y: </span>
+<span id=c>0</span>
+</div>
+</div>
+<script>
+a = document.querySelector('#a');
+b=document.getElementById("b");
+c=document.getElementById("c");
+a.style.position = "absolute";
+window.onpointermove =(e)=> {
+    a.style.left = e.x + "px";
+    a.style.top = e.y + "px";
+    b.textContent = e.x;
+    c.textContent = e.y;
+}
+
+
+
+
+
+
+</script>
