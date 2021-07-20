@@ -1,29 +1,56 @@
 <!DOCTYPE html>
 <meta charset=UTF-8>
 <meta name=viewport content='initial-scale=1'>
-<div id=a style=width:100px;height:100px;background:red>
-<div>
-<span>x: </span>
-<span id=b>0</span>
-<span>y: </span>
-<span id=c>0</span>
-</div>
-</div>
-<script>
-a = document.querySelector('#a');
-b=document.getElementById("b");
-c=document.getElementById("c");
-a.style.position = "absolute";
-window.onpointermove =(e)=> {
-    a.style.left = e.x + "px";
-    a.style.top = e.y + "px";
-    b.textContent = e.x;
-    c.textContent = e.y;
+<style>
+.m {
+    position:relative;
+    top:73px;
+    min-width: 88px;
+    height: 0;
+    margin:16px;
+    padding-top:88px;
+    background-size: 88px;
+    border-radius: 88px;
+    cursor: grab;
+    user-select:none;
+}
+
+#x {
+    width:100%;overflow-x:overlay;display:flex;height:200px;background:#DDD;
+}
+#x::-webkit-scrollbar {
+    background:transparent;
+}
+
+#x::-webkit-scrollbar-track {
+    background:transparent;
+}
+
+#x::-webkit-scrollbar-thumb {
+    background:blue;
 }
 
 
-
-
-
-
-</script>
+</style>
+<div id=x>
+<div class=m style=background:red>ああああ</div>
+<div class=m style=background:yellow>いいいい</div>
+<div class=m style=background:red>ああああ</div>
+<div class=m style=background:yellow>いいいい</div>
+<div class=m style=background:red>ああああ</div>
+<div class=m style=background:yellow>いいいい</div>
+<div class=m style=background:red>ああああ</div>
+<div class=m style=background:yellow>いいいい</div>
+<div class=m style=background:red>ああああ</div>
+<div class=m style=background:yellow>いいいい</div>
+<div class=m style=background:red>ああああ</div>
+<div class=m style=background:yellow>いいいい</div>
+<div class=m style=background:red>ああああ</div>
+<div class=m style=background:yellow>いいいい</div>
+<div class=m style=background:red>ああああ</div>
+<div class=m style=background:yellow>いいいい</div>
+<div class=m style=background:red>ああああ</div>
+<div class=m style=background:yellow>いいいい</div>
+<div class=m style=background:red>ああああ</div>
+<div class=m style=background:yellow>いいいい</div>
+</div>
