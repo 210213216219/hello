@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<meta charset=UTF-8>
+<meta name=viewport content='initial-scale=1'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="css2.css" rel="stylesheet">
+<title>ポリゴン突撃部隊</title>
+<style>
+/*rootを100%にしないと#main_containtsのcalcが適用されない*/
+html{
+    height:100%;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+    font-family: 'Noto Sans JP', sans-serif;
+    height: 100%;
+}
+
+#main_contents {
+    height: calc( 100% - 129px );
+    overflow: overlay;
+
+}
+
+#main_contents::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+
+#main_contents::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .1);
+}
+
+#title {
+    font-size:32px;
+    margin:32px 0;
+}
+
+#formation {
+    width: min-content;
+    margin: 0 auto;
+}
+
+.r {
+    display: flex;
+    width: min-content; /*max-content or fit-content or min-content*/
+    margin: 0 auto;
+    align-items: center;
+    user-select: none
+}
+
+.n {
+    min-width: 44px;
+    height: 44px;
+    line-height: 44px;
+    margin: 16px 12px;
+    border: solid 1px #AAA;
+    border-radius: 44px;
+    cursor: pointer;
+}
+
+.c {
+    min-width: 88px;
+    height: 88px;
+    line-height: 88px;
+    margin: 16px 12px;
+    background-size: 88px;
+    border: solid 1px #AAA;
+    border-radius: 88px;
+    cursor: pointer
+}
+
+#member_container {
+    display: flex;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 124px;
+    flex-wrap: nowrap;
+    overflow-x: overlay
+}
+
+#member_container::-webkit-scrollbar { height:20px }
+#member_container::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, .1) }
+#member_container > * { display: flex }
+#member_container > :nth-child(1) { background: #C9D }
+#member_container > :nth-child(2) { background: #FDE }
+#member_container > :nth-child(3) { background: #9DF }
+
+.m {
+    min-width: 88px;
+    height: 88px;
+    line-height: 200px;
+    margin: 12px;
+    background-size: 88px;
+    border-radius: 88px;
+    cursor: pointer;
+    user-select:none
+}
+</style>
+<div id=main_contents>
+  <div id=title>#ポリゴン突撃部隊</div>
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" width=51 height=49 stroke=#555 fill=none>
+        <path id=mode d=M1,9a5,5,0,0,1,5-5h30a5,5,0,0,1,5,5v30a5,5,0,0,1-5,5h-30a5,5,0,0,1-5-5zm7,4h5v5h-5zm5,9h5v5h-5zm5,9h5v5h-5zm0-18h5v5h-5zm5,9h5v5h-5zm5-9h5v5h-5z />
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width=200 height=49 stroke=#555 fill=none>
+        <!--<path d=M1,9a5,5,0,0,1,5-5h30a5,5,0,0,1,5,5v30a5,5,0,0,1-5,5h-30a5,5,0,0,1-5-5zm9,5h7v7m0-7a12,12,0,1,0,9,0 />-->
+        <!--<fill path d=M0,9a5,5,0,0,1,5-5h30a5,5,0,0,1,5,5v30a5,5,0,0,1-5,5h-30a5,5,0,0,1-5-5zm24,5a12,12,0,1,1,-9,0v7m-7-7h7 />-->        
+        <path id=download d=M80,9a5,5,0,0,1,5-5h30a5,5,0,0,1,5,5v30a5,5,0,0,1-5,5h-30a5,5,0,0,1-5-5zm28,15-9,7-9-7m9-12v16m-9,8h18 />
+        <!--<path id=settings d=M159,9a5,5,0,0,1,5-5h30a5,5,0,0,1,5,5v30a5,5,0,0,1-5,5h-30a5,5,0,0,1-5-5zm20,9v2m0,4v2m0,4v2 />-->
+    </svg>
+  </div>
+  <div id=formation>
+        <div class=r>
+            <div class=n>-</div>
+            <div class=c>9</div>
+            <div class=c>10</div>
+            <div class=c>11</div>
+            <div class=c>12</div>
+            <div class=c>13</div> 
+            <div class=c>14</div>
+            <div class=n>+</div>
+        </div>
+        <div class=r>
+            <div class=n>-</div>
+            <div class=c>4</div>
+            <div class=c>5</div>
+            <div class=c>6</div>
+            <div class=c>7</div>
+            <div class=c>8</div>
+            <div class=n>+</div>
+        </div>
+        <div class=r>
+            <div class=n>-</div>
+            <div class=c>1</div>
+            <div class=c>2</div>
+            <div class=c>3</div>
+            <div class=n>+</div>
+        </div>
+  </div>
+<div id=member_container>
+      <div>
+        <div class=m style=background-image:url(井上梨名.avif)>井上梨名</div>
+        <div class=m style=background-image:url(土生瑞穂.avif)>土生瑞穂</div>
+        <div class=m style=background-image:url(大園玲.avif)>大園玲</div>
+        <div class=m style=background-image:url(原田葵.avif)>原田葵</div>
+        <div class=m style=background-image:url(藤吉夏鈴.avif)>藤吉夏鈴</div>
+        <div class=m style=background-image:url(守屋茜.avif)>守屋茜</div>
+        <div class=m style=background-image:url(森田ひかる.avif)>森田ひかる</div>
+        <div class=m style=background-image:url(渡辺梨加.avif)>渡辺梨加</div>
+        <div class=m style=background-image:url(増本綺良.avif)>増本綺良</div>
+        <div class=m style=background-image:url(守屋麗奈.avif)>守屋麗奈</div>
+        <div class=m style=background-image:url(上村莉菜.avif)>上村莉菜</div>
+        <div class=m style=background-image:url(尾関梨香.avif)>尾関梨香</div>
+        <div class=m style=background-image:url(井上梨名.avif)>井上梨名</div>
+        <div class=m style=background-image:url(土生瑞穂.avif)>土生瑞穂</div>
+        <div class=m style=background-image:url(大園玲.avif)>大園玲</div>
+        <div class=m style=background-image:url(原田葵.avif)>原田葵</div>
+        <div class=m style=background-image:url(藤吉夏鈴.avif)>藤吉夏鈴</div>
+        <div class=m style=background-image:url(守屋茜.avif)>守屋茜</div>
+        <div class=m style=background-image:url(森田ひかる.avif)>森田ひかる</div>
+        <div class=m style=background-image:url(渡辺梨加.avif)>渡辺梨加</div>
+        <div class=m style=background-image:url(増本綺良.avif)>増本綺良</div>
+        <div class=m style=background-image:url(守屋麗奈.avif)>守屋麗奈</div>
+      </div>
+      <div>
+        <div class=m style=background-image:url(井上梨名.avif)>井上梨名</div>
+        <div class=m style=background-image:url(土生瑞穂.avif)>土生瑞穂</div>
+        <div class=m style=background-image:url(大園玲.avif)>大園玲</div>
+        <div class=m style=background-image:url(原田葵.avif)>原田葵</div>
+        <div class=m style=background-image:url(藤吉夏鈴.avif)>藤吉夏鈴</div>
+        <div class=m style=background-image:url(守屋茜.avif)>守屋茜</div>
+        <div class=m style=background-image:url(森田ひかる.avif)>森田ひかる</div>
+        <div class=m style=background-image:url(渡辺梨加.avif)>渡辺梨加</div>
+        <div class=m style=background-image:url(増本綺良.avif)>増本綺良</div>
+        <div class=m style=background-image:url(守屋麗奈.avif)>守屋麗奈</div>
+        <div class=m style=background-image:url(上村莉菜.avif)>上村莉菜</div>
+        <div class=m style=background-image:url(尾関梨香.avif)>尾関梨香</div>
+        <div class=m style=background-image:url(井上梨名.avif)>井上梨名</div>
+        <div class=m style=background-image:url(土生瑞穂.avif)>土生瑞穂</div>
+        <div class=m style=background-image:url(大園玲.avif)>大園玲</div>
+        <div class=m style=background-image:url(原田葵.avif)>原田葵</div>
+        <div class=m style=background-image:url(藤吉夏鈴.avif)>藤吉夏鈴</div>
+        <div class=m style=background-image:url(守屋茜.avif)>守屋茜</div>
+        <div class=m style=background-image:url(森田ひかる.avif)>森田ひかる</div>
+        <div class=m style=background-image:url(渡辺梨加.avif)>渡辺梨加</div>
+        <div class=m style=background-image:url(増本綺良.avif)>増本綺良</div>
+        <div class=m style=background-image:url(守屋麗奈.avif)>守屋麗奈</div>
+      </div>
+      <div>
+        <div class=m style=background-image:url(井上梨名.avif)>井上梨名</div>
+        <div class=m style=background-image:url(土生瑞穂.avif)>土生瑞穂</div>
+        <div class=m style=background-image:url(大園玲.avif)>大園玲</div>
+        <div class=m style=background-image:url(原田葵.avif)>原田葵</div>
+        <div class=m style=background-image:url(藤吉夏鈴.avif)>藤吉夏鈴</div>
+        <div class=m style=background-image:url(守屋茜.avif)>守屋茜</div>
+        <div class=m style=background-image:url(森田ひかる.avif)>森田ひかる</div>
+        <div class=m style=background-image:url(渡辺梨加.avif)>渡辺梨加</div>
+        <div class=m style=background-image:url(増本綺良.avif)>増本綺良</div>
+        <div class=m style=background-image:url(守屋麗奈.avif)>守屋麗奈</div>
+        <div class=m style=background-image:url(上村莉菜.avif)>上村莉菜</div>
+        <div class=m style=background-image:url(尾関梨香.avif)>尾関梨香</div>
+        <div class=m style=background-image:url(井上梨名.avif)>井上梨名</div>
+        <div class=m style=background-image:url(土生瑞穂.avif)>土生瑞穂</div>
+        <div class=m style=background-image:url(大園玲.avif)>大園玲</div>
+        <div class=m style=background-image:url(原田葵.avif)>原田葵</div>
+        <div class=m style=background-image:url(藤吉夏鈴.avif)>藤吉夏鈴</div>
+        <div class=m style=background-image:url(守屋茜.avif)>守屋茜</div>
+        <div class=m style=background-image:url(森田ひかる.avif)>森田ひかる</div>
+        <div class=m style=background-image:url(渡辺梨加.avif)>渡辺梨加</div>
+        <div class=m style=background-image:url(増本綺良.avif)>増本綺良</div>
+        <div class=m style=background-image:url(守屋麗奈.avif)>守屋麗奈</div>
+      </div>
+    </div>
+<script>
+
+r = document.getElementsByClassName('r');
+
+keyframes = { minWidth:"0",height:"0",marginLeft:"0",marginRight:"0" };
+timings = { duration:640 };
+
+
+c=[];
+
+for(let i=0;i<3;++i) {
+    c[i] = [];
+    c[i] = r[i].children;
+    effect = new KeyframeEffect(c[i][1], keyframes, timings);
+    ani = new Animation(effect, document.timeline);
+    ani.onfinish =(e)=> {
+        console.log(e);
+    }
+
+    c[i][0].onclick =()=> {
+        c[i][1].style.fontSize = 0;
+        /*c[i][1].animate([
+            { minWidth:"0",
+              marginLeft:"0",
+              marginRight:"0",
+              height:"0" }
+        ],640);*/
+        ani.play();
+        //c[i][1].remove();
+    }
+    c[i][c[i].length-1].onclick =()=> {
+
+    }
+}
+/*
+m = document.getElementsByClassName('m');
+for(i=0;m[i];++i) {
+
+}*/
+
+console.log("ffdf");
+
+
+//c = document.getElementsByClassName('c');
+/*
+mirror = document.createElement("div");
+mirror.style.display = "none";
+mirror.style.position = "absolute";
+mirror.style.minWidth = "88px";
+mirror.style.height = 0;
+mirror.style.paddingTop = "88px";
+mirror.style.backgroundSize = "88px";
+mirror.style.borderRadius = "88px";
+mirror.style.filter = "opacity(0.5)";
+mirror.style.pointerEvents = "none";
+mirror.style.userSelect = "none";
+mirror.style.cursor = "grab";
+document.body.append(mirror);
+*/
+
+//r3top = c[0][0].getBoundingClientRect().top + 44;
+//r2top = r3top + 114;
+//r1top = r2top + 114;
+//r1top = c[2][0].getBoundingClientRect().top + 45;
+
+//isMoving = false;
+//targetFocus = false;
+
+//var targetUnit;
+//var flag;
+
+/*
+if ( window.ontouchstart !== undefined ) {
+    window.ontouchmove =(e)=> {
+        
+        touches = e.touches[0];
+        x = touches.pageX - 44;
+        y = touches.pageY - 44;
+        mirror.style.top =  y + "px";
+        mirror.style.left = x + "px";
+        yDist1 = y - r1top;
+
+        if ( yDist1 < -90 ) {
+            if ( yDist1 < -203 ) {
+                if ( yDist1 > -318 && yDist1 < -228 ) { //3列目
+                    flag = 3;
+                }
+            } else if ( yDist1 > -293 ) { //2列目
+                flag = 2;
+            }
+        } else if ( yDist1 < 0 ) { //1列目
+            flag = 1;
+        }
+    }
+} else {
+    window.onmousemove =(e)=> {
+        if ( isMoving ) {
+            x = e.pageX - 44;
+            y = e.pageY - 44;
+            mirror.style.top  = y + "px";
+            mirror.style.left = x + "px";
+*/
+/*
+            yDist1 = y - r1top;
+            
+            if ( yDist1 < -90 ) {
+                if ( yDist1 < -203 ) {
+                    if ( yDist1 > -318 && yDist1 < -228 ) { //3列目
+                        flag = 3;
+                        //for(i=0;i<r3;++i) {
+                        console.log(flag);
+                    }
+                } else if ( yDist1 > -293 ) { //2列目
+                    flag = 2;
+                    console.log(flag);
+                }
+            } else if ( yDist1 < 0 ) { //1列目
+                flag = 1;
+                console.log(flag);
+            }*/
+        //}
+    //}
+//}
+/*
+window.onpointerup =(e)=> {
+    if ( targetFocus && isMoving ) {
+        targetUnit.textContent = mirror.textContent;
+        targetUnit.style.backgroundImage = mirror.style.backgroundImage;
+    }
+    mirror.style.display = "none";
+    mirror.style.top = "";
+    isMoving = false;
+}
+
+for(i=0;m[i];++i) {
+    m[i].onpointerdown = function mousedownEvent(e) {
+        e.target.style.filter = "brightness(0.5)";
+        mirror.textContent  = e.target.textContent;
+        mirror.style.backgroundImage = e.target.style.backgroundImage;
+        mirror.style.bottom = "30px";
+        mirror.style.display = "block";
+        isMoving = true;
+    };
+}
+
+
+
+
+for(i=0;c[i];++i) {
+    c[i].onmouseenter = function mouseenterEvent(e) {
+        if(isMoving) {
+            targetFocus = true;
+            e.target.style.border = "solid 1px #F00";
+            targetUnit = e.target;
+        }
+    }
+
+    c[i].onmouseout = function mouseoutEvent(e) {
+        if(targetFocus) {
+            e.target.style.border = "solid 1px #AAA"; 
+        }
+        targetFocus = false;
+    }
+}*/
+
+/*
+長さが足らないと足らない部分は出力されない
+x = document.getElementById("x");
+x.style.strokeDasharray = 100;
+x.style.strokeDashOffset = 100; 
+x.animate([
+    { strokeDashoffset: 100 },
+    { strokeDashoffset: 1 }
+    ],1000
+    );
+twitter
+*/
+</script>

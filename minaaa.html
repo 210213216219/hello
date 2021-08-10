@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<meta charset=UTF-8>
+<meta name=viewport content='initial-scale=1'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="css2.css" rel="stylesheet">
+<title>ポリゴン突撃部隊</title>
+<!--tierを加えるとフォントをほぼすべて取得する必要がある
+formation
+sort
+tier
+84
+11px 66
+12   72 144
+13   
+-->
+<style>
+body {
+    /*background:#f8f7f1;*/
+    margin: 0;
+    text-align: center;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.button {
+    width:128px;
+    padding:0px;
+    border:solid 1px #000;
+    border-radius:9px;
+}
+
+#member_container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.m {
+    font-size:13px;
+    min-width: 78px;
+    height: 0;
+    margin: 16px;
+    padding-top: 78px;
+    background-size: 78px;
+    border-radius: 78px;
+}
+
+/*サイズはborderradiusの端数で考えてもいい*/
+
+.b {
+    width: 160px;
+    height: 50px;
+    border-radius: 9px;
+    color: #FFF;
+    background:cadetblue;
+}
+</style>
+<div style="font-size:39px;font-style:normal;margin:10px auto">ポリゴンガール</div>
+<div>
+    <svg width=100 height=100>
+    <path d=M1,1v60 stroke-width=0.2 stroke=#000 />
+    </svg>
+    <svg id=form xmlns="http://www.w3.org/2000/svg" width=60 height=60>
+        <circle cx=30 cy=30 r=29 fill=none stroke=#BBB></circle><circle cx=30 cy=30 r=25 fill=#BBB stroke=none></circle><path d=M17.5,20h5v5h-5zm5,9h5v5h-5zm5,9h5v5h-5zm0-18h5v5h-5zm5,9h5v5h-5zm5-9h5v5h-5z stroke=#FFF fill=#FFF />
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width=60 height=60>
+        <circle cx=30 cy=30 r=29 fill=none stroke=#BBB></circle><circle cx=30 cy=30 r=25 fill=#BBB stroke=none></circle><path d=M23,28h5v5h-5zm9,0h5v5h-5z stroke=#FFF fill=#FFF />
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width=60 height=60>
+        <circle cx=30 cy=30 r=29 fill=none stroke=#BBB></circle><circle cx=30 cy=30 r=25 fill=#BBB stroke=none></circle><path d=M17,20h5v5h-5zm0,9h5v5h-5zm0,9h5v5h-5zm9-9h5v5h-5zm0-9h5v5h-5zm9,0h5v5h-5z stroke=#FFF fill=#FFF />
+    </svg>
+</div>
+<div id=member_container>
+<!--画像にしてしまうとエフェクトがむずかしくなる-->
+  <svg xmlns=http://www.w3.org/2000/svg width=120 height=128>
+  <circle cx=60 cy=60 r=44 fill=none stroke=#B7C></circle>
+  <circle cx=60 cy=60 r=40 fill=#95A></circle>
+  <path d=M76,41v35h-34z fill=#FFF />
+  <text x=30 y=124 font-size=16px>乃木坂46</text>
+  </svg>
+  <div class=m style=background-image:url(上村莉菜.avif)>上村莉菜</div>
+  <div class=m style=background-image:url(尾関梨香.avif)>尾関梨香</div>
+  <div class=m style=background-image:url(井上梨名.avif)>井上梨名</div>
+  <div class=m style=background-image:url(土生瑞穂.avif)>土生瑞穂</div>
+  <div class=m style=background-image:url(大園玲.avif)>大園玲</div>
+  <div class=m style=background-image:url(原田葵.avif)>原田葵</div>
+  <div class=m style=background-image:url(藤吉夏鈴.avif)>藤吉夏鈴</div>
+  <div class=m style=background-image:url(守屋茜.avif)>守屋茜</div>
+  <div class=m style=background-image:url(森田ひかる.avif)>森田ひかる</div>
+  <div class=m style=background-image:url(渡辺梨加.avif)>渡辺梨加</div>
+  <div class=m style=background-image:url(増本綺良.avif)>増本綺良</div>
+  <div class=m style=background-image:url(守屋麗奈.avif)>守屋麗奈</div>
+  <div class=m style=background-image:url(上村莉菜.avif)>上村莉菜</div>
+  <div class=m style=background-image:url(尾関梨香.avif)>尾関梨香</div>
+  <div class=m style=background-image:url(井上梨名.avif)>井上梨名</div>
+  <div class=m style=background-image:url(土生瑞穂.avif)>土生瑞穂</div>
+  <div class=m style=background-image:url(大園玲.avif)>大園玲</div>
+  <div class=m style=background-image:url(原田葵.avif)>原田葵</div>
+  <div class=m style=background-image:url(藤吉夏鈴.avif)>藤吉夏鈴</div>
+  <div class=m style=background-image:url(守屋茜.avif)>守屋茜</div>
+  <div class=m style=background-image:url(森田ひかる.avif)>森田ひかる</div>
+  <div class=m style=background-image:url(渡辺梨加.avif)>渡辺梨加</div>
+  <div class=m style=background-image:url(森田ひかる2.png)>増本綺良</div>
+  <div class=m style=background-image:url(守屋麗奈.avif)>守屋麗奈</div>
+</div>
+<script>
+member_container = document.getElementById("member_container");
+
+form = document.getElementById("form");
+
+rect = form.getBoundingClientRect();
+
+timings = { duration:80,fill:"forwards" };
+
+var ani=[];
+var effect=[];
+var keyframes = {transform:"rotate(360deg)"}
+//スタンプが押されるような
+member = document.getElementsByClassName("m");
+for(let i=0;member[i];++i){
+    effect[i] = new KeyframeEffect(member[i], keyframes, timings);
+    ani[i] = new Animation(effect[i], document.timeline);
+
+    ani[i].onfinish =(e)=> {
+        e.currentTarget.effect.target.style.display = "none";
+        ani[i+1].play();
+    }
+
+
+}
+
+form.onclick =()=> {
+member_container.style.position = "fixed";
+//member_container.style.bottom = 0;
+
+}
+//member_container.style.bottom = (rect.bottom - rect.height) + "px";
+
+
+ef = { width:"128px", background:"#FDE" };
+ti = { duration: 1500,fill:"forwards" };
+eff = new KeyframeEffect(member_container, ef, ti);
+an = new Animation(eff, document.timeline);
+
+form.onclick =()=> {
+    an.play();
+    //member_container.style.width = "200px";
+    //ani[0].play();
+    //卵ケースのような
+}
+
+
+/*
+form.onclick=()=>{
+    for(i=0;member[i];++i){
+        ani[i].play();
+    }
+}*/
+
+
+
+//アニメーションはいろいろ考えた結果無理だということがわかった
+//別の部分でアニメーションをこる
+
+//b = document.getElementById('b');
+/*
+b.onclick=()=>{
+    member_container.style.maxWidth = "1920px";
+    member_container.style.position = "fixed";
+    member_container.style.bottom = 0;
+    member_container.style.height = "200px";
+    member_container.style.overflowX = "scroll";
+    member_container.style.flexWrap = "nowrap";
+}*/
+
+
+</script>
