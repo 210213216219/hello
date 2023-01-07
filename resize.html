@@ -1,0 +1,28 @@
+<input>
+<div id=eve></div>
+<div id=iw></div>
+<div id=ih></div>
+<div id=dpr></div>
+<br>
+<br>
+<div id=eve2></div>
+<div id=vw></div>
+<div id=vh></div>
+<div id=sc></div>
+<script>
+let flag1 = 0, flag2 = 0;
+onresize =()=> {
+  iw.textContent = "innerWidth: " + innerWidth;
+  ih.textContent = "innerHeight: " + innerHeight;
+  dpr.textContent = "devicePixelRatio: " + devicePixelRatio;
+  eve.textContent = "Event: resize" + flag1++;
+}
+
+visualViewport.onresize =()=> {
+  vw.textContent = "vw: " + visualViewport.width;
+  vh.textContent = "vh: " + visualViewport.height;
+  sc.textContent = "sc: " + visualViewport.scale;
+  eve2.textContent = "Event: vv resize" + flag2++;
+
+}
+</script>
