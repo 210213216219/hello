@@ -1,3 +1,4 @@
+<meta name=viewport content="user-scalable=no">
 <input>
 <div id=eve></div>
 <div id=iw></div>
@@ -11,6 +12,7 @@
 <div id=sc></div>
 <script>
 let flag1 = 0, flag2 = 0;
+document.documentElement.style.touchAction = "none";
 onresize =()=> {
   iw.textContent = "innerWidth: " + innerWidth;
   ih.textContent = "innerHeight: " + innerHeight;
