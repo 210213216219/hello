@@ -16,6 +16,7 @@ head.setAttribute(
   text-align:center;\
   touch-action:none;\
   user-select:none;\
+  overflow:hidden;\
   cursor:url(cursor.svg) 4 4, auto;"
 );
 
