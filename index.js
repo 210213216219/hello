@@ -112,6 +112,7 @@ for (
 );
 
 (onresize =()=> {
+  alert("hello");
   let w = innerWidth;
   if (w < 593) {
     w = 60;
