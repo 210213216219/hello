@@ -1,4 +1,5 @@
 fetch (0).then(async r => {
+try {
 let d = document;
 let head = d.head;
 let main_container = head.firstChild;
@@ -46,14 +47,18 @@ while(
 );
 
 member_container.append("\u2007");
+member_container.onwheel =E=> {
+  member_container.scrollBy(E.deltaY < 0 ? -64 : 64, 0);
+}
+
 
 tmp_member_style = tmp_member.attributeStyleMap;
 tmp_member_style.set("display", "none");
 tmp_member_style.set("position", "fixed");
 head.appendChild(tmp_member).append(new Text);
 
-onpointerdown =e=> {
-  elm = e.target;
+onpointerdown =E=> {
+  elm = E.target;
   let tagName = elm.tagName;
   if (tagName == "CANVAS") {
     octx.drawImage(elm, 0, 0);
@@ -63,12 +68,12 @@ onpointerdown =e=> {
     active_member_style = active_member.attributeStyleMap;
     active_member_style.set("filter", new CSSUnparsedValue(["brightness(.5)"]));
     tmp_member_style.set("color",active_member_style.get("color"));
-    (onpointermove =e=> {
-      tmp_member_style.set("left", CSS.px(e.x - 32));
-      tmp_member_style.set("top", CSS.px(e.y - 40));
-    })(e);
-    onpointerover =e=> {
-      elm = e.target;
+    (onpointermove =E=> {
+      tmp_member_style.set("left", CSS.px(E.x - 32));
+      tmp_member_style.set("top", CSS.px(E.y - 40));
+    })(E);
+    onpointerover =E=> {
+      elm = E.target;
       let tagName = elm.tagName;
       if (tagName == "I") elm.append(active_member);
     }
@@ -81,7 +86,8 @@ onpointerdown =e=> {
 onpointerup =()=> {
   onpointermove = null;
   onpointerover = null;
-  if (active_member?.parentNode.tagName == "I") {
+  if (active_member) {
+    //let tagName = active_member.parentNode.tagName;
     tmp_member_style.set("display", "none");
     active_member_style.delete("filter");
     active_member = null;
@@ -89,4 +95,7 @@ onpointerup =()=> {
 }
 
 d.lastChild.replaceWith(head);
+} catch (e) {
+  alert(e);
+}
 })
