@@ -115,7 +115,7 @@ onpointerdown =E=> {
       onpointerover =E=> {
         elm = E.target;
         let tagName = elm.tagName;
-        if (tagName == "S") {
+        if (tagName == "I") {
           elm.append(active_member);
         } else if (tagName == "P" && elm.parentNode.tagName == "I") {
           elm.before(active_member);
