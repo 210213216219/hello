@@ -1,9 +1,8 @@
-//fetch (0).then(async r => {
 (async ()=> {
 let d = document;
 let head = d.head;
 let main_container = head.firstChild;
-let member_container = main_container.nextSibling;
+let member_container = head.lastChild;
 let tmp_member = d.createElement("p");
 let tmp_cvs = d.createElement("canvas");
 let tmp_ctx = tmp_cvs.getContext("bitmaprenderer");
@@ -20,12 +19,10 @@ let i_1 = 0;
 let i_2 = 3840;
 let i_3 = 0;
 let elm = d.createElement("a");
-let pt_x;
-let pt_y;
 let timer;
 
 head.setAttribute("style",
-    "display:block;width:min(100%,1028px);margin:auto;background:#123;font:10px meiryo;text-align:center;color:#ddd;overflow:hidden;touch-action:none;user-select:none");
+    "display:block;width:min(100%,1028px);margin:auto;background:#123;font:10px meiryo;text-align:center;color:#ddd;overflow:hidden;touch-action:none;-webkit-user-select:none;-webkit-touch-callout:none");
 main_container.setAttribute("style", "display:block;height:calc(100% - 96px);padding:8 0 240;overflow:auto");
 member_container.setAttribute("style",
   "display:flex;position:fixed;left:0;bottom:0;min-width:100%;width:100%;height:80;padding:4;background:#345;overflow:auto");
@@ -59,14 +56,11 @@ member_container.onwheel =E=> {
   member_container.scrollBy(E.deltaY < 0 ? -64 : 64, 0);
 }
 
-
 tmp_member_style = tmp_member.attributeStyleMap;
 tmp_member_style.set("display", "none");
 tmp_member_style.set("position", "fixed");
 head.appendChild(tmp_member).append(new Text);
 
-// やや長押しで判定する
-onselectstart =E=> (E.preventDefault(), !1);
 oncontextmenu =()=> !1;
 
 let ff =()=> {
@@ -130,9 +124,8 @@ onpointerdown =E=> {
       }
       tmp_member_style.set("display", "block");
       tmp_member_style.set("pointer-events", "none");
-    }, 240); // +1が不要
+    }, 240);
   }
 }
-
 d.lastChild.replaceWith(head);
 })()
