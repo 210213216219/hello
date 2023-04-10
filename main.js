@@ -1,5 +1,4 @@
 fetch (0).then(async r => {
-try {
 let d = document;
 let head = d.head;
 let main_container = head.firstChild;
@@ -19,14 +18,22 @@ let i_0 = 169;
 let i_1 = 0;
 let i_2 = 3840;
 let i_3 = 0;
-let elm;
+let elm = d.createElement("a");
+let pt_x;
+let pt_y;
+let timer;
 
 head.setAttribute("style",
-    "display:block;width:min(100%,1028px);margin:auto;background:#123;font:10px meiryo;text-align:center;color:#ddd;overflow:hidden auto;touch-action:none;user-select:none");
-main_container.setAttribute("style",
-  "display:block;");
+    "display:block;width:min(100%,1028px);margin:auto;background:#123;font:10px meiryo;text-align:center;color:#ddd;overflow:hidden;touch-action:none;user-select:none");
+main_container.setAttribute("style", "display:block;height:calc(100% - 96px);padding:8 0 240;overflow:auto");
 member_container.setAttribute("style",
-  "display:flex;gap:0 4px;position:fixed;left:0;bottom:0;min-width:100%;width:100%;height:88;background:#345;overflow:overlay")
+  "display:flex;position:fixed;left:0;bottom:0;min-width:100%;width:100%;height:80;padding:4;background:#345;overflow:auto");
+
+elm.href = "https://twitter.com/ariamaranai";
+elm.setAttribute("style", "display:contents;color:#399");
+elm.append("@ariamaranai");
+main_container.append(d.title = "tiermaker46 ", elm);
+
 tmp_cvs.height = tmp_cvs.width = 240;
 tmp_member.append(tmp_cvs);
 
@@ -39,14 +46,14 @@ while (
   i_0
 ) --i_0, i_2 = i_2 ? i_2 - 240 : (i_3 += 240, 3840);
 
-while(
+while (
   main_container.appendChild(elm = d.createElement("b")).append("SABCD"[i_0]),
   elm.setAttribute("style", "background:#"+ palette[i_0]),
   main_container.appendChild(elm = d.createElement("i")),
   ++i_0 < 5
 );
 
-member_container.append("\u2007");
+
 member_container.onwheel =E=> {
   member_container.scrollBy(E.deltaY < 0 ? -64 : 64, 0);
 }
@@ -57,10 +64,81 @@ tmp_member_style.set("display", "none");
 tmp_member_style.set("position", "fixed");
 head.appendChild(tmp_member).append(new Text);
 
+// やや長押しで判定する
+oncontextmenu =()=> !1;
+
+let ff =()=> {
+  onpointermove = null;
+  onscroll = null
+  onwheel = null;
+  onpointerup = null;
+  onpointerleave = null;
+}
+
 onpointerdown =E=> {
+  if (E.button) return;
   elm = E.target;
   let tagName = elm.tagName;
-  if (tagName == "CANVAS") {
+  if (tagName == "P") {
+    pt_x = E.x;
+    pt_y = E.y;
+    onpointermove =()=> (clearTimeout(timer), ff());
+    onscroll =()=> (clearTimeout(timer), ff());
+    onwheel =()=> (clearTimeout(timer), ff());
+    onpointerup =()=> (clearTimeout(timer), ff());
+    onpointerleave =()=> (clearTimeout(timer), ff());
+
+    timer = setTimeout(()=> {
+      ff();
+      onpointerleave = null;
+      elm = elm.firstChild;
+      octx.drawImage(elm, 0, 0);
+      tmp_ctx.transferFromImageBitmap(ocvs.transferToImageBitmap());
+      tmp_member.lastChild.data = elm.nextSibling.data;
+      active_member = elm.parentNode;
+      active_member_style = active_member.attributeStyleMap;
+      active_member_style.set("filter", new CSSUnparsedValue(["brightness(.5)"]));
+      tmp_member_style.set("color",active_member_style.get("color"));
+      
+      onpointerup =()=> {
+        onpointermove = null;
+        onpointerover = null;
+        onpointerenter = null;
+        if (active_member) {
+          tmp_member_style.set("display", "none");
+          active_member_style.delete("filter");
+          active_member = null;
+        }
+      }
+      
+      (onpointermove =E=> {
+        tmp_member_style.set("left", CSS.px(E.x - 32));
+        tmp_member_style.set("top", CSS.px(E.y - 40));
+      })(E);
+
+      onpointerover =E=> {
+        elm = E.target;
+        let tagName = elm.tagName;
+        if (tagName == "I") {
+          elm.append(active_member);
+        } else if (tagName == "P" && elm.parentNode.tagName == "I") {
+          elm.before(active_member);
+        } else if (tagName == "SCRIPT" && active_member.parentNode.tagName == "I") {
+        }
+      }
+      tmp_member_style.set("display", "block");
+      tmp_member_style.set("pointer-events", "none");
+    }, 240); // +1が不要
+  }
+}
+
+/*
+onpointerdown =E=> {
+  if (E.button) return 0;
+  elm = E.target;
+  let tagName = elm.tagName;
+  if (tagName == "P") {
+    elm = elm.firstChild;
     octx.drawImage(elm, 0, 0);
     tmp_ctx.transferFromImageBitmap(ocvs.transferToImageBitmap());
     tmp_member.lastChild.data = elm.nextSibling.data;
@@ -69,23 +147,31 @@ onpointerdown =E=> {
     active_member_style.set("filter", new CSSUnparsedValue(["brightness(.5)"]));
     tmp_member_style.set("color",active_member_style.get("color"));
     (onpointermove =E=> {
+      // この際に伝番しなければいいのでは??
       tmp_member_style.set("left", CSS.px(E.x - 32));
       tmp_member_style.set("top", CSS.px(E.y - 40));
+      elm = E.target;
     })(E);
     onpointerover =E=> {
       elm = E.target;
       let tagName = elm.tagName;
-      if (tagName == "I") elm.append(active_member);
+      if (tagName == "I") {
+        elm.append(active_member);
+      } else if (tagName == "P" && elm.parentNode.tagName == "I") {
+        elm.before(active_member);
+      } else if (tagName == "SCRIPT" && active_member.parentNode.tagName == "I") {
+    
+      }
     }
     tmp_member_style.set("display", "block");
     tmp_member_style.set("pointer-events", "none");
-  } else {
   }
 }
 
 onpointerup =()=> {
   onpointermove = null;
   onpointerover = null;
+  onpointerenter = null;
   if (active_member) {
     //let tagName = active_member.parentNode.tagName;
     tmp_member_style.set("display", "none");
@@ -94,8 +180,7 @@ onpointerup =()=> {
   }
 }
 
+*/
+
 d.lastChild.replaceWith(head);
-} catch (e) {
-  alert(e);
-}
 })
