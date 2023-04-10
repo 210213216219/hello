@@ -24,7 +24,7 @@ let pt_y;
 let timer;
 
 head.setAttribute("style",
-    "display:block;width:min(100%,1028px);margin:auto;background:#123;font:10px meiryo;text-align:center;color:#ddd;overflow:hidden;touch-action:none;user-select:none");
+    "display:block;width:min(100%,1028px);margin:auto;background:#123;font:10px meiryo;text-align:center;color:#ddd;overflow:hidden;touch-action:none;-webkit-user-select:none");
 main_container.setAttribute("style", "display:block;height:calc(100% - 96px);padding:8 0 240;overflow:auto");
 member_container.setAttribute("style",
   "display:flex;position:fixed;left:0;bottom:0;min-width:100%;width:100%;height:80;padding:4;background:#345;overflow:auto");
