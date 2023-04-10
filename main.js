@@ -47,7 +47,7 @@ while (
 while (
   main_container.appendChild(elm = d.createElement("b")).append("SABCD"[i_0]),
   elm.setAttribute("style", "background:#"+ palette[i_0]),
-  main_container.appendChild(elm = d.createElement("s")),
+  main_container.appendChild(elm = d.createElement("i")),
   ++i_0 < 5
 );
 
@@ -117,11 +117,16 @@ onpointerdown =E=> {
         let tagName = elm.tagName;
         if (tagName == "S") {
           elm.append(active_member);
-        } else if (tagName == "P" && elm.parentNode.tagName == "S") {
+        } else if (tagName == "P" && elm.parentNode.tagName == "I") {
           elm.before(active_member);
-        } else if (tagName == "SCRIPT" && active_member.parentNode.tagName == "S") {
+        } else if (tagName == "SCRIPT" && active_member.parentNode.tagName == "I") {
         }
       }
+
+      main_container.onscroll =E=> {
+        E.preventDefault();
+      }
+
       tmp_member_style.set("display", "block");
       tmp_member_style.set("pointer-events", "none");
     }, 240);
