@@ -57,7 +57,7 @@ let head = d.head,
 head.setAttribute("style",
   "display:block;\
   background:#123;\
-  font:10px meiryo;\
+  font:10px meiryo,sans-serif;\
   text-align:center;\
   color:#eee;\
   overflow:hidden;\
