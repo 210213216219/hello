@@ -12,6 +12,9 @@ h4 {
   text-align: center;
   color: #ccc;
 }
+h4:hover {
+  filter: brightness(1.3);
+}
 p, a {
   margin: 0;
   font-family: courier;
@@ -26,21 +29,34 @@ svg {
   fill: none;
   stroke: #999;
   stroke-width: 2;
+  cursor: pointer;
 }
 #a { background-color: #633 }
 #b { background-color: #363 }
 #c { background-color: #336 }
 </style>
 <script>
+onauxclick =e=> !1;
+
 onclick =e=> {
   if (x == e.x && y && e.y) {
     let target = e.target;
     let tagName = target.tagName;
     if (tagName == "H4") {
-      let attr = target.getAttributeNames();
-      let query = attr[(attr[1] && attr[0] > ":") ? 1 : 0];
-      query && (open(query[2] ? "https://www.jbis.or.jp/horse/000" +  query.padStart(7, "0") + "/" : "https://www.pedigreequery.com/" + target.firstChild.data + (query != "1" ? query + "/" : "/")));
-    } else {
+      if (target == focus_element) {
+        let attr = target.getAttributeNames();
+        let query = attr[(attr[2] || attr[0] < ":") ? 0 : 1];
+        query && (open(query[2] ?
+        "https://www.jbis.or.jp/horse/000" +  query.padStart(7, "0") + "/" :
+        "https://www.pedigreequery.com/" + target.firstChild.data + (query != "1" ? query + "/" : "/")));
+      } else {
+        focus_element?.removeAttribute("style");
+        (focus_element = target).setAttribute("style", "filter:brightness(2)");
+      }
+    } else if (tagName == "INPUT") {
+      target.previousElementSibling.setAttribute("hidden", "");
+    } else if (tagName == "SVG") {
+    
     }
   }
 }
@@ -49,8 +65,15 @@ onpointerdown =e=> (x = e.x, y = e.y);
 
 oninput =e=> {
   let value = e.target.value;
-  if (!value) return;
+
+  if (!value) {
+    let i = elements.length - 1;
+    while (elements[i].removeAttribute("hidden"), --i); 
+    return;
+  }
+
   let _value = "", i = 0, cc;
+  
   while (
     cc = value.charCodeAt(i),
     _value += (cc > 12352 && cc < 12439) ? String.fromCharCode(cc + 96) : value[i],
@@ -74,20 +97,18 @@ oninput =e=> {
   i) i -= 4;
 }
 
-onload =()=> {
-  elements = document.body.lastChild.children;
-}
+onload =()=> elements = document.body.lastChild.children;
 
-let elements, x, y;
+let elements, x, y, focus_element;
 </script>
 <body style="width:min(960px,100%);margin:auto;background-color:#111;font:min(calc(5vw / 8 + 8px),13px) sans-serif">
-<div style=display:flex;align-items:center;position:sticky;top:0;background-color:#ddd>
+<li style=display:flex;align-items:center;position:sticky;top:0;background-color:#ddd>
   <svg><path d=m28+29-7-7a7+7+0,1,1+.5-.5></svg>
   <a style=pointer-events:auto href=https://twitter.com/ariamaranai>@ariamaranai</a>
-  <input style=all:unset;flex:auto;height:40;color:#222>
+  <input style=all:unset;flex:auto;height:40;color:#222 onblur='(()=>this.previousElementSibling.removeAttribute("hidden"))()'>
   <svg><path d=m9+24+3+3+3-3M12+10V26M15+11H28m0+4H15m2+4H28m0+4H17></svg>
-</div>
-<div style=display:flex;flex-wrap:wrap><h4 id=a>-<p>2022.JPN F<h4 1209439>タワーオブロンドン<p>2015.JPN
+<li style=display:flex;flex-wrap:wrap>
+  <h4 id=a>-<p>2022.JPN F<h4 1209439>タワーオブロンドン<p>2015.JPN
   <h4 1234092 id=b>キャッツアイ<p>2017.JPN
   <h4 1110914>スピルバーグ<p>2009.JPN
   <h4 1355121 id=a>-<p>2022.JPN M
@@ -940,7 +961,7 @@ let elements, x, y;
   <h4 1051578 id=b>New Approach<p>2005.IRE
   <h4 1270121 id=b>フィルメーザ<p>2018.JPN F
   <h4 905163>タートルボウル<p>2002.JPN
-  <h4 1120991>コスモライセンス<p>2010.
+  <h4 1120991>コスモライセンス<p>2010.JPN
   <h4 324933>アグネスタキオン<p>1998.JPN
   <h4 1264239 id=b>ランペロニキ<p>2018.JPN M
   <h4 901749 id=b>キンシャサノキセキ<p>2003.AUS
