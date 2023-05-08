@@ -5,15 +5,16 @@
 ::-webkit-scrollbar-thumb { background-color: #888 }
 h4 {
   flex: 1 0 20%;
-  margin: -1 0 0 -1;
+  margin: -1 -1 0 0;
   padding: 8 0;
   border: 1px solid #888;
   font: unset;
   text-align: center;
   color: #ccc;
 }
+
 h4:hover {
-  filter: brightness(1.3);
+  filter: brightness(1.2);
 }
 p, a {
   margin: 0;
@@ -31,15 +32,18 @@ svg {
   stroke-width: 2;
   cursor: pointer;
 }
-#a { background-color: #633 }
-#b { background-color: #363 }
-#c { background-color: #336 }
+a {
+  position:absolute;
+  left:40;
+  pointer-events:auto
+}
+#a { background-color: #522 }
+#b { background-color: #252 }
+#c { background-color: #225 }
 </style>
 <script>
-onauxclick =e=> !1;
-
 onclick =e=> {
-  if (x == e.x && y && e.y) {
+  if (x == e.x) {
     let target = e.target;
     let tagName = target.tagName;
     if (tagName == "H4") {
@@ -56,30 +60,32 @@ onclick =e=> {
     } else if (tagName == "INPUT") {
       target.previousElementSibling.setAttribute("hidden", "");
     } else if (tagName == "SVG") {
-    
     }
   }
 }
 
-onpointerdown =e=> (x = e.x, y = e.y);
+onpointerdown =e=> ((x == e.x && e.preventDefault()), x = e.x);
 
 oninput =e=> {
   let value = e.target.value;
 
   if (!value) {
     let i = elements.length - 1;
-    while (elements[i].removeAttribute("hidden"), --i); 
+    while (elements[i].removeAttribute("hidden"), i) --i; 
     return;
   }
-
-  let _value = "", i = 0, cc;
+  let _value = "", i = value.length, cc;
   
   while (
-    cc = value.charCodeAt(i),
-    _value += (cc > 12352 && cc < 12439) ? String.fromCharCode(cc + 96) : value[i],
-    ++i < value.length
+    _value = (((cc = value.charCodeAt(--i)) > 12352 && cc < 12439) ? String.fromCharCode(cc + 96) : value[i]) + _value,
+    i
   );
 
+  /*
+  while (
+    _value += ((cc = value.charCodeAt(i)) > 12352 && cc < 12439) ? String.fromCharCode(cc + 96) : value[i],
+    ++i < value.length
+  );*/
   i = elements.length - 4;
   while (
     (elements[i+1].textContent.includes(_value) ||
@@ -101,14 +107,13 @@ onload =()=> elements = document.body.lastChild.children;
 
 let elements, x, y, focus_element;
 </script>
-<!--body margin auto->margin40px auto; position:sticky->fixed; width:inherit -->
-<body style="width:min(960px,100%);margin:40px auto;background-color:#111;font:min(calc(5vw / 8 + 8px),13px) sans-serif">
-<li style=display:flex;align-items:center;position:fixed;top:0;width:inherit;background-color:#ddd>
+<body style="width:min(960px,100%);margin:40px auto;background-color:#111;font:min(calc(5vw / 8 + 8px),13px) sans-serif;overflow-y:scroll">
+<li style="display:flex;align-items:center;position:fixed;top:0;width:inherit;background-color:#ddd">
   <svg><path d=m28+29-7-7a7+7+0,1,1+.5-.5></svg>
-  <a style=pointer-events:auto href=https://twitter.com/ariamaranai>@ariamaranai</a>
+  <a href=https://twitter.com/ariamaranai>@ariamaranai</a>
   <input style=all:unset;flex:auto;height:40;color:#222 onblur='(()=>this.previousElementSibling.removeAttribute("hidden"))()'>
   <svg><path d=m9+24+3+3+3-3M12+10V26M15+11H28m0+4H15m2+4H28m0+4H17></svg>
-<li style=display:flex;flex-wrap:wrap>
+<li style="display:flex;flex-wrap:wrap">
   <h4 id=a>-<p>2022.JPN F<h4 1209439>タワーオブロンドン<p>2015.JPN
   <h4 1234092 id=b>キャッツアイ<p>2017.JPN
   <h4 1110914>スピルバーグ<p>2009.JPN
@@ -865,7 +870,7 @@ let elements, x, y, focus_element;
   <h4 1042314>ベネディーレ<p>2007.JPN
   <h4 615577 id=b>クロフネ<p>1998.JPN
   <h4 1313028 id=b>アンダーレ<p>2019.JPN M
-  <h4 1162685 id=b>ダノンレジェンド<p>2010.JPN
+  <h4 1162685>ダノンレジェンド<p>2010.JPN
   <h4 1138743>アラマサクロフネ<p>2011.JPN
   <h4 615577 id=b>クロフネ<p>1998.USA
   <h4 1312217 id=b>ウィンダミア<p>2019.JPN M
@@ -1094,7 +1099,7 @@ let elements, x, y, focus_element;
   <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE
   <h4 1192324 id=b>スプリングノート<p>2014.JPN F
   <h4 700008 id=c>シンボリクリスエス<p>1999.USA
-  <h4 1047404>グリューネワルト<p>2007.JPN
+  <h4 1047404 id=b>グリューネワルト<p>2007.JPN
   <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
   <h4 1188165 id=b>ディグアップセンス<p>2014.JPN M
   <h4 1031979>Street Sense<p>2004.USA
@@ -1404,6 +1409,10 @@ let elements, x, y, focus_element;
   <h4 848599>Mogok<p>2002.USA <!--sire: Storm Cat-->
   <h4 1>Apache Rose<p>1996.SAF
   <h4 341084>Dolpour<p>1986.IRE <!--sire: Sadler's Wells-->
+  <h4 1047404 id=b>グリューネワルト<p>2007.JPN F
+  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
+  <h4 620034>シェーンクライト<p>1999.JPN
+  <h4 365099>Helissio<p>1993.FR
   <h4 1042049 id=b>ルーラーシップ<p>2007.JPN S
   <h4 729458 id=b>キングカメハメハ<p>2001.JPN
   <h4 274849>エアグルーヴ<p>1993.JPN
@@ -1854,7 +1863,7 @@ let elements, x, y, focus_element;
   <h4 362599>Lammtarra<p>1992.USA
   <h4 1 id=c>Latoscana<p>2011.IRE F
   <h4 1113706 id=b>Sea The Stars<p>2006.IRE
-  <h4 1225183>Luminaria<p>2002.IRE
+  <h4 1225183 id=b>Luminaria<p>2002.IRE
   <h4 337424 id=a>Danehill<p>1986.USA
   <h4 1164986 id=c>エイシンソルティー<p>2011.USA F
   <h4 849372>Tapit<p>2001.USA
