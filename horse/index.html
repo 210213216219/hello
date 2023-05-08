@@ -101,8 +101,9 @@ onload =()=> elements = document.body.lastChild.children;
 
 let elements, x, y, focus_element;
 </script>
-<body style="width:min(960px,100%);margin:auto;background-color:#111;font:min(calc(5vw / 8 + 8px),13px) sans-serif">
-<li style=display:flex;align-items:center;position:sticky;top:0;background-color:#ddd>
+<!--body margin auto->margin40px auto; position:sticky->fixed; width:inherit -->
+<body style="width:min(960px,100%);margin:40px auto;background-color:#111;font:min(calc(5vw / 8 + 8px),13px) sans-serif">
+<li style=display:flex;align-items:center;position:fixed;top:0;width:inherit;background-color:#ddd>
   <svg><path d=m28+29-7-7a7+7+0,1,1+.5-.5></svg>
   <a style=pointer-events:auto href=https://twitter.com/ariamaranai>@ariamaranai</a>
   <input style=all:unset;flex:auto;height:40;color:#222 onblur='(()=>this.previousElementSibling.removeAttribute("hidden"))()'>
