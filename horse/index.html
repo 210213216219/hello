@@ -3,2037 +3,2533 @@
 <style>
 ::-webkit-scrollbar { width: 8 }
 ::-webkit-scrollbar-thumb { background-color: #888 }
-h4 {
-  flex: 1 0 20%;
-  margin: -1 -1 0 0;
-  padding: 8 0;
-  border: 1px solid #888;
-  font: unset;
-  text-align: center;
-  color: #ccc;
-}
-
-h4:hover {
-  filter: brightness(1.2);
-}
-p, a {
-  margin: 0;
-  font-family: courier;
-  color: #aaa;
-  letter-spacing: -1;
-  pointer-events: none;
-  user-select: none;
-}
-svg {
-  width: 40;
-  height: 40;
-  fill: none;
-  stroke: #999;
-  stroke-width: 2;
-  cursor: pointer;
-}
-a {
-  position:absolute;
-  left:40;
-  pointer-events:auto
-}
-#a { background-color: #522 }
-#b { background-color: #252 }
-#c { background-color: #225 }
+a { width: 25%; margin: 0; padding: 8 0; background-color: #111; color: #bbb; text-decoration: none }
+a:hover { filter: invert(1) }
+span { display: block; font-family: courier; letter-spacing: -1; color: #999; user-select: none }
+p { display: flex; gap: 1px; margin: -1 0 0 0; padding: 1; background-color: #888; text-align: center }
+svg { width: 40; height: 40; fill: none; stroke: #888; stroke-width: 2; cursor: pointer }
+#a { background-color: #532 }
+#b { background-color: #352 }
+#c { background-color: #235 }
 </style>
-<script>
-onclick =e=> {
-  if (x == e.x) {
-    let target = e.target;
-    let tagName = target.tagName;
-    if (tagName == "H4") {
-      if (target == focus_element) {
-        let attr = target.getAttributeNames();
-        let query = attr[(attr[2] || attr[0] < ":") ? 0 : 1];
-        query && (open(query[2] ?
-        "https://www.jbis.or.jp/horse/000" +  query.padStart(7, "0") + "/" :
-        "https://www.pedigreequery.com/" + target.firstChild.data + (query != "1" ? query + "/" : "/")));
-      } else {
-        focus_element?.removeAttribute("style");
-        (focus_element = target).setAttribute("style", "filter:brightness(2)");
-      }
-    } else if (tagName == "INPUT") {
-      target.previousElementSibling.setAttribute("hidden", "");
-    } else if (tagName == "SVG") {
-    }
-  }
-}
-
-onpointerdown =e=> ((x == e.x && e.preventDefault()), x = e.x);
-
-oninput =e=> {
-  let value = e.target.value;
-
-  if (!value) {
-    let i = elements.length - 1;
-    while (elements[i].removeAttribute("hidden"), i) --i; 
-    return;
-  }
-  let _value = "", i = value.length, cc;
-  
-  while (
-    _value = (((cc = value.charCodeAt(--i)) > 12352 && cc < 12439) ? String.fromCharCode(cc + 96) : value[i]) + _value,
-    i
-  );
-
-  /*
-  while (
-    _value += ((cc = value.charCodeAt(i)) > 12352 && cc < 12439) ? String.fromCharCode(cc + 96) : value[i],
-    ++i < value.length
-  );*/
-  i = elements.length - 4;
-  while (
-    (elements[i+1].textContent.includes(_value) ||
-     elements[i+3].textContent.includes(_value) ||
-     elements[i].textContent.includes(_value) ||
-     elements[i+2].textContent.includes(_value)) ?
-      (elements[i+1].removeAttribute("hidden"),
-       elements[i+3].removeAttribute("hidden"),
-       elements[i].removeAttribute("hidden"),
-       elements[i+2].removeAttribute("hidden")) :
-      (elements[i+1].setAttribute("hidden", ""),
-       elements[i+3].setAttribute("hidden", ""),
-       elements[i].setAttribute("hidden", ""),
-       elements[i+2].setAttribute("hidden", "")),
-  i) i -= 4;
-}
-
-onload =()=> elements = document.body.lastChild.children;
-
-let elements, x, y, focus_element;
-</script>
-<body style="width:min(960px,100%);margin:40px auto;background-color:#111;font:min(calc(5vw / 8 + 8px),13px) sans-serif;overflow-y:scroll">
-<li style="display:flex;align-items:center;position:fixed;top:0;width:inherit;background-color:#ddd">
-  <svg><path d=m28+29-7-7a7+7+0,1,1+.5-.5></svg>
-  <a href=https://twitter.com/ariamaranai>@ariamaranai</a>
-  <input style=all:unset;flex:auto;height:40;color:#222 onblur='(()=>this.previousElementSibling.removeAttribute("hidden"))()'>
-  <svg><path d=m9+24+3+3+3-3M12+10V26M15+11H28m0+4H15m2+4H28m0+4H17></svg>
-<li style="display:flex;flex-wrap:wrap">
-  <h4 id=a>-<p>2022.JPN F<h4 1209439>タワーオブロンドン<p>2015.JPN
-  <h4 1234092 id=b>キャッツアイ<p>2017.JPN
-  <h4 1110914>スピルバーグ<p>2009.JPN
-  <h4 1355121 id=a>-<p>2022.JPN M
-  <h4 1213491>モズアスコット<p>2014.USA
-  <h4 1122613>ゴッドフロアー<p>2010.JPN
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN
-  <h4 1358351 id=a>-<p>2022.JPN S
-  <h4 1213491>モズアスコット<p>2014.USA
-  <h4 1213491>シンボリバーグ<p>2014.JPN
-  <h4 725485 id=b>ダイワメジャー<p>2001.JPN
-  <h4 1361510 id=a>-<p>2022.JPN F
-  <h4 1157711 id=b>リアルスティール<p>2012.JPN
-  <h4 1296859>ストームハート<p>2016.USA
-  <h4 1240926>Uncaptured<p>2010.CAN
-  <h4 id=a>-<p>2022.AUS M
-  <h4 1192943>So You Think<p>2006 SG <!--sire: Danehill-->
-  <h4 11>Coralina<p>2009.AUS
-  <h4 1000885>Dylan Thomas<p>2003.IRE
-  <h4 id=a>-<p>2021.AUS M
-  <h4 1351610>Blue Point<p>2014.IRE
-  <h4 7>Tack<p>2014.AUS
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 1338519 id=a>-<p>2021.JPN F
-  <h4 888832>エスポワールシチー<p>2005.JPN
-  <h4 1174877>ジョリガーニャント<p>2013.JPN
-  <h4 729458 id=b>キングカメハメハ<p>2001.JPN
-  <h4 1334656 id=a>スカイキャンバス<p>2021.JPN F
-  <h4 1173702>ファインニードル<p>2013.JPN
-  <h4 1096989>アポロフィオリーナ<p>2008.JPN
-  <h4 1039506>Snitzel<p>2002.AUS
-  <h4 1338824 id=a>ズングリムックリ<p>2021.JPN M
-  <h4 1162685>ダノンレジェンド<p>2010.USA
-  <h4 1186655>ハタノオヌール<p>2014.JPN
-  <h4 310467>サウスヴィグラス<p>1996.USA
-  <h4 1339469 id=a>パリッドキャリア<p>2021.JPN M
-  <h4 1028940 id=a>Henny Hughes<p>2003.USA
-  <h4 1203303>サンライズシェル<p>2015.JPN
-  <h4 901749 id=b>キンシャサノキセキ<p>2003.AUS
-  <h4 1341176 id=a>ホーリーブライト<p>2021.JPN F
-  <h4 1128881>Makfi<p>2007.GB
-  <h4 1209242>ラブリランテ<p>2015.JPN
-  <h4 1110554 id=b>ディープブリランテ<p>2009.JPN
-  <h4 1338498 id=a>レモンシフォン<p>2021.JPN F
-  <h4 1107477 id=b>ホッコータルマエ<p>2009.JPN
-  <h4 1174487>ゼロカラノキセキ<p>2013.JPN
-  <h4 901749 id=b>キンシャサノキセキ<p>2003.AUS
-  <h4 1326521 id=a>-<p>2020.JPN M
-  <h4 1134867>レッドファルクス<p>2011.JPN
-  <h4 1219242 id=b>プシュケ<p>2016.JPN
-  <h4 1178418 id=b>Novellist<p>2009.IRE
-  <h4 1322686 id=a>ヴァリアントゴッド<p>2020.JPN M
-  <h4 1127395 id=b>Dunkirk<p>2006.USA
-  <h4 1122613>ゴッドフロアー<p>2010.JPN
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN
-  <h4 1320679 id=a>トリフィス<p>2020.JPN F
-  <h4 1089850 id=a>ロードカナロア<p>2008.JPN
-  <h4 1046875>キョウエイカルラ<p>2007.JPN
-  <h4 337421>Afleet<p>1984.CAN
-  <h4 1327418 id=a>マコトヴィクラント<p>2020.JPN M
-  <h4 1127395 id=b>Dunkirk<p>2006.USA
-  <h4 1148828>マコトカンパネッロ<p>2002.JPN
-  <h4 619835 id=b>デュランダル<p>1999.JPN
-  <h4 1310451 id=a>カリグラフィー<p>2019.JPN F
-  <h4 1124405 id=b>ロゴタイプ<p>2010.JPN
-  <h4 1141700>コートリーラッシュ<p>2011.JPN
-  <h4 891931>ディープスカイ<p>2005.JPN
-  <h4 1310433 id=a>クールフォルテ<p>2019.JPN F
-  <h4 615577 id=b>クロフネ<p>1998.USA
-  <h4 1141447>シュシュブリーズ<p>2011.JPN
-  <h4 262443 id=b>フジキセキ<p>1992.JPN
-  <h4 1307442 id=a>ルーシッド<p>2019.JPN
-  <h4 1127395 id=b>Dunkirk<p>2006.USA
-  <h4 1086752>スイートマカロン<p>2006.USA
-  <h4 369621 id=a>Tale of the Cat<p>1994.USA
-  <h4 id=a>Brooklyn<p>2018.HUN M
-  <h4 1036137 >Bully Pulpit<p>2000.USA
-  <h4 4>Brynhild<p>2011.FR
-  <h4 848826>Simplex<p>2001.FR
-  <h4 id=a>Chin Chin<p>2018.HUN M
-  <h4 848826>Simplex<p>2001 FR
-  <h4 1>Chiaraluna<p>2007 SI
-  <h4 1036137>Bully Pulpit<p>2000.USA
-  <h4 12 id=a>Hong Kong<p>2018.HUN M
-  <h4 1210979 id=b>Move Your Vision<p>2009.IRE
-  <h4 4>Heliconia<p>2010.GB
-  <h4 361055>Hernando<p>1990 FR
-  <h4 1 id=a>Kontroll<p>2018.HUN F
-  <h4 1036137>Bully Pulpit<p>2000.USA
-  <h4 1>Kespark<p>2007.ITY
-  <h4 337435>Kendor<p>1986 FR
-  <h4 id=a>Loire<p>2018.HUN M
-  <h4 1177537>George Vancouver<p>2010.USA
-  <h4 1>Ligurian Sea<p>2009.NZ
-  <h4 621128>Medicean<p>1997.GB
-  <h4 id=a>Manet<p>2018.HUN M
-  <h4 1036137>Bully Pulpit<p>2000.USA
-  <h4 3>Macabea<p>2008.CZ
-  <h4 769436>Look Honey<p>2000.IRE <!--sire: Sadler's Wells-->
-  <h4 id=a>Marshmallow<p>2018.HUN M
-  <h4 1036137>Bully Pulpit<p>2000.USA
-  <h4>Mazsola<p>2008.HUN
-  <h4 342963>Horatio Luro<p>1987.USA
-  <h4 id=a>Meglepetes<p>2018.HUN M
-  <h4 1177402>Penny's Picnic<p>2010.IRE
-  <h4 1>Megerto<p>2006.HUN
-  <h4 342963>Horatio Luro<p>1987.USA
-  <h4 id=a>Mont Negro<p>2018.HUN M
-  <h4 1003684 id=b>Stormy River<p>2003.FR
-  <h4 1111988 id=b>Montmarie<p>2005.FR
-  <h4 369845 id=c>Montjeu<p>1996.IRE
-  <h4 1 id=a>Mr. Penny<p>2018.HUN M
-  <h4 1177402>Penny's Picnic<p>2010.IRE
-  <h4 1>Miss Brooch<p>2012.GER
-  <h4 369587>Areion<p>1995.GER
-  <h4 1346307 id=a>Poetic Flare<p>2018.IRE S
-  <h4 1194537 id=a>Dawn Approach<p>2010.IRE
-  <h4 1211385 id=b>Maria Lee<p>2007.IRE
-  <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE
-  <h4 id=a>Sasha<p>2018.HUN M
-  <h4 1036137 >Bully Pulpit<p>2000.USA
-  <h4 3>Salalah<p>2011.CZ
-  <h4 1>Fairlypi<p>2004.IRE
-  <h4 id=a>Sue<p>2018.HUN F
-  <h4 1036137>Bully Pulpit<p>2000.USA
-  <h4 7>Sunny Girl<p>2004.HUN
-  <h4 782854>Jolly Groom<p>1984.USA
-  <h4 id=a>Sunday<p>2018.HUN
-  <h4 1210979 id=b>Move Your Vision<p>2009.IRE
-  <h4 1>Szombatesti Lany<p>2012.HUN <!--mare:Sunny Girl-->
-  <h4 1003766>Steady As A Rock<p>2004.FR <!--sire: Rock of Gibraltar-->
-  <h4 17 id=a>Turbina<p>2018.HUN M
-  <h4 1210979 id=b>Move Your Vision<p>2009.IRE
-  <h4 5>Tunic<p>2005.GB
-  <h4 362560>Danehill Dancer<p>1993.IRE <!--sire: Danehill-->
-  <h4 1267632 id=a>アジアノジュンシン<p>2018.JPN F
-  <h4 1177896>アジアエクスプレス<p>2011.USA
-  <h4 298465>バトルアンコール<p>2010.JPN
-  <h4 262443 id=b>フジキセキ<p>1992.JPN
-  <h4 1268900 id=a>アヴォカド<p>2018.JPN F
-  <h4 888832>エスポワールシチー<p>2005.JPN
-  <h4 1142745>アップライジング<p>2011.JPN
-  <h4 626815>Commands<p>1996.JPN <!--sire: Danehill-->
-  <h4 1262985 id=a>エベーヌ<p>2018.JPN F
-  <h4 1127395 id=b>Dunkirk<p>2006.USA
-  <h4 758780>ラズベリータイム<p>2003.JPN
-  <h4 262443 id=b>フジキセキ<p>19992.JPN
-  <h4 1265862 id=a>ギガインパクト<p>2018.JPN F
-  <h4 1110554 id=b>ディープブリランテ<p>2009.JPN
-  <h4 1051710 id=b>グレイスフルソング<p>2005.IRE
-  <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE
-  <h4 1270626 id=a>ゴールドレッグス<p>2018.JPN M
-  <h4 1042049 id=b>ルーラーシップ<p>2007.JPN
-  <h4 1139859>ファンシーミューズ<p>2011.JPN
-  <h4 619768>ゴールドアリュール<p>1999.JPN
-  <h4 1262332 id=a>マミリアス<p>2018.JPN F
-  <h4 1170063 id=b>リオンディーズ<p>2013.JPN
-  <h4 728812>ハニーハント<p>2001.JPN
-  <h4 361855>エンドスウィープ<p>1991.USA
-  <h4 1267531 id=a>マーテル<p>2018.JPN F
-  <h4 1151936 id=b>ドゥラメンテ<p>2012.JPN
-  <h4 1113708>Malvern Spring<p>2006.USA
-  <h4 347814>Silver Deputy<p>1985.CAN
-  <h4 1264297 id=a>ラヴマイウェイ<p>2018.JPN F
-  <h4 1106251 id=b>ジャスタウェイ<p>2009.JPN
-  <h4 899740 id=b>Higher Love<p>2002.IRE
-  <h4 336572 id=c>Sadler's Wells<p>2002.USA
-  <h4 1317590 id=a>リフレイム<p>2018.USA F
-  <h4 1238289 id=b>American Pharoah<p>2012.USA
-  <h4 1114664>Careless Jewel<p>2006.USA
-  <h4 849372>Tapit<p>2001.USA
-  <h4 1266716 id=a>ヴィジャーヤ<p>2018.JPN M
-  <h4 1090360 id=b>オルフェーヴル<p>2008.JPN
-  <h4 1101171>デプロマトウショウ<p>2009.JPN
-  <h4 372610>Fasliyev<p>1997.USA
-  <h4 1345677 id=a>Anders<p>2017.AUS S
-  <h4 1068216>Not A Single Doubt<p>2001.AUS
-  <h4 1109003>Madame Andree<p>2009.AUS
-  <h4 731452>War Emblem<p>1999.USA
-  <h4 0 id=a>Doubtland<p>2017.AUS S
-  <h4 1068216>Not A Single Doubt<p>2001.AUS
-  <h4 3>Miss Sharapova<p>2006.NZ
-  <h4 975364>Ustinov<p>1998.AUS
-  <h4 1346155 id=a>Ilalliqa<p>2017.IRE F
-  <h4 1286574>Muhaarar<p>2012.GB
-  <h4 1055526>Sun Bittern<p>2005.USA
-  <h4 337444>Seeking The Gold<p>1985.USA
-  <h4 10 id=a>Lady Penelope<p>2017.IRE F
-  <h4 1239485>Night of Thunder<p>2011.IRE <!-- sire: Dubawi -->
-  <h4 1>Step Sequence<p>2010.IRE
-  <h4 714371>Nayef<p>1998.USA
-  <h4 1349383 id=a>Russian Camelot<p>2017.IRE S
-  <h4 1228789 id=b>Camelot<p>2009.GB
-  <h4 1347358>Lady Babooshka<p>2011.GB
-  <h4 363470>Cape Cross<p>1994.IRE
-  <h4 1237607 id=a>スノージュエリー<p>2017.JPN F
-  <h4 1088803 id=b>ウインバリアシオン<p>2008.JPN
-  <h4 611749>サクラバーベナ<p>1999.JPN
-  <h4 225628 id=a>サクラバクシンオー<p>1989.JPN
-  <h4 1235403 id=a>プライムライン<p>2017.JPN M
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN
-  <h4 1108866>バートラムガーデン<p>2009.JPN
-  <h4 225628 id=a>サクラバクシンオー<p>1989.JPN
-  <h4 1220875 id=a>アントリューズ<p>2016.USA M
-  <h4 1089850 id=a>ロードカナロア<p>2008.JPN
-  <h4 1111253>Shes All Eltish<p>2005.USA
-  <h4 356574>Eltish<p>1992.USA
-  <h4 1219539 id=a>グランソヴァール<p>2016.JPN M
-  <h4 1127395 id=b>Dunkirk<p>2006.USA
-  <h4 1086752>スイートマカロン<p>2006.USA
-  <h4 369621 id=a>Tale of the Cat<p>1994.USA
-  <h4 1296859 id=a>ストームハート<p>2016.USA F
-  <h4 1240926>Uncaptured<p>2010.CAN
-  <h4 986306>Miss Fear Factor<p>2003.USA
-  <h4 622228>Siphon<p>1991.BR
-  <h4 5 id=a>Extrema<p>2015.AUS M
-  <h4 999168 id=b>Bernardini<p>2003.USA <!--CT from sire:A.P. Indy TT-->
-  <h4 1226699>Streama<p>2008.AUS
-  <h4 1039599 id=a>Stratum<p>2002.AUS
-  <h4 1 id=a>Written By<p>2015.AUS S
-  <h4 1157888 id=a>Written Tycoon<p>2002.AUS
-  <h4 1>Yau Chin<p>2005.AUS
-  <h4 621989 >Tobougg<p>1998.IRE
-  <h4 1 id=a>Zousain<p>2015.AUS S
-  <h4 1296846 id=a>Zoustar<p>2010.AUS
-  <h4 1>Pasar Silbano<p>2006.IRE
-  <h4 369144>Elnadim<p>1994.USA
-  <h4 1211839 id=a>アドバンスマルス<p>2015.JPN M
-  <h4 1209642>Jimmy Creed<p>2009.USA
-  <h4 1144132>Bijoux Miss<p>2004.USA
-  <h4 731473>Buddha<p>1999.USA
-  <h4 1204988 id=a>キングオブハーツ<p>2015.JPN M
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN
-  <h4 899740 id=b>Higher Love<p>2002.IRE
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 1209316 id=a>パワーバンド<p>2015.JPN M
-  <h4 1110554 id=b>ディープブリランテ<p>2009.JPN
-  <h4 1086752>スイートマカロン<p>2006.USA
-  <h4 369621 id=a>Tale of the Cat<p>1994.USA
-  <h4 1244591 id=a>Cracksman<p>2014.GB S
-  <h4 1161935 id=b>Frankel<p>2008.GB
-  <h4 1225274>Rhadegunda<p>2005.GB
-  <h4 365118>Pivotal<p>1993.GB
-  <h4 1292040 id=a>Dynamic<p>2014.GB F
-  <h4 1003266 id=b>Teofilo<p>2004.IRE
-  <h4 1299905>White Cay<p>2005.GB
-  <h4 745340>Dalakhani<p>1990.IRE
-  <h4 1 id=a>Elegantly Bound<p>2014.IRE M
-  <h4 1016646 >Choisir<p>1999.AUS
-  <h4 2>Boundless Joy<p>2008.AUS
-  <h4 369845 id=c>Montjeu<p>1996.IRE
-  <h4 1240187 id=a>National Defense<p>2014.AUS S
-  <h4 372680 id=b>Invincible Spirit<p>1997.IRE <!--sire:Green Desert bro: Kodiac-->
-  <h4 1146331>Angle Falls<p>2006.GB
-  <h4 347989>Kingmambo<p>1990 USA
-  <h4 1 id=a>Plata O Plomo<p>2014.GB M
-  <h4 1193305>Paco Boy<p>2005.IRE
-  <h4 1>BranStom Gem<p>1998.GB
-  <h4 237717>So Factual<p>1990.USA
-  <h4 1249697 id=a>Samran Says<p>2014.IRE F
-  <h4 1146082>Dark Angel<p>2005.IRE
-  <h4 1146082>Chachalacas<p>2007.ir
-  <h4 714422>Hawk Wing<p>1999.USA
-  <h4 1350388 id=a>Galileo Gold<p>2013.GB S
-  <h4 1193305>Paco Boy<p>2005.IRE
-  <h4 1277210 id=b>Galicuix<p>2008.GB
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 1 id=a>Smash Williams<p>2013.IRE 
-  <h4 904771>Fracas<p>2002.IRE
-  <h4 2>Take Flight<p>2008.IRE
-  <h4 365118>Pivotal<p>1993.GB
-  <h4 1296648 id=a>Thronum<p>2013.AUS S
-  <h4 1039506>Snitzel<p>2002.AUS
-  <h4 1112767>Helena's Secret<p>2007.USA
-  <h4 372807>Five Star Day<p>1996.USA
-  <h4 id=a>Washington DC<p>2013.IRE S
-  <h4 1194104>Zoffany<p>2008.IRE <!--sire: Dansili-->
-  <h4 1>How's she Cuttin<p>2003.IRE
-  <h4 275458>シンコウフォレスト<p>1993.IRE <!--Green Desert x Park Express-->
-  <h4 1173834 id=a>ヴァイスクリガー<p>2013.JPN M
-  <h4 887465>キャプテントゥーレ<p>2005.JPN
-  <h4 1040580>バトルキクヒメ<p>2007.JPN
-  <h4 237704>White Muzzle<p>1990.GB
-  <h4 1166859 id=a>エネルムサシ<p>2013.JPN M
-  <h4 901749 id=b>キンシャサノキセキ<p>2003.AUS
-  <h4 313524>クリノトップレディ<p>1997.USA
-  <h4 339861>Salt Lake<p>1989.USA
-  <h4 1197495 id=a>Belardo<p>2012.IRE S
-  <h4 1115412>Lope de Vega<p>2007.IRE
-  <h4 745091>Danaskaya<p>2000.IRE
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 3 id=a>Icy Lady<p>2012.GB F
-  <h4 1051578 id=b>New Approach<p>2005.IRE
-  <h4 2 id=b>Kitty Kiernan<p>2007.GB
-  <h4 365118>Pivotal<p>1993.GB
-  <h4 1 id=a>Mattmu<p>2012.GB S  <!--sire: Danehill Dancer-->
-  <h4 1022351>Indesatchel<p>2002.IRE
-  <h4 1>Katie Boo<p>2002.IRE
-  <h4 369582>Namid<p>1996.GB
-  <h4 3 id=a>Outreach<p>2012.AUS S
-  <h4 794335>Exceed And Excel<p>2000.AUS
-  <h4 13>Bahira<p>2002.AUS
-  <h4 343464>Snippets<p>1984.AUS
-  <h4 2 id=a>Palentino<p>2012.AUS S
-  <h4 1003266 id=b>Teofilo<p>2004.IRE
-  <h4 1>Palatine Hill<p>1999.AUS
-  <h4 337576>Palace Music<p>1981.USA
-  <h4 1 id=a>Ready For Victory<p>2012.AUS S
-  <h4 372626 id=b>More Than Ready<p>1997.USA
-  <h4 9>Crillon<p>2006.NZ
-  <h4 342033>Zabeel<p>1986.NZ
-  <h4 1 id=a>Well In Flight<p>2012.SAF
-  <h4 1027109 id=b>Just As Well<p>2003.USA
-  <h4 1>Flight Prospect<p>1993.SAF
-  <h4 766524>Secret Prospector<p>1982.USA
-  <h4 1224708 id=a>AeriAlist<p>2011.IRE M
-  <h4 1113706 id=b>Sea The Stars<p>2006.IRE
-  <h4 1100371>Maoineach<p>2006.USA
-  <h4 634933>Congaree<p>1998.USA
-  <h4 1283438 id=a>County Wexford<p>2011.IRE M
-  <h4 1003266 id=b>Teofilo<p>2004.IRE
-  <h4 1175504>Tiffed<p>2003.USA
-  <h4 335964>Seattle Slew<p>1974.USA
-  <h4 1328157 id=a>Curlin to Mischief<p>2011.USA S <!--bro: Mendelssohn Beholder Into Mischief-->
-  <h4 1051353>Curlin<p>2004.USA
-  <h4 722017>Leslie's Lady<p>1996.USA
-  <h4 340580>Tricky Creek<p>1986.USA
-  <h4 1343319 id=a>Fighting Sun<p>2011.AUS S
-  <h4 1112035 id=a>Northern Meteor<p>2005.AUS
-  <h4 1350159>Irish Darling<p>2001.AUS
-  <h4 367971>Ivorys Irish<p>1991.AUS
-  <h4 1283893 id=a>Fountain Of Youth<p>2011.IRE S
-  <h4 745493>Oasis Dream<p>2000.GB
-  <h4 879605>Attraction<p>2001.GB
-  <h4 339566>Efisio<p>1982.GB
-  <h4 1 id=a>Stratum Star<p>2011.AUS S
-  <h4 1039599 id=a>Stratum<p>2002.AUS
-  <h4 1>Purely Spectacular<p>2006.NZ
-  <h4 718137>Pins<p>1996.AUS
-  <h4 1239885 id=a>Supido<p>2011.AUS S
-  <h4 1178081 id=b>Sebring<p>2005.AUS
-  <h4 707332>レディサクシード<p>2000.JPN
-  <h4 333844>Brian's Time<p>1985.USA
-  <h4 1138044 id=a>ワンハート<p>2011.JPN F
-  <h4 704212>アサクサデンエン<p>1999.GB
-  <h4 727656>カガヤケラビット<p>2001.JPN
-  <h4 337848>Dehere<p>1991.USA
-  <h4 1194537 id=a>Dawn Approach<p>2010.IRE S
-  <h4 1051578 id=b>New Approach<p>2005.IRE
-  <h4 1194526 id=a>Hymn Of The Dawn<p>1999.USA
-  <h4 336875>Phone Trick<p>1982.USA
-  <h4 1296846 id=a>Zoustar<p>2010.AUS S
-  <h4 1112035 id=a>Northern Meteor<p>2005.AUS
-  <h4 1068188>Zouzou<p>2001.AUS
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 1144181 id=a>エーシントップ<p>2010.USA S
-  <h4 369621 id=a>Tale of the Cat<p>1994.USA
-  <h4 875292>Ecology<p>2001.USA
-  <h4 361396>Unbridled's Song<p>1993.USA
-  <h4 1227531 id=a>An Ghalanta<p>2009.IRE F
-  <h4 1000965>Holy Roman Emperor<p>2004.IRE <!--sire Danehill-->
-  <h4 1227447>Alamanta<p>1999.IRE
-  <h4 369059>Ali-Royal<p>1993.IRE
-  <h4 7 id=a>Crusade<p>2009.USA S
-  <h4 362868>Mr. Greeley<p>1992.USA
-  <h4 16 >La Traviata<p>2004.USA
-  <h4 719054>Johannesburg<p>1999.USA
-  <h4 1 id=a>Sessions<p>2009.AUS S
-  <h4 844073>Lonhro<p>1998.AUS
-  <h4 1>Seances<p>1999.AUS
-  <h4 342037>Canny Lad<p>1987.AUS
-  <h4 1 id=a>Shamexpress<p>2009.NZ S
-  <h4 371697>O'reilly<p>1993.NZ <!--sire: Last Tycoon-->
-  <h4 1>Volkrose<p>2002.NZ
-  <h4 341009>Volksraad<p>1988.GB <!--sire: Green Desert-->
-  <h4 1 id=a>Vastitas<p>2009.AUS F
-  <h4 336430 id=a>Green Desert<p>1983.USA 
-  <h4 897198>Kahira<p>2002.IRE
-  <h4 372784>King's Best<p>1997.USA
-  <h4 1176681 id=a>Your Song<p>2009.AUS S
-  <h4 1019761>Fastnet Rock<p>2001.AUS
-  <h4 1145813>Zembu<p>1999.AUS
-  <h4 262443 id=b>フジキセキ<p>1992.JPN
-  <h4 1147205 id=a>Dialed In<p>2008.USA S
-  <h4 744351 id=b>Mineshaft<p>1999.USA
-  <h4 621557>Miss Doolittle<p>1998.USA
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 1180907 id=a>Dream Ahead<p>2008.USA S
-  <h4 611101>Diktat<p>1995.GB
-  <h4 444285>Land of Dreams<p>1995.GB
-  <h4 342671>Cadeaux Genereux<p>1985.GB
-  <h4 1147585 id=a>Gig Harbor<p>2008.USA S
-  <h4 620969>City Zip<p>1998.USA
-  <h4 791683>Miss Blue Grass<p>1998.USA
-  <h4 339552>St. Jovite<p>1989.USA
-  <h4 2 id=a>Whisper Gently<p>2008.IRE F
-  <h4 719408 id=b>High Chaparral<p>1999.UR
-  <h4 1>Whisper Light<p>1998.IRE
-  <h4 336202>Caerleon<p>1980.USA
-  <h4 1089850 id=a>ロードカナロア<p>2008.JPN S
-  <h4 729458 id=b>キングカメハメハ<p>2001.JPN
-  <h4 308961>レディブラッサム<p>1996.JPN
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 1241319 id=a>Moshe<p>2007.AUS S
-  <h4 962836 id=b>Bel Esprit<p>1999.AUS
-  <h4 1242518>Helsinge<p>2001.AUS
-  <h4 340107>Desert Sun<p>1988.GB
-  <h4 1296597 id=a>Squamosa<p>2007.AUS S
-  <h4 1068216>Not A Single Doubt<p>2001.AUS
-  <h4 792415>Class Success<p>1999.AUS
-  <h4 343051>Success Express<p>1985.USA
-  <h4 1194118 id=a>Star Witness<p>2007.AUS S
-  <h4 1113851>Starcraft<p>2000.NZ
-  <h4 1039082>Leone Chiara<p>1999.AUS
-  <h4 364748>Lion Hunter<p>1992.AUS
-  <h4 1180281 id=a>Bushranger<p>2006.IRE S
-  <h4 369106>Danetime<p>1994.IRE <!--sire Danehill-->
-  <h4 1062976>Danz Danz<p>1997.GB
-  <h4 339566>Efisio<p>1982.GB
-  <h4 1177657 id=a>Intense Focus<p>2006.USA S
-  <h4 372708 id=b>Giant's Causeway<p>1997.USA
-  <h4 714706>Daneleta<p>1999.IRE
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 1223314 id=a>Rogano<p>2006.AUS S
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 384232>Singles Bar<p>1991.AUS <!--bro: Snippets-->
-  <h4 341172>Rory's Jester<p>1982.AUS
-  <h4 1180320 id=a>Run Away and Hide<p>2006.USA S
-  <h4 620969>City Zip<p>1998.USA
-  <h4 1226005>Jilted<p>1999.USA
-  <h4 339965>Runaway Groom<p>1979.USA
-  <h4 1195144 id=a>Starspangledbanner<p>2006.AUS S
-  <h4 1016646>Choisir<p>1999.AUS
-  <h4 1227792>Gold Anthem<p>1999.AUS
-  <h4 341059>Made of Gold<p>1989.USA
-  <h4 1224590 id=a>Stryker<p>2006.AUS S
-  <h4 1019761>Fastnet Rock<p>2001.AUS
-  <h4 1001548>Laetitia<p>1998.AUS
-  <h4 337445>Woodman<p>1983.USA
-  <h4 1 id=a>Unionize<p>2006.USA S
-  <h4 372662>Dixie Union<p>1997.USA
-  <h4 1>Silent Sighs<p>2001.USA
-  <h4 365583>Benchmark<p>1991.USA
-  <h4 1114813 id=a>Vocalised<p>2006.USA S
-  <h4 745249>Vindication<p>2002.USA <!--sire: Seattle Slew-->
-  <h4 792358>Serena's Tune<p>1998.USA
-  <h4 335975 >Mr. Prospector<p>1970.USA
-  <h4 8 id=a>Wanted<p>2006.AUS S
-  <h4 1019761>Fastnet Rock<p>2001.AUS
-  <h4 1>Fragmentation<p>2000.AUS
-  <h4 343464>Snippets<p>1984.AUS
-  <h4 989119 id=a>アフィニティ<p>2006.JPN F
-  <h4 225628 id=a>サクラバクシンオー<p>1989.JPN
-  <h4 272448>オギブルービーナス<p>1993.JPN
-  <h4 179892>スーパークリーク<p>1985.JPN
-  <h4 1099945 id=a>Dreamscape<p>2005.AUS S
-  <h4 1016646>Choisir<p>1999.AUS
-  <h4 1008324>Faith In Dreams<p>1991.AUS
-  <h4 337428>Ferdinand<p>1983.AUS
-  <h4 1 id=a>Drumbeats<p>2005.AUS S
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 1>Delicate Choice<p>1998.AUS
-  <h4 337436>Last Tycoon<p>1983.IRE
-  <h4 1298140 id=a>Duporth<p>2005.AUS S
-  <h4 337563>Red Ransom<p>1987.USA
-  <h4 447370>Stanging<p>1994.AUS
-  <h4 343051>Success Express<p>1985.USA
-  <h4 1098347 id=a>Equiano<p>2005.FR S
-  <h4 745418>Acclamation<p>1999.GB
-  <h4 1063846>Entente Cordiale<p>1998.IRE
-  <h4 336370>Ela-Mana-Mou<p>1976.IRE
-  <h4 1146059 id=a>Master of Design<p>2005.AUS S
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 787428>Urgo To Merge<p>1993.AUS
-  <h4 337436>Last Tycoon<p>1983.IRE
-  <h4 1194998 id=a>Nicconi<p>2005.AUS S
-  <h4 369627>Bianconi<p>1995.USA
-  <h4 718753>Nicola Lass<p>1995.AUS
-  <h4 341896 id=b>Scenic<p>1986.IRE <!--CT sire: Sadler's Wells--> 
-  <h4 1112035 id=a>Northern Meteor<p>2005.AUS S
-  <h4 368799>Encosta De Lago<p>1993.AUS
-  <h4 439775>Explosive<p>1990.USA
-  <h4 336225>Fappiano<p>1977.USA
-  <h4 1053652 id=a>Tale of Ekati<p>2005.USA S
-  <h4 369621 id=a>Tale of the Cat<p>1994.USA
-  <h4 312873 id=b>サイレンスビューティ<p>1997.JPN
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 1082430 id=a>Visionaire<p>2005.USA S
-  <h4 369314>Grand Slam<p>1995.USA
-  <h4 869776>Scarlet Tango<p>1998.USA
-  <h4 362799>French Deputy<p>1992.USA
-  <h4 1 id=a>Warm White Night<p>2005.SAF S
-  <h4 361406>Western Winter<p>1992.USA
-  <h4 2>Thousand Nights<p>1988.SAF
-  <h4 346488>Foveros<p>1976.GB
-  <h4 1175557 id=a>Astronomer Royal<p>2004.USA S
-  <h4 336082 id=a>Danzig<p>1977.USA
-  <h4 837880>Sheepscot<p>1994.USA
-  <h4 341713>Easy Goer<p>1986.USA
-  <h4 1180044 id=a>Idiot Proof<p>2004.USA S
-  <h4 365583>Benchmark<p>1991.USA
-  <h4 1179748>Perfectly Pretty<p>1999.USA
-  <h4 339972>Bertrando<p>1989.USA
-  <h4 1003306 id=a>Major Cadeaux<p>2004.GB S
-  <h4 342671>Cadeaux Genereux<p>1985.GB
-  <h4 625230>Maine Lobster<p>1998.USA
-  <h4 337445>Woodman<p>1983.USA
-  <h4 1076874 id=a>Murtajill<p>2004.AUS S
-  <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE
-  <h4 436264>Skating<p>1989.AUS
-  <h4 344065>At Talaq<p>1981.USA <!--sire:Roberto-->
-  <h4 1076306 id=a>Seventh Rock<p>2004.AUS S
-  <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE
-  <h4 960924>Ruby Clipper<p>1995.NZ
-  <h4 344080>Rubiton<p>1983.AUS
-  <h4 1028940 id=a>Henny Hughes<p>2003.USA S
-  <h4 362819>Hennessy<p>1993.USA
-  <h4 865068>Meadow Flyer<p>1989.USA
-  <h4 337483>Meadowlake<p>1983.USA
-  <h4 1039962 id=a>Kildonan<p>2003.SAF S
-  <h4 362915>Rich Man's Gold<p>1992.USA
-  <h4 1038783>Cathay Firth<p>1994.SAF
-  <h4 342217>Philippi<p>1986.FR
-  <h4 1022220 id=a>Darci Brahma<p>2002.NZ S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 718633>Grand Echezeaux<p>1996.NZ
-  <h4 342033>Zabeel<p>1986.NZ
-  <h4 1039666 id=a>Fast 'N' Famous<p>2002.AUS S
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 452267>Zalinda<p>1994.NZ
-  <h4 342033>Zabeel<p>1986.NZ
-  <h4 1039552 id=a>God's Own<p>2002.AUS S
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 867062>Angel In Disguise<p>1994.NZ
-  <h4 171986>Sky Chase<p>1984.NZ
-  <h4 984276 id=a>Magnus<p>2002.AUS S
-  <h4 363038 id=b>Flying Spur<p>1992.AUS
-  <h4 447344>Scandinavia<p>1994.AUS
-  <h4 343464>Snippets<p>1984.AUS
-  <h4 1039599 id=a>Stratum<p>2002.AUS S
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 1038516>Bourgeois<p>1991.AUS
-  <h4 340269>Luskin Star<p>1974.AUS
-  <h4 1157888 id=a>Written Tycoon<p>2002.AUS S
-  <h4 375120>Iglesia<p>2002.AUS <!--sire: Last Tycoon-->
-  <h4 1226831>Party Miss<p>1991.AUS
-  <h4 336570>Kenmare<p>1975.FR
-  <h4 896484 id=a>Assafa<p>2001.AUS S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 840175>Marigot Bay<p>1995.IRE
-  <h4 337427>Fairy King<p>1982.USA
-  <h4 1019772 id=a>Dane Shadow<p>2001.AUS S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 405988>Slight Chance<p>1989.NZ
-  <h4 340272>Centaine<p>1980.AUS
-  <h4 904635 id=a>Snippetson<p>2001.AUS S <!--bro: Singles Bar -> son: Not A Single Doubt-->
-  <h4 343464>Snippets<p>1984.AUS
-  <h4 787979>Snowdrift<p>1994.FR
-  <h4 342688>Polish Precedent<p>1986.USA
-  <h4 861633 id=a>Way West<p>2001.AUS S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 852127>Prospect Fever<p>1992.USA
-  <h4 335975 >Mr. Prospector<p>1970.USA
-  <h4 743908 id=a>Statue of Liberty<p>2000.USA S <!--bro: Lemon Drop Kid-->
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 424416>Charming Lassie<p>1987.USA
-  <h4 335964>Seattle Slew<p>1974.USA
-  <h4 962836 id=a>Bel Esprit<p>1999.AUS S
-  <h4 341457>Royal Academy<p>1987.USA
-  <h4 962837>Bespoken<p>1990.AUS
-  <h4 334722>Vain<p>1966.AUS
-  <h4 719727 id=a>Firebreak<p>1999.GB S
-  <h4 362552>Charnwood Forest<p>1992.IRE
-  <h4 719604>Breakaway<p>1985.GB
-  <h4 335151>Song<p>1966.GB
-  <h4 878926 id=a>Hidden Dragon<p>1999.AUS S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 442415>Ballroom Babe<p>1992.NZ
-  <h4 341477>Citidancer<p>1986.IRE
-  <h4 1194526 id=a>Hymn Of The Dawn<p>1999.USA F
-  <h4 336875>Phone Trick<p>1982.USA
-  <h4 866839>Colonial Debut<p>1994.USA
-  <h4 335991>Pleasant Colony<p>1978.USA
-  <h4 1016573 id=a>Lucky Owners<p>1999.NZ S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 865656>Miss Priority<p>1991.NZ
-  <h4 337515>Kaapstad<p>1984.NZ
-  <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 426859>Offshore Boom<p>1985.IRE
-  <h4 335936>Be My Guest<p>1974.USA
-  <h4 858242 id=a>Dexterity<p>1998.USA s
-  <h4 347989>Kingmambo<p>1990.USA
-  <h4 427086>Diese<p>1989.USA
-  <h4 336499>Diesis<p>1980.GB <!--bro: Kris-->
-  <h4 375042 id=a>Monashee Mountain<p>1997.USA S <!--bro: MineShaft-->
-  <h4 336082 id=a>Danzig<p>1977.USA
-  <h4 404719>Prospectors Delite<p>1989.USA
-  <h4 335975 >Mr. Prospector<p>1970.USA
-  <h4 843795 id=a>St Petersburg<p>1997.AUS S
-  <h4 336085>Nureyev<p>1977.USA
-  <h4 444039>Miss Bold Appeal<p>1990.USA
-  <h4 336773>Valid Appeal<p>1972.USA
-  <h4 963103 id=a>Captain Al<p>1996.SAF S
-  <h4 342881>Al Mufti<p>1985.USA <!--sire: Roberto-->
-  <h4 963104>Off To War<p>1983.SAF
-  <h4 780167>Complete Warrior<p>1976.USA
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 451254>Shantha's Choice<p>1992.AUS
-  <h4 342037>Canny Lad<p>1987.AUS
-  <h4 747661 id=a>Tiger Ridge<p>1996.USA S <!--bro: A.P. Indy-->
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 404842 id=b>Weekend Surprise<p>1980.USA
-  <h4 333978 id=b>Secretariat<p>1970.USA
-  <h4 369621 id=a>Tale of the Cat<p>1994.USA S
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 445014>Yarn<p>1987.USA
-  <h4 335975 >Mr. Prospector<p>1970.USA
-  <h4 362873 id=a>Northern Afleet<p>1993.USA S
-  <h4 337421>Afleet<p>1984.CAN
-  <h4 436004>Nuryette<p>1986.USA
-  <h4 336085>Nureyev<p>1977.USA
-  <h4 225628 id=a>サクラバクシンオー<p>1989.JPN S
-  <h4 145106>サクラユタカオー<p>1982.JPN
-  <h4 169374>サクラハゴロモ<p>1984.JPN
-  <h4 333544 id=a>Northern Taste<p>1971.CAN
-  <h4 337424 id=a>Danehill<p>1986.USA S
-  <h4 336082 id=a>Danzig<p>1977.USA
-  <h4 394662 id=b>Razyana<p>1981.USA
-  <h4 335990>His Majesty<p>1968.USA
-  <h4 336430 id=a>Green Desert<p>1983.USA S
-  <h4 336082 id=a>Danzig<p>1977.USA
-  <h4 391704>Foreign Courier<p>1979.USA <!--bro: Twining-->
-  <h4 333957>Sir Ivor<p>1965.USA
-  <h4 337102 id=a>Storm Cat<p>1983.USA S
-  <h4 336177>Storm Bird<p>1978.USA
-  <h4 393602>Terlingua<p>1976.USA
-  <h4 333978 id=b>Secretariat<p>1970.USA
-  <h4 336082 id=a>Danzig<p>1977.USA
-  <h4 334002 id=b>Northern Dancer<p>1961.CAN
-  <h4 389652>Pas de Nom<p>1968.USA
-  <h4 334079>Admiral's Voyage<p>1959.USA
-  <h4 333544 id=a>Northern Taste<p>1971.CAN S
-  <h4 334002 id=b>Northern Dancer<p>1961.CAN
-  <h4 386266>Lady Victoria<p>1962.CAN
-  <h4 335344>Victoria Park<p>1957.CAN
-  <h4 334378 id=a>Nearctic<p>1954.CAN S
-  <h4 334377>Nearco<p>1935.ITY
-  <h4 387922 id=b>Lady Angela<p>1944.GB
-  <h4 338878 id=c>Hyperion<p>1930.GB
-  <h4 1358728 id=b>-<p>2022.JPN F
-  <h4 1177896>アジアエクスプレス<p>2010.USA
-  <h4 1192324 id=b>スプリングノート<p>2014.USA
-  <h4 700008 id=c>シンボリクリスエス<p>1999.USA
-  <h4 1332230 id=b>アフタヌーンティー<p>2021.JPN F
-  <h4 1127395 id=b>Dunkirk<p>2006.USA
-  <h4 758780>ラズベリータイム<p>2003.JPN
-  <h4 262443 id=b>フジキセキ<p>1992.JPN
-  <h4 1339626 id=b>アンモシエラ<p>2021.JPN F
-  <h4 1293348>Bricks and Mortar<p>2014.USA 
-  <h4 1207115>サンドクイーン<p>2015.JPN
-  <h4 619768>ゴールドアリュール<p>1999.JPN
-  <h4 1332989 id=b>-<p>2021.JPN F
-  <h4 1240055>Drefong<p>2013.USA
-  <h4 899928>スズカシャンティー<p>2005.JPN
-  <h4 372708 id=b>Giant's Causeway<p>1997.USA
-  <h4 1341411 id=b>-<p>2021.JPN F
-  <h4 1123166>コパノリッキー<p>2010.JPN
-  <h4 1192324 id=b>スプリングノート<p>2014.JPN
-  <h4 700008 id=c>シンボリクリスエス<p>1999.USA
-  <h4 1339278 id=b>-<p>2021.JPN M
-  <h4 1090360 id=b>オルフェーヴル<p>2008.JPN
-  <h4 1194122>トレサンセール<p>2014.JPN
-  <h4 1127380>Rip Van Winkle<p>2006.IRE
-  <h4 1338680 id=b>-<p>2021.JPN F
-  <h4 1141719 id=b>ミッキーアイル<p>2011.JPN
-  <h4 1183698>ローズシュクレ<p>2014.JPN
-  <h4 881793>スマートファルコン<p>2005.JPN
-  <h4 1341896 id=b>ホームアンドドライ<p>2021.JPN M
-  <h4 1328548>シュヴァルグラン<p>2012.JPN
-  <h4 1328548>Sailing Home<p>2015.GB
-  <h4 858233>Shamardal<p>2002.USA
-  <h4 1334729 id=b>リヤンイヴェール<p>2021.JPN F
-  <h4 1120570 id=b>キズナ<p>2010.JPN
-  <h4 1101171>デプロマトウショウ<p>2009.JPN
-  <h4 372610>Fasliyev<p>1997.USA
-  <h4 1327613 id=b>マジックブルー<p>2021.JPN M
-  <h4 1083691>Majestic Warrior<p>2005.USA <!--sire: A.P. Indy-->
-  <h4 1151744>エンパイアブルー<p>2012.JPN
-  <h4 749845>Empire Maker<p>2000.USA
-  <h4 1340841 id=b>メタシアター<p>2021.JPN F
-  <h4 1124297 id=c>エピファネイア<p>2010.JPN
-  <h4 1190679>ミッシングリンク<p>2014.JPN
-  <h4 1046333>ヴィクトワールピサ<p>2007.JPN
-  <h4 1341783 id=b>ラヴシュプリーム<p>2021.JPN M
-  <h4 1162905>サトノクラウン<p>2012.JPN
-  <h4 1237775>パーフェクトラヴ<p>2017.JPN
-  <h4 1341783 id=b>オルフェーヴル<p>2008.JPN
-  <h4 1319031 id=b>イエルバブエナ<p>2020.JPN M
-  <h4 1083691>Majestic Warrior<p>2005.USA
-  <h4 1319031>ミンティエアー<p>2004.JPN
-  <h4 324933>アグネスタキオン<p>1998.JPN
-  <h4 1318725 id=b>グランツベリー<p>2020.JPN F
-  <h4 1052586>エイシンフラッシュ<p>2007.JPN
-  <h4 758780>ラズベリータイム<p>2003.JPN
-  <h4 262443 id=b>フジキセキ<p>1992.JPN
-  <h4 1326088 id=b>セントアイヴス<p>2020.JPN M
-  <h4 1137571>サトノアラジン<p>2011.JPN
-  <h4 1227544>Quest For Wonder<p>2012.GB
-  <h4 1128881>Makfi<p>2007.GB
-  <h4 1320751 id=b>テラステラ<p>2020.JPN M
-  <h4 1138240 id=b>モーリス<p>2011.JPN
-  <h4 1048499 id=c>ステラリード<p>2007.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 1324236 id=b>ドンカルロ<p>2020.JPN M
-  <h4 1240055>Drefong<p>2013.USA
-  <h4 1151934>レトロクラシック<p>2012.JPN
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 1327597 id=b>ボンドオブラヴ<p>2020.JPN M
-  <h4 1120570 id=b>キズナ<p>2010.JPN
-  <h4 899740 id=b>Higher Love<p>2002.IRE
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 1325233 id=b>メグルキセキ<p>2020.JPN F
-  <h4 1127395 id=b>Dunkirk<p>2006.USA
-  <h4 1174487>ゼロカラノキセキ<p>2013.JPN
-  <h4 901749 id=b>キンシャサノキセキ<p>2003.AUS
-  <h4 1323783 id=b>モーメントキャッチ<p>2020.JPN M
-  <h4 1138240 id=b>モーリス<p>2011.JPN
-  <h4 1141447>シュシュブリーズ<p>2011.JPN
-  <h4 262443 id=b>フジキセキ<p>1992.JPN
-  <h4 1351767 id=b>モダナイズクィーン<p>2020.USA F
-  <h4 365171>Distorted Humor<p>1993.USA
-  <h4 1250088>Never Grow Old<p>2014.USA
-  <h4 1003260>Scat Daddy<p>2004.USA
-  <h4 1325753 id=b>ランドオブラヴ<p>2020.JPN F
-  <h4 1141719 id=b>ミッキーアイル<p>2011.JPN
-  <h4 1192967>ルックオブラヴ<p>2013.JPN <!--mare: Higher Love-->
-  <h4 372784>King's Best<p>1997.USA
-  <h4 id=b>-<p>2019.AUS M
-  <h4 1197223>Adelaide<p>2011.IRE <!--sire: Galileo-->
-  <h4 1>Anantha<p>2010.AUS
-  <h4 621945>Hussonet<p>1991.USA <!--sire: Mr.Prospector-->
-  <h4 id=b>-<p>2019.AUS M
-  <h4 3>De Gaulle<p>2014.AUS <!--sire: Exceed And Excel-->
-  <h4 1>Avienus<p>2005.AUS
-  <h4 852660>Reset<p>2000.AUS
-  <h4 1305404 id=b>アシタカ<p>2019.JPN M
-  <h4 1120570 id=b>キズナ<p>2010.JPN
-  <h4 853083>ミスペンバリー<p>2002.IRE
-  <h4 369845 id=c>Montjeu<p>1996.IRE
-  <h4 1306822 id=b>アリシアン<p>2019.JPN M
-  <h4 1124297 id=c>エピファネイア<p>2010.JPN
-  <h4 1042314>ベネディーレ<p>2007.JPN
-  <h4 615577 id=b>クロフネ<p>1998.JPN
-  <h4 1313028 id=b>アンダーレ<p>2019.JPN M
-  <h4 1162685>ダノンレジェンド<p>2010.JPN
-  <h4 1138743>アラマサクロフネ<p>2011.JPN
-  <h4 615577 id=b>クロフネ<p>1998.USA
-  <h4 1312217 id=b>ウィンダミア<p>2019.JPN M
-  <h4 1141719 id=b>ミッキーアイル<p>2011.JPN
-  <h4 1227544>Quest For Wonder<p>2012.GB
-  <h4 1128881>Makfi<p>2007.GB
-  <h4 1305437 id=b>オトニエル<p>2019.JPN M
-  <h4 760084>メイショウサムソン<p>2003.JPN
-  <h4 862103>Lady Bountiful<p>2002.GB
-  <h4 362679>Spectrum<p>1992.IRE
-  <h4 1313232 id=b>キセキノセンシ<p>2019.JPN M
-  <h4 1083691>Majestic Warrior<p>2005.USA
-  <h4 1174487>ゼロカラノキセキ<p>2013.JPN
-  <h4 901749 id=b>キンシャサノキセキ<p>2003.AUS
-  <h4 1307185 id=b>キングエルメス<p>2019.JPN M
-  <h4 1089850 id=a>ロードカナロア<p>2008.JPN
-  <h4 1048499 id=b>ステラリード<p>2007.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 1307506 id=b>スパルタレオニダス<p>2019.JPN M
-  <h4 1028940 id=a>Henny Huges<p>2003.USA
-  <h4 1087908>ゼフィランサス<p>2008.JPN
-  <h4 294840>キングヘイロー<p>1995.JPN
-  <h4 1305263 id=b>タレントゥーサ<p>2019.JPN F
-  <h4 1138240 id=b>モーリス<p>2011.JPN
-  <h4 806779>ショウナンタレント<p>2004.JPN
-  <h4 324933>アグネスタキオン<p>1998.JPN
-  <h4 1306732 id=b>ドグマ<p>2019.JPN M
-  <h4 1155349>キタサンブラック<p>2012.JPN
-  <h4 1040671>ショウナンカラット<p>2007.JPN
-  <h4 333844>Brian's Time<p>1985.USA
-  <h4 1303945 id=b>ハキ<p>2019.JPN F
-  <h4 1083691>Majestic Warrior<p>2005.USA
-  <h4 705382>レフィナーダ<p>2000.JPN
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 1310478 id=b>ミルニュイ<p>2019.JPN F
-  <h4 1177896>アジアエクスプレス<p>2011.USA
-  <h4 1142018>アルーシュ<p>2011.JPN
-  <h4 626923>Chichicastenango<p>1998.FR
-  <h4 id=b>Allur<p>2018.HUN F
-  <h4 1>Chardonney Tcheque<p>2008.FR
-  <h4 1>Allonya<p>2003.GER
-  <h4 347970>Protektor<p>1989.GER
-  <h4 id=b>Arnika<p>2018.HUN F
-  <h4 1210979 id=b>Move Your Vision<p>2009.IRE
-  <h4 1>Aeronwy Thomas<p>2011.IRE
-  <h4 1000885>Dylan Thomas<p>1997.IRE <!--sire: Danehill-->
-  <h4 id=b>Friseur<p>2018. M
-  <h4 1210979 id=b>Move Your Vision<p>2009.IRE
-  <h4 1>Fashion Icon<p>2006.US
-  <h4 745105>Van Nistelrooy<p>1999.US <!--sire: Storm Cat-->
-  <h4 12 id=b>Juvenile<p>2018.HUN F
-  <h4 848826>Simplex<p>2001.FR
-  <h4 1>Jubilantka<p>2008.IRE
-  <h4 777061>Byron<p>2001.GB <!--sire: Green Dersert-->
-  <h4 1349478 id=b>Mac Swiney<p>2018.IRE M
-  <h4 1051578 id=b>New Approach<p>2005.IRE
-  <h4 1349479>Halla Na Saoire<p>2010.IRE
-  <h4 1003266 id=b>Teofilo<p>2004.IRE
-  <h4 id=b>Rain Man<p>2018.HUN M
-  <h4 1181647>Anodin<p>2010.IRE
-  <h4 1>Rainfire<p>2004.FR
-  <h4 337286>Rainbow Quest<p>1981.USA
-  <h4 id=b>Schafer<p>2018.HUN F
-  <h4 1210979 id=b>Move Your Vision<p>2009.IRE
-  <h4 984905>Saffwah<p>2003.IRE
-  <h4 372784>King's Best<p>1997.USA
-  <h4 id=b>Shy Boy<p>2018.HUN M
-  <h4 1210979 id=b>Move Your Vision<p>2009.IRE
-  <h4 1>Sougy<p>2011.FR
-  <h4 1111214>Naaqoos<p>2006.GB
-  <h4 id=b>Surrogate<p>2018.HUN F
-  <h4 1181647>Anodin<p>2010.IRE
-  <h4 2>Surveyance<p>2009.USA
-  <h4 719111 id=b>Broken Vow<p>1997.USA <!--sire: Unbridled-->
-  <h4 1262084 id=b>カーディフ<p>2018.JPN M
-  <h4 1090394>グランプリボス<p>2008.JPN
-  <h4 713693>ウェルシュステラ<p>1999.IRE
-  <h4 372626>Zafonic<p>1990.USA
-  <h4 1265962 id=b>キャットウォーク<p>2018.JPN M
-  <h4 1110914>スピルバーグ<p>2009.JPN
-  <h4 1086752>スイートマカロン<p>2006.USA
-  <h4 369621 id=a>Tale of the Cat<p>1994.USA
-  <h4 1270679 id=b>クエストフォーラヴ<p>2018.JPN F
-  <h4 1120570 id=b>キズナ<p>2010.JPN
-  <h4 1227544>Quest For Wonder<p>2012.GB
-  <h4 1128881>Makfi<p>2007.GB
-  <h4 1261858 id=b>スターリーソング<p>2018.JPN F
-  <h4 888832>エスポワールシチー<p>2005.JPN
-  <h4 634454>ウディバードソング<p>1999.USA
-  <h4 337445>Woodman<p>1983.USA
-  <h4 1270615 id=b>バスラットレオン<p>2018.JPN M
-  <h4 1120570 id=b>キズナ<p>2010.JPN
-  <h4 1127401>バスラットアマル<p>2010.JPN
-  <h4 1051578 id=b>New Approach<p>2005.IRE
-  <h4 1270121 id=b>フィルメーザ<p>2018.JPN F
-  <h4 905163>タートルボウル<p>2002.JPN
-  <h4 1120991>コスモライセンス<p>2010.JPN
-  <h4 324933>アグネスタキオン<p>1998.JPN
-  <h4 1264239 id=b>ランペロニキ<p>2018.JPN M
-  <h4 901749 id=b>キンシャサノキセキ<p>2003.AUS
-  <h4 891679>チェルカ<p>2005.JPN
-  <h4 615577 id=b>クロフネ<p>1998.USA
-  <h4 1269968 id=b>リナーシェ<p>2018.JPN F
-  <h4 729458 id=b>キングカメハメハ<p>2001.JPN
-  <h4 1239592>Vapour<p>2008.GB
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 1229710 id=b>アレアシオン<p>2017.JPN F
-  <h4 1040066>カジノドライヴ<p>2005.USA
-  <h4 705382>レフィナーダ<p>200.JPN
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 1235170 id=b>エピファレーヌ<p>2017.JPN F
-  <h4 1124297 id=c>エピファネイア<p>2010.JPN
-  <h4 1105398 id=b>ウインアルエット<p>2009.JPN
-  <h4 274883>ダンスインザダーク<p>1993.JPN
-  <h4 1234092 id=b>キャッツアイ<p>2017.JPN F
-  <h4 1110914>スピルバーグ<p>2009.JPN
-  <h4 1086752>スイートマカロン<p>2006.USA
-  <h4 369621 id=a>Tale of the Cat<p>1994.USA
-  <h4 1235702 id=b>スマイリンフィット<p>2017.JPN F
-  <h4 1129430>Workforce<p>2007.GB
-  <h4 1117351>スマイリンアスク<p>2010.JPN
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 1237701 id=b>パンサラッサ<p>2017.JPN M
-  <h4 1089850 id=a>ロードカナロア<p>2008.JPN
-  <h4 853083>ミスペンバリー<p>2002.IRE
-  <h4 369845 id=c>Montjeu<p>1996.IRE
-  <h4 3 id=b>Dirty Work<p>2016.AUS S
-  <h4 1157888 id=a>Written Tycoon<p>2002.AUS
-  <h4 1>Maidel<p>2008.AUS
-  <h4 905489>Ad Valorem<p>2002.USA
-  <h4 1 id=b>Prince Elzaam<p>2016.IRE M
-  <h4 1132659>Elzaam<p>2016.AUS <!--sire: Redoute's Choise s__m: Kingmambo-->
-  <h4 1>Emma Princess<p>2000.IRE
-  <h4 365073>Bahhare<p>1994.USA
-  <h4 1244471 id=b>ヴァッシュモン<p>2016.GB M
-  <h4 1111493>Dubawi<p>2002.IRE
-  <h4 1195882>Daksha<p>2010.FR
-  <h4 1029544>Authorized<p>2004.IRE
-  <h4 1222746 id=b>エレナレジーナ<p>2016.JPN F
-  <h4 1178418 id=b>Novellist<p>2009.IRE
-  <h4 1102843>フェニーチェ<p>2009.JPN
-  <h4 626942>Falbrav<p>1998.IRE
-  <h4 1215530 id=b>カナロアガール<p>2016.JPN F
-  <h4 1089850 id=a>ロードカナロア<p>2008.JPN
-  <h4 736165>サンデーローザ<p>2002.JPN
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 1214886 id=b>スパーブアゲイン<p>2016.JPN M
-  <h4 1106251 id=b>ジャスタウェイ<p>2009.JPN
-  <h4 713693>ウェルシュステラ<p>1999.IRE
-  <h4 372626 id=c>Zafonic<p>1990.USA
-  <h4 1219242 id=b>プシュケ<p>2016.JPN F
-  <h4 1178418 id=b>Novellist<p>2009.IRE
-  <h4 1048499 id=c>ステラリード<p>2007.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 12 id=b>Strategic<p>2015.IRE M
-  <h4 1019744>Kodiac<p>2001.GB <!--sire:Danehill bro: Invincible Spirit-->
-  <h4 1>Run To Jane<p>1997.IRE
-  <h4 337282>Doyoun<p>1995.IRE
-  <h4 1206175 id=b>インディチャンプ<p>2015.JPN S
-  <h4 286968 id=c>ステイゴールド<p>1994.JPN
-  <h4 1042633>ウィルパワー<p>2007.JPN
-  <h4 729458 id=b>キングカメハメハ<p>2001.JPN
-  <h4 1205954 id=b>ウェディングソング<p>2015.JPN F
-  <h4 1042049 id=b>ルーラーシップ<p>2007.JPN
-  <h4 1029578>Monsoon Wedding<p>2004.GB
-  <h4 361091>Monsun<p>1990.GER
-  <h4 1209293 id=b>シーザライト<p>2015.JPN F
-  <h4 1042049 id=b>ルーラーシップ<p>2007.JPN
-  <h4 713693>ウェルシュステラ<p>1999.IRE
-  <h4 372626>Zafonic<p>1990.USA
-  <h4 1209311 id=b>ソイカウボーイ<p>2015.JPN M <!--bro: ウォーターナビレラ-->
-  <h4 1164976>Toby's Corner<p>2008.USA
-  <h4 1047703>シャイニングサヤカ<p>2007.JPN
-  <h4 294840>キングヘイロー<p>1995.JPN
-  <h4 1207417 id=b>フッフール<p>2015.JPN F
-  <h4 881793>スマートファルコン<p>2005.JPN
-  <h4 1098776>ベイビーローズ<p>2006.IRE
-  <h4 263172>Singspiel<p>1992.IRE
-  <h4 1201748 id=b>レイナグラシア<p>2015.JPN M
-  <h4 1028940 id=a>Henny Hughes<p>2003.USA
-  <h4 705382>レフィナーダ<p>2000.JPN
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 2 id=b>Berkshire Lady<p>2014.AUS F
-  <h4 1194118>Star Witness<p>2007.AUS
-  <h4 3>Placement<p>2007.NZ
-  <h4 1111479>Savabeel<p>2001.AUS
-  <h4 10 id=b>Gold Standard<p>2014.AUS S
-  <h4 1178081 id=b>Sebring<p>2005.AUS
-  <h4 1>Coniston Gem<p>2001.AUS
-  <h4 626869>Greig<p>1998.NZ
-  <h4 1241210 id=b>Klimt<p>2014.USA S
-  <h4 1112380>Quality Road<p>2006.USA
-  <h4 1083760>Inventive<p>2005.USA
-  <h4 372662>Dixie Union<p>1997.USA
-  <h4 1293380 id=b>Not This Time<p>2014.USA S
-  <h4 372708 id=b>Giant's Causeway<p>1997.USA
-  <h4 986108>Miss Macy Sue<p>2003.USA
-  <h4 621146>Trippi<p>1997.USA
-  <h4 1314304 id=b>Overshare<p>2014.AUS S
-  <h4 1077228>I Am Invincible<p>2004.AUS
-  <h4 1113658>Savannah's Choice<p>2007.AUS
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 2 id=b>Swing Valley<p>2014.GB F
-  <h4 1036918>Lawman<p>2004.FR
-  <h4 6>Gaze<p>2003.GB
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 1226963 id=b>Thunder Snow<p>2014.IRE S
-  <h4 1143755>Helmet<p>2008.AUS
-  <h4 1114462>Eastern Joy<p>2006.GB
-  <h4 714910>Dubai Destination<p>1999.USa
-  <h4 5 id=b>Trapeze Artist<p>2014.AUS S
-  <h4 1039506>Snitzel<p>2002.AUS
-  <h4 1>Trappes<p>2007.AUS
-  <h4 1023337>Domesday<p>2002.AUS
-  <h4 1189284 id=b>オニダツ<p>2014.JPN M
-  <h4 619768>ゴールドアリュール<p>1999.JPN
-  <h4 989119>アフィニティ<p>2006.JPN
-  <h4 225628 id=a>サクラバクシンオー<p>1989.JPN
-  <h4 1192099 id=b>クレッシェンドラヴ<p>2014.JPN M
-  <h4 286968 id=c>ステイゴールド<p>1994.JPN
-  <h4 899740 id=b>Higher Love<p>2002.IRE
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 1190660 id=b>コンフォルツァ<p>2014.JPN M
-  <h4 701577>ネオユニヴァース<p>2000.JPN
-  <h4 1051710 id=b>グレイスフルソング<p>2005.IRE
-  <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE
-  <h4 1192324 id=b>スプリングノート<p>2014.JPN F
-  <h4 700008 id=c>シンボリクリスエス<p>1999.USA
-  <h4 1047404 id=b>グリューネワルト<p>2007.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 1188165 id=b>ディグアップセンス<p>2014.JPN M
-  <h4 1031979>Street Sense<p>2004.USA
-  <h4 808410>Atarama<p>1999.IRE
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 1186323 id=b>ハニートリップ<p>2014.JPN F
-  <h4 324971>マンハッタンカフェ<p>1998.JPN
-  <h4 732852>ネヴァーピリオド<p>2002.JPN
-  <h4 287925 id=b>タイキシャトル<p>1994.USA
-  <h4 1191672 id=b>ブライトメモリー<p>2014.JPN F
-  <h4 701577>ネオユニヴァース<p>2000.JPN
-  <h4 1157852>Majestic Bright<p>2007.GB
-  <h4 365118>Pivotal<p>1993.GB
-  <h4 5 id=b>Lycurgus<p>2013.AUS M
-  <h4 1194118 id=a>Star Witness<p>2007.AUS
-  <h4 1298193>Geblitzt<p>2006.AUS
-  <h4 700018>Testa Rossa<p>1996.AUS
-  <h4 6 id=b>Marcel<p>2013.IRE S
-  <h4 1036918>Lawman<p>2004.FR
-  <h4 4>Mauresmo<p>2004.IRE
-  <h4 341019>Marju<p>1988.IRE
-  <h4 1212779 id=b>Moonlight Magic<p>2013.GB M
-  <h4 363470>Cape Cross<p>1994.IRE
-  <h4 621484>Melikah<p>1997.IRE <!--mare: Urban Sea-->
-  <h4 362599>Lammtarra<p>1992.USA
-  <h4 1 id=b>On The Go Again<p>2013.IRE M
-  <h4 861088>Arakan<p>2000.USA
-  <h4 1>Lady Bolino<p>2003.IRE
-  <h4 361072>King's Theatre<p>1991.IRE <!--sire: Sadler's Wells-->
-  <h4 1 id=b>Tay Swift<p>2013.AUS F
-  <h4 1223318>Rothesay<p>2006.AUS <!--sire: Fastnet Rock-->
-  <h4 1023777>Perfect Feeling<p>2002.AUS
-  <h4 362681>Spinning World<p>1993.USA
-  <h4 1224396 id=b>Turret Rocks<p>2013.IRE F
-  <h4 1019761>Fastnet Rock<p>2001.AUS
-  <h4 1051446>Beyond Compare<p>2005.IRE
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 1167975 id=b>エネルワンダー<p>2013.JPN M
-  <h4 299089>グラスワンダー<p>1995.USA
-  <h4 615084>フラッシュカード<p>1999.JPN
-  <h4 161740>Tony Bin<p>1983.IRE
-  <h4 1172347 id=b>チタンクレバー<p>2013.JPN F
-  <h4 1148419>Behkabad<p>2007.FR
-  <h4 888245>ウインプラチナム<p>2005.JPN
-  <h4 321292>ゼンノエルシド<p>1997.IRE
-  <h4 1170063 id=b>リオンディーズ<p>2013.JPN S
-  <h4 729458 id=b>キングカメハメハ<p>2001.JPN
-  <h4 743110>シーザリオ<p>2002.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 1238289 id=b>American Pharoah<p>2012.USA S
-  <h4 1127396>Pioneerof the Nile<p>2006.USA
-  <h4 1238284>Littleprincessemma<p>2006.USA
-  <h4 1015914>Yankee Gentleman<p>1999.USA
-  <h4 1 id=b>Just Positive<p>2012.USA M
-  <h4 1027109 id=b>Just As Well<p>2003.USA
-  <h4 796292>Positive Thoughts<p>2001.USA
-  <h4 369182>King of Kings<p>1995.IRE <!--sire: Sadler's Wells-->
-  <h4 1212721 id=b>Pleascach<p>2012.IRE F
-  <h4 1003266 id=b>Teofilo<p>2004.IRE
-  <h4 1053644>Toirneach<p>2005.USA
-  <h4 361977>Thunder Gulch<p>1992.USA
-  <h4 1157625 id=b>グランデサムライ<p>2012.JPN M
-  <h4 742996>サムライハート<p>2002.JPN
-  <h4 1098777>パラダイスコースト<p>2006.USA
-  <h4 621167>Fusaichi Pegasus<p>1997.USA
-  <h4 1149141 id=b>サウンドアラムシャ<p>2012.JPN M
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN
-  <h4 298204>メジロレーマー<p>1995.JPN
-  <h4 214492>リンドシェーバー<p>1988.USA
-  <h4 1193275 id=b>サウンドジャンゴ<p>2012.USA M
-  <h4 1127214>Desert Party<p>2006.USA
-  <h4 1031933>Salt Water Reign<p>2004.USA
-  <h4 339861>Salt Lake<p>1989.USA
-  <h4 1150915 id=b>サウンドフォース<p>2012.JPN M
-  <h4 725485 id=b>ダイワメジャー<p>2001.JPN
-  <h4 614382>レーヴドゲラン<p>1999.JPN
-  <h4 333707>Real Shadai<p>1979.USA
-  <h4 1150673 id=b>シェアザジョイフル<p>2012.JPN F
-  <h4 722797 id=c>ブラックタイド<p>2001.JPN
-  <h4 447217>Peridot<p>1995.GB
-  <h4 336430 id=a>Green Desert<p>1983.USA
-  <h4 1157776 id=b>ダノンプラチナ<p>2012.JPN S
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 1143075>Badeelah<p>2008.USA
-  <h4 361396>Unbridled's Song<p>1993.USA
-  <h4 1150084 id=b>ヒトミヲトジテ<p>2012.JPN F
-  <h4 849057>Bago<p>2001.FR
-  <h4 324992>セトアフロディーデ<p>1998.JPN
-  <h4 161740>Tony Bin<p>1983.IRE
-  <h4 1151936 id=b>ドゥラメンテ<p>2012.JPN S
-  <h4 729458 id=b>キングカメハメハ<p>2001.JPN
-  <h4 713851>アドマイヤグルーヴ<p>2002.JPN
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 1157711 id=b>リアルスティール<p>2012.JPN S
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 1127173>Loves Only Me<p>2006.USA
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 1224756 id=b>Fascinating Rock<p>2011.IRE S
-  <h4 1019761>Fastnet Rock<p>2001.AUS
-  <h4 896750>Miss Polaris<p>2001.GB
-  <h4 341066>Polar Falcon<p>1987.USA
-  <h4 1 id=b>Ionsai Nua<p>2011.IRE F
-  <h4 1051578 id=b>New Approach<p>2005.IRE
-  <h4 1053644>Toirneach<p>2005.USA
-  <h4 361977>Thunder Gulch<p>1992.USA
-  <h4 1284493 id=b>Protonico<p>2011.USA S
-  <h4 372708 id=b>Giant's Causeway<p>1997.USA
-  <h4 1349315>Alpha Spirit<p>2006.USA
-  <h4 339653 id=c>A.P. Indy<p>1989.USA
-  <h4 1283357 id=b>Tapiture<p>2011.USA S
-  <h4 849372>Tapit<p>2001.USA
-  <h4 1341944>Free Spin<p>1998.USA
-  <h4 339954>Olympio<p>1988.USA
-  <h4 1142398 id=b>イスラボニータ<p>2011.JPN S
-  <h4 262443 id=b>フジキセキ<p>1992.JPN
-  <h4 1022407>Isla Cozzene<p>2002.USA
-  <h4 337423>Cozzene<p>1980.USA
-  <h4 1141711 id=b>ウィアーワン<p>2011.JPN F
-  <h4 737164>アドマイヤジャパン<p>2002.JPN
-  <h4 899507>My Hope<p>2001.IRE
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 1211258 id=b>California Chrome<p>2011.USA S
-  <h4 848846>Lucky Pulpit<p>2001.USA
-  <h4 1211217>Love the Chase<p>2006.USA
-  <h4 337965>Not For Love<p>1990.USA
-  <h4 1134550 id=b>キングズオブザサン<p>2011.JPN M
-  <h4 626923>Chichicastenango<p>1998.FR
-  <h4 309040>スティンガー<p>1996.JPN
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 112440 id=b>ロゴタイプ<p>2010.JPN S
-  <h4 619817>ローエングリン<p>1999.JPN
-  <h4 750290>ステレイタイプ<p>2002.JPN
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 1330072 id=b>Tom Melbourne<p>2001.IRE M
-  <h4 1000885>Dylan Thomas<p>2003.IRE
-  <h4 1031792>Roshanak<p>2004.IRE
-  <h4 362681>Spinning World<p>1993.USA
-  <h4 1141719 id=b>ミッキーアイル<p>2011.JPN S
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 899522>スターアイル<p>2004.IRE
-  <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE
-  <h4 1138240 id=b>モーリス<p>2011.JPN S
-  <h4 801447>スクリーンヒーロー<p>2004.JPN
-  <h4 729927>メジロフランシス<p>2001.JPN
-  <h4 358543>Carnegie<p>1991.IRE <!--sire: Sadler's Wells-->
-  <h4 1181745 id=b>Mshawish<p>2010.USA S
-  <h4 721553>Medaglia d'Oro<p>1999.USA
-  <h4 1025502>Thunder Bayou<p>2003.USA
-  <h4 361977>Thunder Gulch<p>1992.USA
-  <h4 1328929 id=b>Shamus Award<p>2010.AUS S
-  <h4 1039506>Snitzel<p>2002.AUS
-  <h4 1350499>Sunset Express<p>1999.AUS
-  <h4 343051>Success Express<p>1985.USA
-  <h4 1120570 id=b>キズナ<p>2010.JPN S
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 383744>Catequil<p>1990.USA
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 1122613 id=b>ゴッドフロアー<p>2010.M JPN
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN
-  <h4 713693>ウェルシュステラ<p>1999.IRE
-  <h4 372626>Zafonic<p>1990.USA
-  <h4 1162690 id=b>ヒュウマ<p>2010.USA M
-  <h4 1030715>Any Given Saturday<p>2004.USA
-  <h4 1027105>Moravia<p>2003.USA
-  <h4 339653 id=c>A.P. Indy<p>1989.USA
-  <h4 1228789 id=b>Camelot<p>2009.GB S
-  <h4 369845 id=c>Montjeu<p>1996.IRE
-  <h4 875146>Tarfah<p>2001.USA
-  <h4 347989>Kingmambo<p>1990.USA
-  <h4 1 id=b>Estiqbaal<p>2009.GB F
-  <h4 745493>Oasis Dream<p>2001.GB
-  <h4 1>Manayer<p>2001.IRE
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 1242970 id=b>Graydar<p>2009.USA S
-  <h4 361396>Unbridled's Song<p>1993.USA
-  <h4 858751>Sweetest Smile<p>1998.USA
-  <h4 337848>Dehere<p>1991.USA
-  <h4 1 id=b>Janey Muddles<p>2009.IRE F
-  <h4 1036918>Lawman<p>2004.FR
-  <h4 1070240>Slip Dance<p>2002.IRE
-  <h4 361623>Celtic Swing<p>1992.GB
-  <h4 1210979 id=b>Move Your Vision<p>2009.IRE S
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 451692>Cash Run<p>1997.USA <!--bro: Frestry-->
-  <h4 337444>Seeking The Gold<p>1985.USA
-  <h4 1178418 id=b>Novellist<p>2009.IRE S <!--from: プシュケ-ステラリード-->
-  <h4 361091>Monsun<p>1990.GER
-  <h4 1178417>Night Lagoon<p>2001.GER
-  <h4 340377>Lagunas<p>1981.GB
-  <h4 1 id=b>Rebel Dane<p>2009.AUS S
-  <h4 999248>California Dane<p>2002.AUS <!--sire: Danehill-->
-  <h4 983067>Texarcana<p>2002.AUS
-  <h4 372626 id=b>More Than Ready<p>1997.USA
-  <h4 1148362 id=b>Sky Kingdom<p>2009.USA S
-  <h4 749845>Empire Maker<p>2000.USA
-  <h4 998762>Sky Beam<p>2004.USA
-  <h4 347989>Kingmambo<p>1990.USA
-  <h4 1176880 id=b>Tiffilia<p>2009.IRE F
-  <h4 621973>Macho Uno<p>1998.USA
-  <h4 1175504>Tiffed<p>2003.USA
-  <h4 335964>Seattle Slew<p>1974.USA
-  <h4 1105398 id=b>ウインアルエット<p>2009.JPN F
-  <h4 274883>ダンスインザダーク<p>1993.JPN
-  <h4 442364>Larkwhistle<p>1994.USA
-  <h4 347814>Silver Deputy<p>1985.USA
-  <h4 1106251 id=b>ジャスタウェイ<p>2009.JPN S
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN
-  <h4 619968>シビル<p>1999.JPN
-  <h4 336574>Wild Again<p>1980.USA
-  <h4 1110554 id=b>ディープブリランテ<p>2009.JPN S
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 852566>Love And Bubbles<p>2001.USA
-  <h4 369004>Loup Sauvage<p>1994.USA
-  <h4 1110458 id=b>フェノーメノ<p>2009.JPN S
-  <h4 286968 id=c>ステイゴールド<p>1994.JPN
-  <h4 808412>De Laroche<p>1999.IRE
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 1107477 id=b>ホッコータルマエ<p>2009.JPN S
-  <h4 729458 id=b>キングカメハメハ<p>2001.JPN
-  <h4 722526>マダムチェロキー<p>2001.JPN
-  <h4 347612>Cherokee Run<p>1990.USA
-  <h4 1 id=b>Albaasil<p>2008.IRE S
-  <h4 372531 id=b>Dansili<p>1996.GB
-  <h4 743955>Wrong Key<p>1999.IRE
-  <h4 361071>Key of Luck<p>1991.USA
-  <h4 1242869 id=b>Alternation<p>2008.USA S
-  <h4 365171>Distorted Humor<p>1993.USA
-  <h4 744285>Alternate<p>1999.USA
-  <h4 335964>Seattle Slew<p>1974.USA
-  <h4 1239791 id=b>Astrology<p>2008.USA S
-  <h4 339653 id=c>A.P. Indy<p>1989.USA
-  <h4 973550>Quiet Eclipse<p>1996.USA
-  <h4 341573>Quiet American<p>1986.USA
-  <h4 2 id=b>Boundless Joy<p>2008.AUS F
-  <h4 369845 id=c>Montjeu<p>1996.IRE
-  <h4 1014107>Elegant As Always<p>1997.USA
-  <h4 342649>Nashwan<p>1986.USA
-  <h4 3 id=b>Burn The Floor<p>2008.IRE F
-  <h4 1113348>Indian Haven<p>2000.GB
-  <h4 450138>Dance Time<p>1994.IRE
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 1161935 id=b>Frankel<p>2008.GB S
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 1019747>Kind<p>2001.IRE
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 1277210 id=b>Galicuix<p>2008.GB F
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 1209676>Clizia<p>2002.IRE
-  <h4 337496>Machiavellian<p>1987.USA
-  <h4 1211633 id=b>Niagara<p>2008.AUS S
-  <h4 368799>Encosta De Lago<p>1993.AUS
-  <h4 1159029>River Song<p>2002.AUS
-  <h4 621167>Fusaichi Pegasus<p>1997.USA
-  <h4 1143913 id=b>Reliable Man<p>2008.GB S
-  <h4 745340>Dalakhani<p>2000.IRE
-  <h4 440542>On Fair Stage<p>1993.IRE
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 1176060 id=b>Shackleford<p>2008.USA S
-  <h4 372671>Forestry<p>1996.USA
-  <h4 852867>Oatsee<p>1997.USA
-  <h4 340629>Unbridled<p>1987.USA
-  <h4 1088803 id=b>ウインバリアシオン<p>2008.JPN S
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN
-  <h4 287743>スーパーバレリーナ<p>1994.USA
-  <h4 336177>Storm Bird<p>1978.USA
-  <h4 1090360 id=b>オルフェーヴル<p>2008.JPN S
-  <h4 286968 id=c>ステイゴールド<p>1994.JPN
-  <h4 316406>オリエンタルアート<p>1997.JPN
-  <h4 203356>メジロマックイーン<p>1987.JPN
-  <h4 1128972 id=b>サウンドボルケーノ<p>2008.USA S
-  <h4 1028940 id=a>Henny Hughes<p>2003.USA
-  <h4 620835>Cosmic Wing<p>1996.USA
-  <h4 335154>Halo<p>1969.USA
-  <h4 5 id=b>Ato<p>2007.SAF S
-  <h4 341457>Royal Academy<p>1987.USA
-  <h4 432717>Another Legend<p>1992.USA
-  <h4 336348>Lyphard's Wish<p>1976.FR
-  <h4 1162401 id=b>Await The Dawn<p>2007.USA S
-  <h4 372708 id=b>Giant's Causeway<p>1997.USA
-  <h4 850947>Valentine Band<p>1997.USA
-  <h4 336397>Dixieland Band<p>1980.USA
-  <h4 1161933 id=b>Bullet Train<p>2007.GB S
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 1019747>Kind<p>2001.IRE
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 1 id=b>Cuiseach<p>2007.IRE F
-  <h4 848724>Bachelor Duke<p>2001.USA
-  <h4 1062776>Masnada<p>1997.IRE
-  <h4 110877>Erins Isle<p>1978.IRE
-  <h4 1348075 id=b>Go Go Gadget<p>2007.GER S
-  <h4 369587>Areion<p>1995.GER
-  <h4 879023>Globuli<p>1999.GER
-  <h4 361428>Surako<p>1993.GER
-  <h4 1132287 id=b>Kitty Kiernan<p>2007.GB F
-  <h4 365118>Pivotal<p>1993.GB
-  <h4 1016522>Alstemeria<p>1999.GB
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 1211385 id=b>Maria Lee<p>2007.IRE F
-  <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE
-  <h4 838934 id=b>Elida<p>1994.IRE
-  <h4 341457>Royal Academy<p>1987.USA
-  <h4 1 id=b>Toorak Toff<p>2007.AUS S
-  <h4 718156>Show A Heart<p>1997.AUS
-  <h4 1>Orong<p>2002.AUS
-  <h4 337862>Grand Lodge<p>1991.USA
-  <h4 1 id=b>The Apache<p>2007.SAF S
-  <h4 848599>Mogok<p>2002.USA <!--sire: Storm Cat-->
-  <h4 1>Apache Rose<p>1996.SAF
-  <h4 341084>Dolpour<p>1986.IRE <!--sire: Sadler's Wells-->
-  <h4 1047404 id=b>グリューネワルト<p>2007.JPN F
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 620034>シェーンクライト<p>1999.JPN
-  <h4 365099>Helissio<p>1993.FR
-  <h4 1042049 id=b>ルーラーシップ<p>2007.JPN S
-  <h4 729458 id=b>キングカメハメハ<p>2001.JPN
-  <h4 274849>エアグルーヴ<p>1993.JPN
-  <h4 161740>Tony Bin<p>1983.IRE
-  <h4 1328053 id=b>Byword<p>2006.GB S
-  <h4 365262>Peintre Celebre<p>1994.USA
-  <h4 1016398>Binche<p>1999.USA
-  <h4 337445>Woodman<p>1983.USA
-  <h4 1112651 id=b>Haynesfield<p>2006.USA S
-  <h4 719250>Speightstown<p>1998.USA
-  <h4 448412>Nothing Special<p>1994.CAN
-  <h4 347818>Tejabo<p>1985.CAN
-  <h4 1195139 id=b>Calimonco<p>2006.USA S
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 449537>Sweet Life<p>1996.USA
-  <h4 336209>Kris S.<p>1977.USA
-  <h4 1343004 id=b>Love Conquers All<p>2006.AUS S
-  <h4 375169>Mossman<p>1995.AUS
-  <h4 452056>She's a Meanie<p>1995.NZ
-  <h4 340241>Prince Salieri<p>1986.AUS
-  <h4 1239739 id=b>Monaco Consul<p>2006.NZ S
-  <h4 719408 id=b>High Chaparral<p>1999.IRE
-  <h4 973118>Argante<p>1995.NZ
-  <h4 336531>Star Way<p>1977.GB
-  <h4 1114930 id=b>Querari<p>2006.GER S
-  <h4 745493>Oasis Dream<p>2000.GB
-  <h4 898399>Quetena<p>2000.GER
-  <h4 343943>Acatenango<p>1982.GER
-  <h4 1113706 id=b>Sea The Stars<p>2006.IRE S
-  <h4 363470>Cape Cross<p>1994.IRE <!--sire: Green Desert-->
-  <h4 225908>Urban Sea<p>1989.USA <!--bro: King's Best-->
-  <h4 336395>Miswaki<p>1978.USA
-  <h4 1329754 id=b>Tickets<p>2006.AUS S
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 447370>Staging<p>1994.AUS
-  <h4 343051>Success Express<p>1985.USA
-  <h4 1127395 id=b>Dunkirk<p>2006.USA S
-  <h4 361396>Unbridled's Song<p>1993.USA
-  <h4 452435>Secret Status<p>1997.USA
-  <h4 339653 id=c>A.P. Indy<p>1989.USA
-  <h4 1301779 id=b>A.P. Answer<p>2005.USA S
-  <h4 339653 id=c>A.P. Indy<p>1989.USA
-  <h4 439019>Pas De Response<p>1994.USA
-  <h4 336082 id=a>Danzig<p>1977.USA
-  <h4 1084040 id=b>Dixie Chatter<p>2005.USA S
-  <h4 372662>Dixie Union<p>1997.USA
-  <h4 1065652>Mini Chat<p>1999.USA
-  <h4 338072>Deputy Minister<p>1979.CAN
-  <h4 1098195 id=b>Many Rivers<p>2005.USA S
-  <h4 337102 id=a>Storm cat<p>1983.USA
-  <h4 714994>Christmas in Aiken<p>1992.USA
-  <h4 336350>Affirmed<p>1975.USA
-  <h4 1111988 id=b>Montmarie<p>2005.FR F
-  <h4 369845 id=c>Montjeu<p>1996.IRE
-  <h4 859901>Flyamore<p>1995.FR <!--bro: シルヴァースカヤ-->
-  <h4 341032>Sanglamore<p>1987.USA
-  <h4 1051578 id=b>New Approach<p>2005.IRE S <!--bro: シンコウフォレスト-->
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 413674 id=b>Park Express<p>1983.IRE
-  <h4 336322>Ahonoora<p>1975.GB
-  <h4 1 id=b>Oracy<p>2005.NZ S
-  <h4 342033>Zabeel<p>1986.NZ
-  <h4 858574>Lady Dehere<p>1999.USA
-  <h4 337848>Dehere<p>1991.USA
-  <h4 1178081 id=b>Sebring<p>2005.AUS S
-  <h4 372626 id=b>More Than Ready<p>1997.USA
-  <h4 976239>Purespeed<p>1998.AUS
-  <h4 363038 id=b>Flying Spur<p>1992.AUS
-  <h4 1085920 id=b>Twice Over<p>2005.GB S
-  <h4 621122>Observatory<p>1997.USA
-  <h4 878771>Double Crossed<p>1998.GB
-  <h4 336202>Caerleon<p>1980.USA
-  <h4 1051710 id=b>グレイスフルソング<p>2005.IRE F
-  <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE
-  <h4 713690>フェアリーバラード<p>1999.IRE
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 1031789 id=b>Brave Tin Soldier<p>2004.S
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 879960>Bless<p>1999.USA <!--bro: Fusaichi Pegasus-->
-  <h4 335975 >Mr. Prospector<p>1970.USA
-  <h4 1030180 id=b>King's Apostle<p>2004.IRE S
-  <h4 372784>King's Best<p>1997.USA
-  <h4 1017927>Politesse<p>2000.USA
-  <h4 337692>Barathea<p>1990.IRE
-  <h4 1003705 id=b>ロックドゥカンブ<p>2004.NZ S
-  <h4 337563>Red Ransom<p>1987.USA
-  <h4 1000702>Fairy Lights<p>1995.IRE
-  <h4 337427>Fairy King<p>1982.USA
-  <h4 1003266 id=b>Teofilo<p>2004.IRE S
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 845472>Speirbhean<p>1998.IRE
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 999168 id=b>Bernardini<p>2003.USA S
-  <h4 339653 id=c>A.P. Indy<p>1989.USA
-  <h4 434233>Cara Rafaela<p>1993.USA
-  <h4 341573>Quiet American<p>1986.USA
-  <h4 1002657 id=b>Bluegrass Cat<p>2003.USA S
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 841073>She's a Winner<p>1996.USA
-  <h4 339653 id=c>A.P. Indy<p>1989.USA
-  <h4 1032636 id=b>Bold Chieftain<p>2003.USA S
-  <h4 374987>Chief Seattle<p>1997.USA
-  <h4 865488>Hooked On Music<p>1991.USA
-  <h4 336880>Seattle Dancer<p>1984.USA
-  <h4 1039824 id=b>Jay Peg<p>2003.SAF S
-  <h4 844710>Camden Park<p>1998.USA
-  <h4 1038944>Laptop Lady<p>1996.SAF
-  <h4 342881>Al Mufti<p>1985.USA
-  <h4 1027109 id=b>Just As Well<p>2003.USA S
-  <h4 339653 id=c>A.P. Indy<p>1989.USA
-  <h4 621356>No Matter What<p>1997.USA
-  <h4 336085>Nureyev<p>1997.USA
-  <h4 1194886 id=b>Kaphero<p>2003.AUS S
-  <h4 359636>Danzero<p>1991.AUS
-  <h4 437904>Kapchat<p>1990.NZ
-  <h4 340272>Centaine<p>1980.AUS
-  <h4 1039871 id=b>Rebel King<p>2003.SAF S
-  <h4 786099>National Emblem<p>1991.SAF
-  <h4 1039008>Cousin Linda<p>1997.SAF
-  <h4 339662>Badger Land<p>1983.USA
-  <h4 1036815 id=b>Sharkbite<p>2003.AUS S
-  <h4 375619 id=a>Redoute's Choice<p>1996.AUS
-  <h4 1035662>Back Pass<p>1998.USA
-  <h4 203637>Quest for Fame<p>1987.GB
-  <h4 1003684 id=b>Stormy River<p>2003.FR S
-  <h4 363392>Verglas<p>1994.IRE
-  <h4 1003683>Miss Bio<p>1996.FR
-  <h4 345381>River Mist<p>1982.USA
-  <h4 901749 id=b>キンシャサノキセキ<p>2003.AUS S
-  <h4 262443 id=b>フジキセキ<p>1992.JPN
-  <h4 450583>Keltshaan<p>1994.USA
-  <h4 335991>Pleasant Colony<p>1978.USA
-  <h4 876394 id=b>Chinese Dragon<p>2002.USA S
-  <h4 369639>Stravinsky<p>1996.USA
-  <h4 424391>Fabulous Fairy<p>1991.USA
-  <h4 336305>Alydar<p>1975.USA
-  <h4 1225183 id=b>Luminaria<p>2002.IRE F
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 408229>Smaoineamh<p>1986.IRE
-  <h4 333740>Tap On Wood<p>1976.IRE
-  <h4 1 id=b>Saintly Prospect<p>2002.USA S
-  <h4 368646>Sweetsouthernsaint<p>1995.USA
-  <h4 1059529>Hasty Alarm<p>1991.USA
-  <h4 339586>Darn That Alarm<p>1981.USA
-  <h4 899740 id=b>Higher Love<p>2002.IRE F
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 624747>Dollar Bird<p>1997.IRE
-  <h4 336087>Kris<p>1976.GB
-  <h4 861842 id=b>Eddington<p>2001.USA S
-  <h4 340629>Unbridled<p>1987.USA
-  <h4 434266>Fashion Star<p>1992.USA
-  <h4 337339>Chief's Crown<p>1982.USA
-  <h4 904672 id=b>Mullins Bay<p>2001.GB S
-  <h4 337496>Machiavellian<p>1987.USA
-  <h4 406471>Bella Colora<p>1982.GB
-  <h4 333809>Bellypha<p>1976.IRE
-  <h4 874615 id=b>Soldier's Tale<p>2001.USA S
-  <h4 369639>Stravinsky<p>1996.USA
-  <h4 434163>Myrtle<p>1993.GB
-  <h4 340587>Batshoof<p>1986.IRE <!--sire: Sadler's Wells-->
-  <h4 729458 id=b>キングカメハメハ<p>2001.JPN S
-  <h4 347989>Kingmambo<p>1990.USA
-  <h4 440324>Manfath<p>1991.IRE
-  <h4 337436>Last Tycoon<p>1983.IRE
-  <h4 725485 id=b>ダイワメジャー<p>2001.JPN S
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 213918>スカーレットブーケ<p>1988.JPN
-  <h4 333544 id=a>Northern Taste<p>1971.CAN
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN S
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 233121>アイリッシュダンス<p>1990.JPN
-  <h4 161740>Tony Bin<p>1983.IRE
-  <h4 1066871 id=b>Host<p>2000.CHI S
-  <h4 621945>Hussonet<p>1991.USA <!--sire: Mr.Prospector-->
-  <h4 1060133>Colonna Traiana<p>1993.CHI
-  <h4 337993>Roy<p>1983.USA
-  <h4 749316 id=b>Solskjaer<p>2000.IRE S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 396395>Lyndonville<p>1988.IRE
-  <h4 336543>Top Ville<p>1976.IRE
-  <h4 1163248 id=b>Family<p>1999.USA F <!--bro: Danehill-->
-  <h4 336082 id=a>Danzig<p>1977.USA
-  <h4 394662 id=b>Razyana<p>1981.USA
-  <h4 335990>His Majesty<p>1968.USA
-  <h4 719408 id=b>High Chaparral<p>1999.IRE S
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 715140>Kasora<p>1993.IRE
-  <h4 336887>Darshaan<p>1981.GB
-  <h4 744351 id=b>Mineshaft<p>1999.USA S <!--Bro: Monashee Mountain-->
-  <h4 339653 id=c>A.P. Indy<p>1989.USA
-  <h4 404719>Prospectors Delite<p>1989.USA <!--CT ?-->
-  <h4 335975 >Mr. Prospector<p>1970.USA
-  <h4 716091 id=b>Right Approach<p>1999.GB S
-  <h4 337496>Machiavellian<p>1987.USA
-  <h4 439242>Abbey Strand<p>1989.USA
-  <h4 336881>Shadeed<p>1982.USA
-  <h4 793091 id=b>Westerner<p>1999.GB S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 415909>Walensee<p>1982.IRE
-  <h4 336179>Troy<p>1976.GB
-  <h4 619835 id=b>デュランダル<p>1999.JPN S
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 190874>サワヤカプリンセス<p>1986.JPN
-  <h4 333544 id=a>Northern Taste<p>1971.CAN
-  <h4 719111 id=b>Broken Vow<p>1998.USA S
-  <h4 340629>Unbridled<p>1987.USA
-  <h4 714631>Wedding Vow<p>1988.USA
-  <h4 333996>Nijinsky<p>1967.CAN
-  <h4 622244 id=b>Count Dubois<p>1998.GB S
-  <h4 372626>Zafonic<p>1990.USA
-  <h4 409193>Madame Dubois<p>1987.GB
-  <h4 340408>Legend of France<p>1989.USA <!--sire: Lyphard-->
-  <h4 615577 id=b>クロフネ<p>1998.USA S
-  <h4 362799>French Deputy<p>1992.USA
-  <h4 615607>Blue Avenue<p>1990.USA
-  <h4 352327>Classic Go Go<p>1978.USA
-  <h4 372708 id=b>Giant's Causeway<p>1997.USA S
-  <h4 337102 id=a>Storm Cat<p>1983.USA
-  <h4 426762>Mariah's Storm<p>1991.USA
-  <h4 337553>Rahy<p>1985.USA
-  <h4 372626 id=b>More Than Ready<p>1997.USA S
-  <h4 344537>Southern Halo<p>1983.USA
-  <h4 449057>Woodman's Girl<p>1990.USA
-  <h4 337445>Woodman<p>1983.USA
-  <h4 372531 id=b>Dansili<p>1996.GB S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 448867>Hasili<p>1991.IRE
-  <h4 343012>Kahyasi<p>1985.IRE
-  <h4 372572 id=b>Silvano<p>1996.GER S
-  <h4 340380>Lomitas<p>1988.GB
-  <h4 448956>Spirit of Eagles<p>1986.USA
-  <h4 339699>Beau's Eagle<p>1976.USA
-  <h4 369437 id=b>Tiger Hill<p>1995.IRE S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 407980>The Filly<p>1981.GER
-  <h4 336333>Appiani<p>1963.ITY
-  <h4 838934 id=b>Elida<p>1994.IRE F
-  <h4 341457>Royal Academy<p>1987.USA
-  <h4 828196>Saviour<p>1987.USA
-  <h4 336090>Majestic Light<p>1973.USA
-  <h4 287925 id=b>タイキシャトル<p>1994.USA S
-  <h4 337092>Devil's Bag<p>1981.USA
-  <h4 396402>Welsh Muffin<p>1987.GB
-  <h4 336202>Caerleon<p>1980.USA
-  <h4 363038 id=b>Flying Spur<p>1992.AUS S
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 434439>Rolls<p>1984.USA <!--Encosta De Lago-->
-  <h4 335975 >Mr. Prospector<p>1970.USA
-  <h4 262443 id=b>フジキセキ<p>1992.JPN S
-  <h4 333862 id=b>Sunday Silence<p>1986.USA
-  <h4 383129>Millracer<p>1983.USA
-  <h4 334064>Le Fabuleux<p>1961.FR
-  <h4 341896 id=b>Scenic<p>1986.IRE S
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 393206>Idylic<p>1982.USA
-  <h4 334740>Foolish Pleasure<p>1972.USA
-  <h4 413674 id=b>Park Express<p>1985.IRE F <!--2400m-->
-  <h4 336322>Ahonoora<p>1975.GB
-  <h4 413673>Helen Nichols<p>1966.CAN
-  <h4 334355>Martial<p>1958.FR
-  <h4 394662 id=b>Razyana<p>1981.USA F
-  <h4 335990>His Majesty<p>1968.USA
-  <h4 394654>Spring Adieu<p>1974.CAN
-  <h4 334012>Buckpasser<p>1963.USA
-  <h4 404842 id=b>Weekend Surprise<p>1980.USA F <!--from: A.P. Indy TT-->
-  <h4 333978 id=b>Secretariat<p>1970.USA
-  <h4 404841>Lassie Dear<p>1974.USA
-  <h4 334012>Buckpasser<p>1963.USA
-  <h4 333978 id=b>Secretariat<p>1970.USA S <!--bro: Sir Gaylord-->
-  <h4 334140>Bold Ruler<p>1954.USA
-  <h4 388747>Somethingroyal<p>1952.USA
-  <h4 339120>Princequillo<p>1940.IRE
-  <h4 334002 id=b>Northern Dancer<p>1961.CAN S
-  <h4 334378 id=a>Nearctic<p>1954.CAN
-  <h4 386225>Natalma<p>1957.USA
-  <h4 334375>Native Dancer<p>1950.USA
-  <h4 387922 id=b>Lady Angela<p>1944.GB F
-  <h4 338878 id=c>Hyperion<p>1930.GB
-  <h4 388720>Sister Sarah<p>1930.GB
-  <h4 338378>Abbots Trace<p>1917.GB
-  <h4 334812 id=b>Phalaris<p>1913.GB S
-  <h4 334813 id=c>Polymelus<p>1902.GB
-  <h4 393254>Bromus<p>1905.GB
-  <h4 338206>Sainfoin<p>1887.GB
-  <h4 1360202 id=c>-<p>2022.JPN F
-  <h4 1293348>Bricks and Mortar<p>2014.USA
-  <h4 1239592>Vapour<p>2008.GB
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 1358048 id=c>-<p>2022.JPN M
-  <h4 1141719 id=b>ミッキーアイル<p>2011.JPN
-  <h4 1183660>スマートオランプ<p>2014.JPN
-  <h4 372784>King's Best<p>1997.USA
-  <h4 1333938 id=c>アスロス<p>2021.JPN M
-  <h4 1189721>レイデオロ<p>2014.JPN
-  <h4 1048499 id=c>ステラリード<p>2007.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 1349554 id=c>ジーベック<p>2021.JPN M
-  <h4 1288621>Gun Runner<p>2013.USA
-  <h4 1313933>Stellar Agent<p>2016.USA
-  <h4 372626 id=b>More Than Ready<p>1997.USA
-  <h4 1142398 id=c>マジックオブラブ<p>2021.JPN M
-  <h4 1340001 id=b>イスラボニータ<p>2011.JPN
-  <h4 1226646>Silver Four<p>2006.USA
-  <h4 1193370>Majesticperfection<p>1996.USA
-  <h4 1332637 id=c>ロディニア<p>2021.JPN M
-  <h4 1120570 id=b>キズナ<p>2010.JPN
-  <h4 853083>ミスペンバリー<p>2002.IRE
-  <h4 369845 id=c>Montjeu<p>1996.IRE
-  <h4 1324434 id=c>カグヤ<p>2020.JPN F
-  <h4 1124297 id=c>エピファネイア<p>2010.JPN
-  <h4 1154897>アスカビレン<p>2012.JPN
-  <h4 722797 id=c>ブラックタイド<p>2001.JPN
-  <h4 1321865 id=c>コトヴィア<p>2020.JPN F
-  <h4 1042049 id=b>ルーラーシップ<p>2007.JPN
-  <h4 1105398 id=b>ウインアルエット<p>2009.JPN
-  <h4 274883>ダンスインザダーク<p>1993.JPN
-  <h4 1360740 id=c>サイブレーカー<p>2020.USA M
-  <h4 1165010>Uncle Mo<p>2008.USA
-  <h4 1249475>Downside Scenario<p>2013.USA
-  <h4 1003260>Scat Daddy<p>2004.USA
-  <h4 1327752 id=c>ソアヴィータ<p>2020.JPN F
-  <h4 1151936 id=b>ドゥラメンテ<p>2012.JPN
-  <h4 1314014>Gianna's Dream<p>2013.USA
-  <h4 1164410>Twirling Candy<p>2007.USA
-  <h4 1351763 id=c>メリタテス<p>2020.USA F
-  <h4 1238289 id=b>American Pharoah<p>2012.USA
-  <h4 1282355>Gem Gem<p>2010.USA
-  <h4 849372>Tapit<p>2001.USA
-  <h4 1307341 id=c>アタビズム<p>2019.JPN M
-  <h4 1171845>シルバーステート<p>2013.JPN
-  <h4 1051710 id=b>グレイスフルソング<p>2005.IRE
-  <h4 714421 id=a>Rock of Gibraltar<p>1999.IRE
-  <h4 1312250 id=c>アンジアン<p>2019.JPN F
-  <h4 729458 id=b>キングカメハメハ<p>2001.JPN
-  <h4 1239594>Satyana<p>2009.USA
-  <h4 621983>Street Cry<p>1998.IRE
-  <h4 1309370 id=c>キタノキャスター<p>2019.JPN F
-  <h4 1123166>コパノリッキー<p>2010.JPN
-  <h4 1123223>キープザサミット<p>2010.JPN
-  <h4 626923>Chichicastenango<p>1998.FR
-  <h4 1307647 id=c>ケウ<p>2019.JPN F
-  <h4 1194505>ラニ<p>2013.USA
-  <h4 1090151>ミヤサンキューティ<p>2008.JPN
-  <h4 615577 id=b>クロフネ<p>1998.USA
-  <h4 1312789 id=c>サクソフォン<p>2019.JPN M
-  <h4 1052586>エイシンフラッシュ<p>2007.JPN
-  <h4 1151934>レトロクラシック<p>2012.JPN
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 1310660 id=c>スリールトウショウ<p>2019.JPN M
-  <h4 1085636>Pyro<p>2005.USA
-  <h4 1148461>ソヴールトウショウ<p>2012.JPN
-  <h4 739144>スズカフェニックス<p>2002.JPN
-  <h4 id=c>Arc<p>2018.HUN F
-  <h4 1003684 id=b>Stormy River<p>2003.FR
-  <h4 1085077>Alsace<p>2005.GB
-  <h4 372784>King's Best<p>1997.USA
-  <h4 id=c>Meghato<p>2018.HUN M
-  <h4 1003684 id=b>Stormy River<p>2003.FR
-  <h4 1>Megkapo<p>2012.HU
-  <h4 1085196>The Bogberry<p>2005.US
-  <h4 1270222 id=c>アイルオブラヴ<p>2018.JPN M
-  <h4 1141719 id=b>ミッキーアイル<p>2011.JPN
-  <h4 1192967>ルックオブラヴ<p>2013.JPN
-  <h4 372784>King's Best<p>1997.USA
-  <h4 1265688 id=c>カイザーノヴァ<p>2018.JPN M
-  <h4 1138240 id=b>モーリス<p>2011.JPN
-  <h4 1048499 id=c>ステラリード<p>2007.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 1261619 id=c>コマンドブルックス<p>2018.JPN M
-  <h4 1111008>ワールドエース<p>2009.JPN
-  <h4 328153>アスクコマンダー<p>1998.JPN
-  <h4 333894>Commander in Chief<p>1998.GB
-  <h4 1270754 id=c>ゴッドシエル<p>2018.JPN M
-  <h4 1124297 id=c>エピファネイア<p>2010.JPN
-  <h4 1122613>ゴッドフロアー<p>2010.JPN
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN
-  <h4 1270270 id=c>ブライテストダーク<p>2018.JPN M
-  <h4 1178418 id=b>Novellist<p>2009.IRE
-  <h4 1136979>ビキニスタイル<p>2011.JPN
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 1229751 id=c>グラニュエル<p>2017.JPN F
-  <h4 615577 id=b>クロフネ<p>1998.USA
-  <h4 707170>クリヴィア<p>2000.JPN
-  <h4 161740>Tony Bin<p>1983.IRE
-  <h4 1237775 id=c>パーフェクトラヴ<p>2017.jP F
-  <h4 1090360 id=b>オルフェーヴル<p>2008.JPN
-  <h4 899740 id=b>Higher Love<p>2002.IRE
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 1263288 id=c>パープルレディー<p>2018.JPN F
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 799647>メリッサ<p>2004.JPN <!--CT ?-->
-  <h4 237704>White Muzzle<p>1990.GB
-  <h4 1270330 id=c>ペイシャスカイ<p>2018.JPN M
-  <h4 891931>ディープスカイ<p>2005.JPN
-  <h4 1142827>リサプシュケ<p>2011.JPN
-  <h4 369358>Wild Rush<p>1994.USA
-  <h4 1233814 id=c>パラスアテナ<p>2017.JPN F
-  <h4 1042049 id=b>ルーラーシップ<p>2007.JPN
-  <h4 1048499 id=c>ステラリード<p>2007.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 1221953 id=c>カレンブーケドール<p>2016.JPN F
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN
-  <h4 1209432>Solaria<p>2010.USA
-  <h4 1003260>Scat Daddy<p>2004.USA
-  <h4 1214780 id=c>ナグラーダ<p>2016.JPN M
-  <h4 1127395 id=b>Dunkirk<p>2006.USA
-  <h4 705382>レフィナーダ<p>2000.JPN
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 1298336 id=c>Vow And Declare<p>2015.AUS M
-  <h4 1181460>Declaration of War<p>2009.USA
-  <h4 1298193>Geblitzt<p>2006.AUS
-  <h4 700018>Testa Rossa<p>1996.AUS
-  <h4 1206568 id=c>エンジェルリード<p>2015.JPN F
-  <h4 1129430>Workforce<p>2007.GB
-  <h4 1048499 id=c>ステラリード<p>2007.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 1204231 id=c>ディアローグ<p>2015.JPN M
-  <h4 722158 id=b>ハーツクライ<p>2001.JPN
-  <h4 853083>ミスペンバリー<p>2002.IRE
-  <h4 369845 id=c>Montjeu<p>1996.IRE
-  <h4 1208482 id=c>ヘッドストリーム<p>2015.JPN M
-  <h4 725485 id=b>ダイワメジャー<p>2001.JPN
-  <h4 853207>アシュレイリバー<p>2004.JPN
-  <h4 362868>Mr. Greeley<p>1992.USA
-  <h4 2 id=c>Key Bid<p>2014.GB M
-  <h4 1111493>Dubawi<p>2002.IRE
-  <h4 1032805>Silca Chiave<p>2004.GB
-  <h4 365118>Pivotal<p>1993.GB
-  <h4 1190284 id=c>ウマインボルト<p>2014.JPN M
-  <h4 287925 id=b>タイキシャトル<p>1994.USA
-  <h4 1044161 id=c>マイカ<p>2007.JPN
-  <h4 700008 id=c>シンボリクリスエス<p>1999.USA
-  <h4 1185015 id=c>カザキリ<p>2014.JPN F
-  <h4 762497>オンファイア<p>2003.JPN
-  <h4 615084>フラッシュカード<p>1999.JPN
-  <h4 161740>Tony Bin<p>1983.IRE
-  <h4 1192342 id=c>ステラバレット<p>2014.JPN F
-  <h4 700008 id=c>シンボリクリスエス<p>1999.USA
-  <h4 1048499 id=c>ステラリード<p>2007.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 1167454 id=c>ドゥオーモ<p>2013.JPN M
-  <h4 742976 id=b>ディープインパクト<p>2002.JPN
-  <h4 328153>アスクコマンダー<p>1998.JPN
-  <h4 333894>Commander in Chief<p>1990.GB
-  <h4 1150265 id=c>ビヨンジオール<p>2012.JPN M
-  <h4 702412>サクラプレジデント<p>2000.JPN
-  <h4 327511>サムシングナイス<p>1998.JPN
-  <h4 362599>Lammtarra<p>1992.USA
-  <h4 1 id=c>Latoscana<p>2011.IRE F
-  <h4 1113706 id=b>Sea The Stars<p>2006.IRE
-  <h4 1225183 id=b>Luminaria<p>2002.IRE
-  <h4 337424 id=a>Danehill<p>1986.USA
-  <h4 1164986 id=c>エイシンソルティー<p>2011.USA F
-  <h4 849372>Tapit<p>2001.USA
-  <h4 749091>Eightyfivebroadst<p>2000.USA
-  <h4 361396>Unbridled's Song<p>1993.USA
-  <h4 1349479 id=c>Halla Na Saoire<p>2010.IRE F
-  <h4 1003266 id=b>Teofilo<p>2004.IRE
-  <h4 1014259>Siamsa<p>1997.USA
-  <h4 203637>Quest for Fame<p>1987.GB
-  <h4 1124297 id=c>エピファネイア<p>2009.JPN S
-  <h4 700008 id=c>シンボリクリスエス<p>1999.USA
-  <h4 743110>シーザリオ<p>2002.JPN
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN
-  <h4 2 id=c>Green Roller<p>2009.AUS F
-  <h4 363038 id=c>Flying Spur<p>1992.AUS
-  <h4 5>Given<p>1998.AUS
-  <h4 342037>Canny Lad<p>1987.AUS
-  <h4 1129435 id=c>エーシンスピーダー<p>2009.USA S
-  <h4 372708 id=b>Giant's Causeway<p>1997.USA
-  <h4 790654>Myhrr<p>1997.USA <!--bro: Kingmambo-->
-  <h4 335975 >Mr. Prospector<p>1970.USA
-  <h4 1277801 id=c>Fiorente<p>2008.IRE S
-  <h4 361091>Monsun<p>1990.GER
-  <h4 774260>Desert Bloom<p>2000.IRE
-  <h4 263178>Pilsudski<p>1992.IRE
-  <h4 1180866 id=c>Majestic Harbor<p>2008.USA S
-  <h4 876602>RockPort Harbor<p>2002.USA
-  <h4 875149>Champagne Royale<p>2001.USA
-  <h4 362799>French Deputy<p>1992.USA
-  <h4 1048499 id=c>ステラリード<p>2007.JPN F
-  <h4 293624 id=c>スベシャルウィーク<p>1995.JPN
-  <h4 713693>ウェルシュステラ<p>1999.IRE
-  <h4 347622>Zafonic<p>1990.USA
-  <h4 1044161 id=c>マイカ<p>2007.JPN S
-  <h4 700008 id=c>シンボリクリスエス<p>1999.USA
-  <h4 314859>タニノティアラ<p>1997.JPN
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 1127251 id=c>Golden Sword<p>2006.GB S
-  <h4 719408 id=b>High Chaparral<p>1999.IRE
-  <h4 1035559>Sitara<p>1998.GB
-  <h4 337556>Salse<p>1985.USA
-  <h4 1100194 id=c>Jukebox Jury<p>2006.IRE S
-  <h4 369845 id=c>Montjeu<p>1996.IRE
-  <h4 432012>Mare Aux Fees<p>1988.GB
-  <h4 336570>Kenmare<p>1975.FR
-  <h4 1177686 id=c>Scandal Sheet<p>2006.IRE F
-  <h4 714343 id=c>Galileo<p>1998.IRE
-  <h4 1012131>Sandrella<p>1995.IRE
-  <h4 336887>Darshaan<p>1981.GB
-  <h4 1115148 id=c>Harbinger<p>2006.GB S
-  <h4 372531 id=b>Dansili<p>1996.USA
-  <h4 789369>Penang Pearl<p>1996.FR
-  <h4 337417>Bering<p>1983.GB
-  <h4 1099798 id=c>Tavistock<p>2005.NZ S
-  <h4 369845 id=c>Montejeu<p>1996.IRE
-  <h4 1099327>Upstage<p>1998.GB
-  <h4 203637>Quest For Fame<p>1987.GB
-  <h4 1029546 id=c>Traffic Guard<p>2004.USA S
-  <h4 372626 id=b>More Than Ready<p>1997.USA
-  <h4 845007>Street Scene<p>1998.IRE
-  <h4 372626>Zafonic<p>1990.USA
-  <h4 1053021 id=c>Illustrious Blue<p>2003.GB S
-  <h4 372531 id=b>Dansili<p>1996.GB
-  <h4 789227>Gipsy Moth<p>1995.GB
-  <h4 339566>Efisio<p>1982.GB
-  <h4 1032643 id=c>Lord of England<p>2003.GER S
-  <h4 342010>Dashing Blade<p>1987.GB
-  <h4 448918>Loveria<p>1984.GB
-  <h4 346041>Los Santos<p>1978.FR
-  <h4 757705 id=c>アドマイヤメイン<p>2003.JPN S
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 286866>プロモーション<p>1994.JPN
-  <h4 333887>Hector Protector<p>1988.USA
-  <h4 905556 id=c>A. P. Arrow<p>2002.USA S
-  <h4 339653 id=c>A.P. Indy<p>1989.USA
-  <h4 438926>Garimpeiro<p>1987.USA
-  <h4 335975 >Mr. Prospector<p>1970.USA
-  <h4 742976 id=c>ディープインパクト<p>2002.JPN S
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 430846>Wind in Her Hair<p>1991.IRE
-  <h4 339659>Alzao<p>1980.USA
-  <h4 722797 id=c>ブラックタイド<p>2001.JPN S
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 430846>Wind in Her Hair<p>1991.IRE
-  <h4 339659>Alzao<p>1980.USA
-  <h4 700008 id=c>シンボリクリスエス<p>1999.USA S
-  <h4 336209>Kris S.<p>1977.USA
-  <h4 432426>Tee Kay<p>1969.USA
-  <h4 344896>Gold Meridian<p>1982.USA
-  <h4 714343 id=c>Galileo<p>1998.IRE S
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 225908>Urban Sea<p>1989.USA
-  <h4 336395>Miswaki<p>1978.USA
-  <h4 1014259 id=c>Siamsa<p>1997.USA F
-  <h4 203637>Quest for Fame<p>1987.GB
-  <h4 967732>Amoura<p>1983.USA
-  <h4 334003>NorthFields<p>1968.USA
-  <h4 369845 id=c>Montjeu<p>1996.IRE S
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA
-  <h4 412281>Floripedes<p>1985.FR
-  <h4 336543>Top Ville<p>1976.IRE
-  <h4 293624 id=c>スペシャルウィーク<p>1995.JPN S
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 197616>キャンペンガール<p>1987.JPN
-  <h4 69360>マルゼンスキー<p>1974.JPN
-  <h4 286968 id=c>ステイゴールド<p>1994.JPN S
-  <h4 333862 id=c>Sunday Silence<p>1986.USA
-  <h4 213942>ゴールデンサッシュ<p>1988.JPN
-  <h4 333664>Dictus<p>1967.FR
-  <h4 339653 id=c>A.P. Indy<p>1989.USA S
-  <h4 335964>Seattle Slew<p>1974.USA
-  <h4 404842 id=b>Weekend Surprise<p>1980.USA
-  <h4 333978 id=b>Secretariat<p>1970.USA
-  <h4 333862 id=c>Sunday Silence<p>1986.USA S
-  <h4 335154>Halo<p>1969.USA
-  <h4 393162>Wishing Well<p>1975.USA
-  <h4 336892>Understanding<p>1963.USA
-  <h4 336572 id=c>Sadler's Wells<p>1981.USA S
-  <h4 334002 id=b>Northern Dancer<p>1961.CAN
-  <h4 392264>Fairy Bridge<p>1975.USA
-  <h4 334859>Bold Reason<p>1968.USA
-  <h4 338878 id=c>Hyperion<p>1930.GB S
-  <h4 334816>Gainsborough<p>1915.GB
-  <h4 388664>Selene<p>1919.GB
-  <h4 334884>Chaucer<p>1900.GB
-  <h4 334813 id=c>Polymelus<p>1902.GB S
-  <h4 334814>Cyllene<p>1895.GB
-  <h4 398297>Maid Marian<p>1886.GB
-  <h4 338150>Hampton<p>1872.GB
-  <h4 338605 id=c>William the Third<p>1898.GB S
-  <h4 334782 id=c>St. Simon<p>1881.GB
-  <h4 398853>Gravity<p>1884.GB
-  <h4 338157>Wisdom<p>1873.GB
-  <h4 338269 id=c>Persimmon<p>1893.GB S
-  <h4 334782 id=c>St. Simon<p>1881.GB
-  <h4 398828>Perdita<p>1881.GB
-  <h4 338150>Hampton<p>1872.GB
-  <h4 335264 id=c>St. Frusquin<p>1893.GB S
-  <h4 334782 id=c>St. Simon<p>1881.GB
-  <h4 398812>Isabel<p>1879.GB
-  <h4 337611>Plebeian<p>1872.GB
-  <h4 338199 id=c>Donovan<p>1886.GB S
-  <h4 334783>Galopin<p>1872.GB
-  <h4 398872>Mowerina<p>1876.DEN
-  <h4 338130>Scottish Chief<p>1861.GB
-  <h4 338185 id=c>Ormonde<p>1883.GB S
-  <h4 334794 id=c>Bend Or<p>1877.GB
-  <h4 398416>Lily Agnes<p>1871.GB
-  <h4 338101>Macaroni<p>1860.GB
-  <h4 334782 id=c>St. Simon<p>1881.GB S
-  <h4 334783>Galopin<p>1872.GB
-  <h4 398729>St. Angela<p>1865.GB
-  <h4 338085>King Tom<p>1851.GB
-  <h4 402891 id=c>Corrie Roy<p>1878.GB F
-  <h4 334783>Galopin<p>1872.GB
-  <h4 401221>Corrie<p>1870.GB
-  <h4 338084>Stockwell<p>1849.GB
-  <h4 334794 id=c>Bend Or<p>1877.GB S
-  <h4 334795>Doncaster<p>1870.GB
-  <h4 398260>Rouge Rose<p>1865.GB
-  <h4 338094>Thormanby<p>1857.GB
-  <h4 338649 id=c>Hermit<p>1864.GB S
-  <h4 338083>Newminster<p>1848.GB
-  <h4 398685>Seclusion<p>1857.GB
-  <h4 338092>Tadmor<p>1846.GB
-  <h4 338084 id=c>Stockwell<p>1849.GB S
-  <h4 334796>The Baron<p>1842.GB
-  <h4 398305>Pocahontas<p>1837.GB
-  <h4 336646>Glecoe<p>1831.GB
-  <h4 334777 id=c>Eclipse<p>1764.GB S
-  <h4 334778>Marske<p>1750.GB
-  <h4 922235>Spilletta<p>1749.GB
-  <h4 922211>Regulus<p>1739.GB
+<script defer src=main.js></script>
+<base href=https://www.jbis.or.jp/horse/ target=_blank>
+<body style="width:min(960px,100%);margin:40 auto;background-color:#111;font:min(calc(5vw / 8 + 8px),13px) sans-serif;overflow-y:scroll">
+<p>
+  <a id=a>-<span>2022.JPN F
+  <a>タワーオブロンドン<span>2015.JPN
+  <a id=b>キャッツアイ<span>2017.JPN
+  <a>スピルバーグ<span>2009.JPN</a>
+<p>
+  <a id=a>-<span>2022.JPN M
+  <a>モズアスコット<span>2014.USA
+  <a>ゴッドフロアー<span>2010.JPN
+  <a id=b>ハーツクライ<span>2001.JPN</a>
+<p>
+  <a id=a>-<span>2022.JPN S
+  <a>モズアスコット<span>2014.USA
+  <a>シンボリバーグ<span>2014.JPN
+  <a id=b>ダイワメジャー<span>2001.JPN</a>
+<p>
+  <a id=a>-<span>2022.JPN F
+  <a id=b>リアルスティール<span>2012.JPN
+  <a>ストームハート<span>2016.USA
+  <a>Uncaptured<span>2010.CAN</a>
+<p>
+  <a id=a>-<span>2022.AUS M
+  <a>So You Think<span>2006 NZ <!--sire: Danehill-->
+  <a>Coralina<span>2009.AUS
+  <a>Dylan Thomas<span>2003.IRE</a>
+<p>
+  <a id=a>-<span>2021.AUS M
+  <a>Blue Point<span>2014.IRE
+  <a>Tack<span>2014.AUS
+  <a id=a>Redoute's Choice<span>1996.AUS</a>
+<p>
+  <a id=a>スカイキャンバス<span>2021.JPN F
+  <a>ファインニードル<span>2013.JPN
+  <a>アポロフィオリーナ<span>2008.JPN
+  <a>Snitzel<span>2002.AUS</a>
+<p>
+  <a id=a>ズングリムックリ<span>2021.JPN M
+  <a>ダノンレジェンド<span>2010.USA
+  <a>ハタノオヌール<span>2014.JPN
+  <a>サウスヴィグラス<span>1996.USA</a>
+<p>
+  <a id=a>バインドロック<span>2021.JPN F
+  <a>エスポワールシチー<span>2005.JPN
+  <a>ジョリガーニャント<span>2013.JPN
+  <a id=b>キングカメハメハ<span>2001.JPN</a>
+<p>
+  <a id=a>パリッドキャリア<span>2021.JPN M
+  <a id=a>Henny Hughes<span>2003.USA
+  <a>サンライズシェル<span>2015.JPN
+  <a id=b>キンシャサノキセキ<span>2003.AUS</a>
+<p>
+  <a id=a>ホーリーブライト<span>2021.JPN F
+  <a>Makfi<span>2007.GB
+  <a>ラブリランテ<span>2015.JPN
+  <a id=b>ディープブリランテ<span>2009.JPN</a>
+<p>
+  <a id=a>レモンシフォン<span>2021.JPN F
+  <a>ホッコータルマエ<span>2009.JPN
+  <a>ゼロカラノキセキ<span>2013.JPN
+  <a id=b>キンシャサノキセキ<span>2003.AUS</a>
+<p>
+  <a id=a>The Spirit Of Zero<span>2020.AUS M
+  <a>Needs Further<span>2007.AUS
+  <a>Fuji Spirit<span>2015.AUS
+  <a>Pierro<span>2009.AUS</a>
+<p>
+  <a id=a>-<span>2020.JPN M
+  <a>レッドファルクス<span>2011.JPN
+  <a id=b>プシュケ<span>2016.JPN
+  <a id=b>Novellist<span>2009.IRE</a>
+<p>
+  <a id=a>トリフィス<span>2020.JPN F
+  <a id=a>ロードカナロア<span>2008.JPN
+  <a>キョウエイカルラ<span>2007.JPN
+  <a>Afleet<span>1984.CAN</a>
+<p>
+  <a id=a>マコトヴィクラント<span>2020.JPN M
+  <a id=b>Dunkirk<span>2006.USA
+  <a>マコトカンパネッロ<span>2002.JPN
+  <a id=b>デュランダル<span>1999.JPN</a>
+<p>
+  <a id=a>ヴァリアントゴッド<span>2020.JPN M
+  <a id=b>Dunkirk<span>2006.USA
+  <a>ゴッドフロアー<span>2010.JPN
+  <a id=b>ハーツクライ<span>2001.JPN</a>
+<p>
+  <a id=a>Brung King<span>2019.AUS M
+  <a>Crackerjack King<span>2008,IRE
+  <a>Wild Cliffs<span>2013.AUS
+  <a>Canford Cliffs<span>2007.IRE</a>
+<p>
+  <a id=a>カリグラフィー<span>2019.JPN F
+  <a id=b>ロゴタイプ<span>2010.JPN
+  <a>コートリーラッシュ<span>2011.JPN
+  <a>ディープスカイ<span>2005.JPN</a>
+<p>
+  <a id=a>クールフォルテ<span>2019.JPN F
+  <a id=b>クロフネ<span>1998.USA
+  <a id=b>シュシュブリーズ<span>2011.JPN
+  <a id=b>フジキセキ<span>1992.JPN</a>
+<p>
+  <a id=a>ルーシッド<span>2019.JPN M
+  <a id=b>Dunkirk<span>2006.USA
+  <a>スイートマカロン<span>2006.USA
+  <a id=a>Tale of the Cat<span>1994.USA</a>
+<p>
+  <a id=a>Brooklyn<span>2018.HUN M
+  <a>Bully Pulpit<span>2000.USA
+  <a>Brynhild<span>2011.FR
+  <a>Simplex<span>2001.FR</a>
+<p>
+  <a id=a>Chin Chin<span>2018.HUN M
+  <a>Simplex<span>2001.FR
+  <a>Chiaraluna<span>2007.SVN
+  <a>Bully Pulpit<span>2000.USA</a>
+<p>
+  <a id=a>Hong Kong<span>2018.HUN M
+  <a id=b>Move Your Vision<span>2009.IRE
+  <a>Heliconia<span>2010.GB
+  <a>Hernando<span>1990 FR</a>
+<p>
+  <a id=a>Kontroll<span>2018.HUN F
+  <a>Bully Pulpit<span>2000.USA
+  <a>Kespark<span>2007.ITY
+  <a>Kendor<span>1986 FR</a>
+<p>
+  <a id=a>Loire<span>2018.HUN M
+  <a>George Vancouver<span>2010.USA
+  <a>Ligurian Sea<span>2009.NZ
+  <a>Medicean<span>1997.GB</a>
+<p>
+  <a id=a>Manet<span>2018.HUN M
+  <a>Bully Pulpit<span>2000.USA
+  <a>Macabea<span>2008.CZE
+  <a>Look Honey<span>2000.IRE</a> <!--sire: Sadler's Wells-->
+<p>
+  <a id=a>Marshmallow<span>2018.HUN M
+  <a>Bully Pulpit<span>2000.USA
+  <a>Mazsola<span>2008.HUN
+  <a>Horatio Luro<span>1987.USA</a>
+<p>
+  <a id=a>Meglepetes<span>2018.HUN M
+  <a>Penny's Picnic<span>2010.IRE
+  <a>Megerto<span>2006.HUN
+  <a>Horatio Luro<span>1987.USA</a>
+<p>
+  <a id=a>Mont Negro<span>2018.HUN M
+  <a id=b>Stormy River<span>2003.FR
+  <a id=b>Montmarie<span>2005.FR
+  <a id=c>Montjeu<span>1996.IRE</a>
+<p>
+  <a id=a>Mr. Penny<span>2018.HUN M
+  <a>Penny's Picnic<span>2010.IRE
+  <a>Miss Brooch<span>2012.GER
+  <a>Areion<span>1995.GER</a>
+<p>
+  <a id=a>Poetic Flare<span>2018.IRE S
+  <a id=a>Dawn Approach<span>2010.IRE
+  <a id=b>Maria Lee<span>2007.IRE
+  <a id=a>Rock of Gibraltar<span>1999.IRE</a>
+<p>
+  <a id=a>Sasha<span>2018.HUN M
+  <a>Bully Pulpit<span>2000.USA
+  <a>Salalah<span>2011.CZE
+  <a>Fairlypi<span>2004.IRE</a>
+<p>
+  <a id=a>Sue<span>2018.HUN F
+  <a>Bully Pulpit<span>2000.USA
+  <a>Sunny Girl<span>2004.HUN
+  <a>Jolly Groom<span>1984.USA</a>
+<p>
+  <a id=a>Sunday<span>2018.HUN F
+  <a id=b>Move Your Vision<span>2009.IRE
+  <a>Szombatesti Lany<span>2012.HUN <!--mare:Sunny Girl-->
+  <a>Steady As A Rock<span>2004.FR</a> <!--sire: Rock of Gibraltar-->
+<p>
+  <a id=a>Turbina<span>2018.HUN M
+  <a id=b>Move Your Vision<span>2009.IRE
+  <a>Tunic<span>2005.GB
+  <a>Danehill Dancer<span>1993.IRE</a> <!--sire: Danehill-->
+<p>
+  <a id=a>アジアノジュンシン<span>2018.JPN F
+  <a>アジアエクスプレス<span>2011.USA
+  <a>バトルアンコール<span>2010.JPN
+  <a id=b>フジキセキ<span>1992.JPN</a>
+<p>
+  <a id=a>アヴォカド<span>2018.JPN F
+  <a>エスポワールシチー<span>2005.JPN
+  <a>アップライジング<span>2011.JPN
+  <a>Commands<span>1996.JPN</a> <!--sire: Danehill-->
+<p>
+  <a id=a>エベーヌ<span>2018.JPN F
+  <a id=b>Dunkirk<span>2006.USA
+  <a>ラズベリータイム<span>2003.JPN
+  <a id=b>フジキセキ<span>1992.JPN</a>
+<p>
+  <a id=a>ギガインパクト<span>2018.JPN F
+  <a id=b>ディープブリランテ<span>2009.JPN
+  <a id=b>グレイスフルソング<span>2005.IRE
+  <a id=a>Rock of Gibraltar<span>1999.IRE</a>
+<p>
+  <a id=a>ゴールドレッグス<span>2018.JPN M
+  <a id=b>ルーラーシップ<span>2007.JPN
+  <a>ファンシーミューズ<span>2011.JPN
+  <a>ゴールドアリュール<span>1999.JPN</a>
+<p>
+  <a id=a>マミリアス<span>2018.JPN F
+  <a id=b>リオンディーズ<span>2013.JPN
+  <a>ハニーハント<span>2001.JPN
+  <a>エンドスウィープ<span>1991.USA</a>
+<p>
+  <a id=a>マーテル<span>2018.JPN F
+  <a id=b>ドゥラメンテ<span>2012.JPN
+  <a>Malvern Spring<span>2006.USA
+  <a>Silver Deputy<span>1985.CAN</a>
+<p>
+  <a id=a>ラヴマイウェイ<span>2018.JPN F
+  <a id=b>ジャスタウェイ<span>2009.JPN
+  <a id=b>Higher Love<span>2002.IRE
+  <a id=c>Sadler's Wells<span>2002.USA</a>
+<p>
+  <a id=a>リフレイム<span>2018.USA F
+  <a id=b>American Pharoah<span>2012.USA
+  <a>Careless Jewel<span>2006.USA
+  <a>Tapit<span>2001.USA</a>
+<p>
+  <a id=a>ヴィジャーヤ<span>2018.JPN M
+  <a id=b>オルフェーヴル<span>2008.JPN
+  <a>デプロマトウショウ<span>2009.JPN
+  <a>Fasliyev<span>1997.USA</a>
+<p>
+  <a id=a>Anders<span>2017.AUS S
+  <a>Not A Single Doubt<span>2001.AUS
+  <a>Madame Andree<span>2009.AUS
+  <a>War Emblem<span>1999.USA</a>
+<p>
+  <a id=a>Doubtland<span>2017.AUS S
+  <a>Not A Single Doubt<span>2001.AUS
+  <a>Miss Sharapova<span>2006.NZ
+  <a>Ustinov<span>1998.AUS</a>
+<p>
+  <a id=a>Ilalliqa<span>2017.IRE F
+  <a>Muhaarar<span>2012.GB
+  <a>Sun Bittern<span>2005.USA
+  <a>Seeking The Gold<span>1985.USA</a>
+<p>
+  <a id=a>Lady Penelope<span>2017.IRE F
+  <a>Night of Thunder<span>2011.IRE <!-- sire: Dubawi -->
+  <a>Step Sequence<span>2010.IRE
+  <a>Nayef<span>1998.USA</a>
+<p>
+  <a id=a>Repossession<span>2017.IRE F
+  <a>War Front<span>2002.USA
+  <a>Life Happened<span>2001.USA
+  <a>Stravinsky<span>1996.USA</a>
+<p>
+  <a id=a>Russian Camelot<span>2017.IRE S
+  <a id=b>Camelot<span>2009.GB
+  <a>Lady Babooshka<span>2011.GB
+  <a>Cape Cross<span>1994.IRE</a>
+<p>
+  <a id=a>スノージュエリー<span>2017.JPN F
+  <a id=b>ウインバリアシオン<span>2008.JPN
+  <a>サクラバーベナ<span>1999.JPN
+  <a id=a>サクラバクシンオー<span>1989.JPN</a>
+<p>
+  <a id=a>プライムライン<span>2017.JPN M
+  <a id=b>ハーツクライ<span>2001.JPN
+  <a>バートラムガーデン<span>2009.JPN
+  <a id=a>サクラバクシンオー<span>1989.JPN</a>
+<p>
+  <a id=a>アントリューズ<span>2016.USA M
+  <a id=a>ロードカナロア<span>2008.JPN
+  <a>Shes All Eltish<span>2005.USA
+  <a>Eltish<span>1992.USA</a>
+<p>
+  <a id=a>グランソヴァール<span>2016.JPN M
+  <a id=b>Dunkirk<span>2006.USA
+  <a>スイートマカロン<span>2006.USA
+  <a id=a>Tale of the Cat<span>1994.USA</a>
+<p>
+  <a id=a>ストームハート<span>2016.USA F
+  <a>Uncaptured<span>2010.CAN
+  <a>Miss Fear Factor<span>2003.USA
+  <a>Siphon<span>1991.BRZ</a>
+<p>
+  <a id=a>Extrema<span>2015.AUS M
+  <a id=b>Bernardini<span>2003.USA <!--CT from sire:A.P. Indy TT-->
+  <a>Streama<span>2008.AUS
+  <a id=a>Stratum<span>2002.AUS</a>
+<p>
+  <a id=a>Written By<span>2015.AUS S
+  <a id=a>Written Tycoon<span>2002.AUS
+  <a>Yau Chin<span>2005.AUS
+  <a>Tobougg<span>1998.IRE</a>
+<p>
+  <a id=a>Zousain<span>2015.AUS S
+  <a id=a>Zoustar<span>2010.AUS
+  <a>Pasar Silbano<span>2006.IRE
+  <a>Elnadim<span>1994.USA</a>
+<p>
+  <a id=a>アドバンスマルス<span>2015.JPN M
+  <a>Jimmy Creed<span>2009.USA
+  <a>Bijoux Miss<span>2004.USA
+  <a>Buddha<span>1999.USA</a>
+<p>
+  <a id=a>キングオブハーツ<span>2015.JPN M
+  <a id=b>ハーツクライ<span>2001.JPN
+  <a id=b>Higher Love<span>2002.IRE
+  <a id=c>Sadler's Wells<span>1981.USA</a>
+<p>
+  <a id=a>パワーバンド<span>2015.JPN M
+  <a id=b>ディープブリランテ<span>2009.JPN
+  <a>スイートマカロン<span>2006.USA
+  <a id=a>Tale of the Cat<span>1994.USA</a>
+<p>
+  <a id=a>Cracksman<span>2014.GB S
+  <a id=b>Frankel<span>2008.GB
+  <a>Rhadegunda<span>2005.GB
+  <a>Pivotal<span>1993.GB</a>
+<p>
+  <a id=a>Dynamic<span>2014.GB F
+  <a id=b>Teofilo<span>2004.IRE
+  <a>White Cay<span>2005.GB
+  <a>Dalakhani<span>1990.IRE</a>
+<p>
+  <a id=a>Elegantly Bound<span>2014.IRE M
+  <a>Choisir<span>1999.AUS
+  <a>Boundless Joy<span>2008.AUS
+  <a id=c>Montjeu<span>1996.IRE</a>
+<p>
+  <a id=a>National Defense<span>2014.AUS S
+  <a id=b>Invincible Spirit<span>1997.IRE <!--sire:Green Desert bro: Kodiac-->
+  <a>Angle Falls<span>2006.GB
+  <a>Kingmambo<span>1990 USA</a>
+<p>
+  <a id=a>Plata O Plomo<span>2014.GB M
+  <a>Paco Boy<span>2005.IRE
+  <a>BranStom Gem<span>1998.GB
+  <a>So Factual<span>1990.USA</a>
+<p>
+  <a id=a>Samran Says<span>2014.IRE F
+  <a>Dark Angel<span>2005.IRE
+  <a>Chachalacas<span>2007.IRE
+  <a>Hawk Wing<span>1999.USA</a>
+<p>
+  <a id=a>Galileo Gold<span>2013.GB S
+  <a>Paco Boy<span>2005.IRE
+  <a id=b>Galicuix<span>2008.GB
+  <a id=c>Galileo<span>1998.IRE</a>
+<p>
+  <a id=a>Smash Williams<span>2013.IRE S
+  <a>Fracas<span>2002.IRE
+  <a>Take Flight<span>2008.IRE
+  <a>Pivotal<span>1993.GB</a>
+<p>
+  <a id=a>Thronum<span>2013.AUS S
+  <a>Snitzel<span>2002.AUS
+  <a>Helena's Secret<span>2007.USA
+  <a>Five Star Day<span>1996.USA</a>
+<p>
+  <a id=a>Washington DC<span>2013.IRE S
+  <a>Zoffany<span>2008.IRE <!--sire: Dansili-->
+  <a>How's she Cuttin<span>2003.IRE
+  <a>シンコウフォレスト<span>1993.IRE</a> <!--Green Desert x Park Express-->
+<p>
+  <a id=a>エネルムサシ<span>2013.JPN M
+  <a id=b>キンシャサノキセキ<span>2003.AUS
+  <a>クリノトップレディ<span>1997.USA
+  <a>Salt Lake<span>1989.USA</a>
+<p>
+  <a id=a>ヴァイスクリガー<span>2013.JPN M
+  <a>キャプテントゥーレ<span>2005.JPN
+  <a>バトルキクヒメ<span>2007.JPN
+  <a>White Muzzle<span>1990.GB</a>
+<p>
+  <a id=a>Belardo<span>2012.IRE S
+  <a>Lope de Vega<span>2007.IRE
+  <a>Danaskaya<span>2000.IRE
+  <a id=a>Danehill<span>1986.USA</a>
+<p>
+  <a id=a>Icy Lady<span>2012.GB F
+  <a id=b>New Approach<span>2005.IRE
+  <a id=b>Kitty Kiernan<span>2007.GB
+  <a>Pivotal<span>1993.GB</a>
+<p>
+  <a id=a>Mattmu<span>2012.GB S  <!--sire: Danehill Dancer-->
+  <a>Indesatchel<span>2002.IRE
+  <a>Katie Boo<span>2002.IRE
+  <a>Namid<span>1996.GB</a>
+<p>
+  <a id=a>Outreach<span>2012.AUS S
+  <a>Exceed And Excel<span>2000.AUS
+  <a>Bahira<span>2002.AUS
+  <a>Snippets<span>1984.AUS</a>
+<p>
+  <a id=a>Palentino<span>2012.AUS S
+  <a id=b>Teofilo<span>2004.IRE
+  <a>Palatine Hill<span>1999.AUS
+  <a>Palace Music<span>1981.USA</a>
+<p>
+  <a id=a>Ready For Victory<span>2012.AUS S
+  <a id=b>More Than Ready<span>1997.USA
+  <a>Crillon<span>2006.NZ
+  <a>Zabeel<span>1986.NZ</a>
+<p>
+  <a id=a>Well In Flight<span>2012.SAF S
+  <a id=b>Just As Well<span>2003.USA
+  <a>Flight Prospect<span>1993.SAF
+  <a>Secret Prospector<span>1982.USA</a>
+<p>
+  <a id=a>AeriAlist<span>2011.IRE M
+  <a id=b>Sea The Stars<span>2006.IRE
+  <a>Maoineach<span>2006.USA
+  <a>Congaree<span>1998.USA</a>
+<p>
+  <a id=a>County Wexford<span>2011.IRE M
+  <a id=b>Teofilo<span>2004.IRE
+  <a>Tiffed<span>2003.USA
+  <a>Seattle Slew<span>1974.USA</a>
+<p>
+  <a id=a>Curlin to Mischief<span>2011.USA S <!--bro: Mendelssohn Beholder Into Mischief-->
+  <a>Curlin<span>2004.USA
+  <a>Leslie's Lady<span>1996.USA
+  <a>Tricky Creek<span>1986.USA</a>
+<p>
+  <a id=a>Fighting Sun<span>2011.AUS S
+  <a id=a>Northern Meteor<span>2005.AUS
+  <a>Irish Darling<span>2001.AUS
+  <a>Ivorys Irish<span>1991.AUS</a>
+<p>
+  <a id=a>Fountain Of Youth<span>2011.IRE S
+  <a>Oasis Dream<span>2000.GB
+  <a>Attraction<span>2001.GB
+  <a>Efisio<span>1982.GB</a>
+<p>
+  <a id=a>Stratum Star<span>2011.AUS S
+  <a id=a>Stratum<span>2002.AUS
+  <a>Purely Spectacular<span>2006.NZ
+  <a>Pins<span>1996.AUS</a>
+<p>
+  <a id=a>Supido<span>2011.AUS S
+  <a id=b>Sebring<span>2005.AUS
+  <a>レディサクシード<span>2000.JPN
+  <a>Brian's Time<span>1985.USA</a>
+<p>
+  <a id=a>エイシンブルズアイ<span>2011.USA M
+  <a>Belgravia<span>2004.USA
+  <a>Miss Fear Factor<span>2003.USA
+  <a>Siphon<span>1991.BRZ</a>
+<p>
+  <a id=a>ワンハート<span>2011.JPN F
+  <a>アサクサデンエン<span>1999.GB
+  <a>カガヤケラビット<span>2001.JPN
+  <a>Dehere<span>1991.USA</a>
+<p>
+  <a id=a>Dawn Approach<span>2010.IRE S
+  <a id=b>New Approach<span>2005.IRE
+  <a id=a>Hymn Of The Dawn<span>1999.USA
+  <a>Phone Trick<span>1982.USA</a>
+<p>
+  <a id=a>Zoustar<span>2010.AUS S
+  <a id=a>Northern Meteor<span>2005.AUS
+  <a>Zouzou<span>2001.AUS
+  <a id=a>Redoute's Choice<span>1996.AUS</a>
+<p>
+  <a id=a>エーシントップ<span>2010.USA S
+  <a id=a>Tale of the Cat<span>1994.USA
+  <a>Ecology<span>2001.USA
+  <a>Unbridled's Song<span>1993.USA</a>
+<p>
+  <a id=a>An Ghalanta<span>2009.IRE F
+  <a>Holy Roman Emperor<span>2004.IRE <!--sire Danehill-->
+  <a>Alamanta<span>1999.IRE
+  <a>Ali-Royal<span>1993.IRE</a>
+<p>
+  <a id=a>Crusade<span>2009.USA S
+  <a>Mr. Greeley<span>1992.USA
+  <a>La Traviata<span>2004.USA
+  <a>Johannesburg<span>1999.USA</a>
+<p>
+  <a id=a>Sessions<span>2009.AUS S
+  <a>Lonhro<span>1998.AUS
+  <a>Seances<span>1999.AUS
+  <a>Canny Lad<span>1987.AUS</a>
+<p>
+  <a id=a>Shamexpress<span>2009.NZ S
+  <a>O'reilly<span>1993.NZ <!--sire: Last Tycoon-->
+  <a>Volkrose<span>2002.NZ
+  <a>Volksraad<span>1988.GB</a> <!--sire: Green Desert-->
+<p>
+  <a id=a>Vastitas<span>2009.AUS F
+  <a id=a>Green Desert<span>1983.USA 
+  <a>Kahira<span>2002.IRE
+  <a>King's Best<span>1997.USA</a>
+<p>
+  <a id=a>Your Song<span>2009.AUS S
+  <a>Fastnet Rock<span>2001.AUS
+  <a>Zembu<span>1999.AUS
+  <a id=b>フジキセキ<span>1992.JPN</a>
+<p>
+  <a id=a>Dialed In<span>2008.USA S
+  <a id=b>Mineshaft<span>1999.USA
+  <a>Miss Doolittle<span>1998.USA
+  <a id=a>Storm Cat<span>1983.USA</a>
+<p>
+  <a id=a>Dream Ahead<span>2008.USA S
+  <a>Diktat<span>1995.GB
+  <a>Land of Dreams<span>1995.GB
+  <a>Cadeaux Genereux<span>1985.GB</a>
+<p>
+  <a id=a>Gig Harbor<span>2008.USA S
+  <a>City Zip<span>1998.USA
+  <a>Miss Blue Grass<span>1998.USA
+  <a>St. Jovite<span>1989.USA</a>
+<p>
+  <a id=a>Whisper Gently<span>2008.IRE F
+  <a id=b>High Chaparral<span>1999.IRE
+  <a>Whisper Light<span>1998.IRE
+  <a>Caerleon<span>1980.USA</a>
+<p>
+  <a id=a>ロードカナロア<span>2008.JPN S
+  <a id=b>キングカメハメハ<span>2001.JPN
+  <a>レディブラッサム<span>1996.JPN
+  <a id=a>Storm Cat<span>1983.USA</a>
+<p>
+  <a id=a>Moshe<span>2007.AUS S
+  <a id=b>Bel Esprit<span>1999.AUS
+  <a>Helsinge<span>2001.AUS
+  <a>Desert Sun<span>1988.GB</a>
+<p>
+  <a id=a>Squamosa<span>2007.AUS S
+  <a>Not A Single Doubt<span>2001.AUS
+  <a>Class Success<span>1999.AUS
+  <a>Success Express<span>1985.USA</a>
+<p>
+  <a id=a>Star Witness<span>2007.AUS S
+  <a>Starcraft<span>2000.NZ
+  <a>Leone Chiara<span>1999.AUS
+  <a>Lion Hunter<span>1992.AUS</a>
+<p>
+  <a id=a>Bushranger<span>2006.IRE S
+  <a>Danetime<span>1994.IRE <!--sire Danehill-->
+  <a>Danz Danz<span>1997.GB
+  <a>Efisio<span>1982.GB</a>
+<p>
+  <a id=a>Intense Focus<span>2006.USA S
+  <a id=b>Giant's Causeway<span>1997.USA
+  <a>Daneleta<span>1999.IRE
+  <a id=a>Danehill<span>1986.USA</a>
+<p>
+  <a id=a>Rogano<span>2006.AUS S
+  <a id=a>Redoute's Choice<span>1996.AUS
+  <a>Singles Bar<span>1991.AUS <!--bro: Snippets-->
+  <a>Rory's Jester<span>1982.AUS</a>
+<p>
+  <a id=a>Run Away and Hide<span>2006.USA S
+  <a>City Zip<span>1998.USA
+  <a>Jilted<span>1999.USA
+  <a>Runaway Groom<span>1979.USA</a>
+<p>
+  <a id=a>Starspangledbanner<span>2006.AUS S
+  <a>Choisir<span>1999.AUS
+  <a>Gold Anthem<span>1999.AUS
+  <a>Made of Gold<span>1989.USA</a>
+<p>
+  <a id=a>Stryker<span>2006.AUS S
+  <a>Fastnet Rock<span>2001.AUS
+  <a>Laetitia<span>1998.AUS
+  <a>Woodman<span>1983.USA</a>
+<p>
+  <a id=a>Unionize<span>2006.USA S
+  <a>Dixie Union<span>1997.USA
+  <a>Silent Sighs<span>2001.USA
+  <a>Benchmark<span>1991.USA</a>
+<p>
+  <a id=a>Vocalised<span>2006.USA S
+  <a>Vindication<span>2002.USA <!--sire: Seattle Slew-->
+  <a>Serena's Tune<span>1998.USA
+  <a>Mr. Prospector<span>1970.USA</a>
+<p>
+  <a id=a>Wanted<span>2006.AUS S
+  <a>Fastnet Rock<span>2001.AUS
+  <a>Fragmentation<span>2000.AUS
+  <a>Snippets<span>1984.AUS</a>
+<p>
+  <a id=a>アフィニティ<span>2006.JPN F
+  <a id=a>サクラバクシンオー<span>1989.JPN
+  <a>オギブルービーナス<span>1993.JPN
+  <a>スーパークリーク<span>1985.JPN</a>
+<p>
+  <a id=a>Dreamscape<span>2005.AUS S
+  <a>Choisir<span>1999.AUS
+  <a>Faith In Dreams<span>1991.AUS
+  <a>Ferdinand<span>1983.AUS</a>
+<p>
+  <a id=a>Drumbeats<span>2005.AUS S
+  <a id=a>Redoute's Choice<span>1996.AUS
+  <a>Delicate Choice<span>1998.AUS
+  <a>Last Tycoon<span>1983.IRE</a>
+<p>
+  <a id=a>Duporth<span>2005.AUS S
+  <a>Red Ransom<span>1987.USA
+  <a>Stanging<span>1994.AUS
+  <a>Success Express<span>1985.USA</a>
+<p>
+  <a id=a>Equiano<span>2005.FR S
+  <a>Acclamation<span>1999.GB
+  <a>Entente Cordiale<span>1998.IRE
+  <a>Ela-Mana-Mou<span>1976.IRE</a>
+<p>
+  <a id=a>Master of Design<span>2005.AUS S
+  <a id=a>Redoute's Choice<span>1996.AUS
+  <a>Urgo To Merge<span>1993.AUS
+  <a>Last Tycoon<span>1983.IRE</a>
+<p>
+  <a id=a>Nicconi<span>2005.AUS S
+  <a>Bianconi<span>1995.USA
+  <a>Nicola Lass<span>1995.AUS
+  <a id=b>Scenic<span>1986.IRE</a> <!--CT sire: Sadler's Wells--> 
+<p>
+  <a id=a>Northern Meteor<span>2005.AUS S
+  <a>Encosta De Lago<span>1993.AUS
+  <a>Explosive<span>1990.USA
+  <a>Fappiano<span>1977.USA</a>
+<p>
+  <a id=a>Tale of Ekati<span>2005.USA S
+  <a id=a>Tale of the Cat<span>1994.USA
+  <a id=b>サイレンスビューティ<span>1997.JPN
+  <a id=c>Sunday Silence<span>1986.USA</a>
+<p>
+  <a id=a>Visionaire<span>2005.USA S
+  <a>Grand Slam<span>1995.USA
+  <a>Scarlet Tango<span>1998.USA
+  <a>French Deputy<span>1992.USA</a>
+<p>
+  <a id=a>Warm White Night<span>2005.SAF S
+  <a>Western Winter<span>1992.USA
+  <a>Thousand Nights<span>1988.SAF
+  <a>Foveros<span>1976.GB</a>
+<p>
+  <a id=a>Astronomer Royal<span>2004.USA S
+  <a id=a>Danzig<span>1977.USA
+  <a>Sheepscot<span>1994.USA
+  <a>Easy Goer<span>1986.USA</a>
+<p>
+  <a id=a>Idiot Proof<span>2004.USA S
+  <a>Benchmark<span>1991.USA
+  <a>Perfectly Pretty<span>1999.USA
+  <a>Bertrando<span>1989.USA</a>
+<p>  
+  <a id=a>Major Cadeaux<span>2004.GB S
+  <a>Cadeaux Genereux<span>1985.GB
+  <a>Maine Lobster<span>1998.USA
+  <a>Woodman<span>1983.USA</a>
+<p>
+  <a id=a>Murtajill<span>2004.AUS S
+  <a id=a>Rock of Gibraltar<span>1999.IRE
+  <a>Skating<span>1989.AUS
+  <a>At Talaq<span>1981.USA</a> <!--sire:Roberto-->
+<p>
+  <a id=a>Seventh Rock<span>2004.AUS S
+  <a id=a>Rock of Gibraltar<span>1999.IRE
+  <a>Ruby Clipper<span>1995.NZ
+  <a>Rubiton<span>1983.AUS</a>
+<p>
+  <a id=a>Henny Hughes<span>2003.USA S
+  <a>Hennessy<span>1993.USA
+  <a>Meadow Flyer<span>1989.USA
+  <a>Meadowlake<span>1983.USA</a>
+<p>
+  <a id=a>Kildonan<span>2003.SAF S
+  <a>Rich Man's Gold<span>1992.USA
+  <a>Cathay Firth<span>1994.SAF
+  <a>Philippi<span>1986.FR</a>
+<p>
+  <a id=a>Darci Brahma<span>2002.NZ S
+  <a id=a>Danehill<span>1986.USA
+  <a>Grand Echezeaux<span>1996.NZ
+  <a>Zabeel<span>1986.NZ</a>
+<p>
+  <a id=a>Fast 'N' Famous<span>2002.AUS S
+  <a id=a>Redoute's Choice<span>1996.AUS
+  <a>Zalinda<span>1994.NZ
+  <a>Zabeel<span>1986.NZ</a>
+<p>
+  <a id=a>God's Own<span>2002.AUS S
+  <a id=a>Redoute's Choice<span>1996.AUS
+  <a>Angel In Disguise<span>1994.NZ
+  <a>Sky Chase<span>1984.NZ</a>
+<p>
+  <a id=a>Magnus<span>2002.AUS S
+  <a id=b>Flying Spur<span>1992.AUS
+  <a>Scandinavia<span>1994.AUS
+  <a>Snippets<span>1984.AUS</a>
+<p>
+  <a id=a>Stratum<span>2002.AUS S
+  <a id=a>Redoute's Choice<span>1996.AUS
+  <a>Bourgeois<span>1991.AUS
+  <a>Luskin Star<span>1974.AUS</a>
+<p>
+  <a id=a>Written Tycoon<span>2002.AUS S
+  <a>Iglesia<span>2002.AUS <!--sire: Last Tycoon-->
+  <a>Party Miss<span>1991.AUS
+  <a>Kenmare<span>1975.FR</a>
+<p>
+  <a id=a>Assafa<span>2001.AUS S
+  <a id=a>Danehill<span>1986.USA
+  <a>Marigot Bay<span>1995.IRE
+  <a>Fairy King<span>1982.USA</a>
+<p>
+  <a id=a>Dane Shadow<span>2001.AUS S
+  <a id=a>Danehill<span>1986.USA
+  <a>Slight Chance<span>1989.NZ
+  <a>Centaine<span>1980.AUS</a>
+<p>
+  <a id=a>Snippetson<span>2001.AUS S <!--bro: Singles Bar -> son: Not A Single Doubt-->
+  <a>Snippets<span>1984.AUS
+  <a>Snowdrift<span>1994.FR
+  <a>Polish Precedent<span>1986.USA</a>
+<p>
+  <a id=a>Way West<span>2001.AUS S
+  <a id=a>Danehill<span>1986.USA
+  <a>Prospect Fever<span>1992.USA
+  <a>Mr. Prospector<span>1970.USA</a>
+<p>
+  <a id=a>Statue of Liberty<span>2000.USA S <!--bro: Lemon Drop Kid-->
+  <a id=a>Storm Cat<span>1983.USA
+  <a>Charming Lassie<span>1987.USA
+  <a>Seattle Slew<span>1974.USA</a>
+<p>
+  <a id=a>Bel Esprit<span>1999.AUS S
+  <a>Royal Academy<span>1987.USA
+  <a>Bespoken<span>1990.AUS
+  <a>Vain<span>1966.AUS</a>
+<p>
+  <a id=a>Firebreak<span>1999.GB S
+  <a>Charnwood Forest<span>1992.IRE
+  <a>Breakaway<span>1985.GB
+  <a>Song<span>1966.GB</a>
+<p>
+  <a id=a>Hidden Dragon<span>1999.AUS S
+  <a id=a>Danehill<span>1986.USA
+  <a>Ballroom Babe<span>1992.NZ
+  <a>Citidancer<span>1986.IRE</a>
+<p>
+  <a id=a>Hymn Of The Dawn<span>1999.USA F
+  <a>Phone Trick<span>1982.USA
+  <a>Colonial Debut<span>1994.USA
+  <a>Pleasant Colony<span>1978.USA</a>
+<p>
+  <a id=a>Lucky Owners<span>1999.NZ S
+  <a id=a>Danehill<span>1986.USA
+  <a>Miss Priority<span>1991.NZ
+  <a>Kaapstad<span>1984.NZ</a>
+<p>
+  <a id=a>Rock of Gibraltar<span>1999.IRE S
+  <a id=a>Danehill<span>1986.USA
+  <a>Offshore Boom<span>1985.IRE
+  <a>Be My Guest<span>1974.USA</a>
+<p>
+  <a id=a>Dexterity<span>1998.USA S
+  <a>Kingmambo<span>1990.USA
+  <a>Diese<span>1989.USA
+  <a>Diesis<span>1980.GB</a> <!--bro: Kris-->
+<p>
+  <a id=a>Monashee Mountain<span>1997.USA S <!--bro: MineShaft-->
+  <a id=a>Danzig<span>1977.USA
+  <a>Prospectors Delite<span>1989.USA
+  <a>Mr. Prospector<span>1970.USA</a>
+<p>
+  <a id=a>St Petersburg<span>1997.AUS S
+  <a>Nureyev<span>1977.USA
+  <a>Miss Bold Appeal<span>1990.USA
+  <a>Valid Appeal<span>1972.USA</a>
+<p>
+  <a id=a>Captain Al<span>1996.SAF S
+  <a>Al Mufti<span>1985.USA <!--sire: Roberto-->
+  <a>Off To War<span>1983.SAF
+  <a>Complete Warrior<span>1976.USA</a>
+<p>
+  <a id=a>Redoute's Choice<span>1996.AUS S
+  <a id=a>Danehill<span>1986.USA
+  <a>Shantha's Choice<span>1992.AUS
+  <a>Canny Lad<span>1987.AUS</a>
+<p>
+  <a id=a>Tiger Ridge<span>1996.USA S <!--bro: A.P. Indy-->
+  <a id=a>Storm Cat<span>1983.USA
+  <a id=b>Weekend Surprise<span>1980.USA
+  <a id=b>Secretariat<span>1970.USA</a>
+<p>
+  <a id=a>Tale of the Cat<span>1994.USA S
+  <a id=a>Storm Cat<span>1983.USA
+  <a>Yarn<span>1987.USA
+  <a>Mr. Prospector<span>1970.USA</a>
+<p>
+  <a id=a>Northern Afleet<span>1993.USA S
+  <a>Afleet<span>1984.CAN
+  <a>Nuryette<span>1986.USA
+  <a>Nureyev<span>1977.USA</a>
+<p>
+  <a id=a>サクラバクシンオー<span>1989.JPN S
+  <a>サクラユタカオー<span>1982.JPN
+  <a>サクラハゴロモ<span>1984.JPN
+  <a id=a>Northern Taste<span>1971.CAN</a>
+<p>
+  <a id=a>Danehill<span>1986.USA S
+  <a id=a>Danzig<span>1977.USA
+  <a id=b>Razyana<span>1981.USA
+  <a>His Majesty<span>1968.USA</a>
+<p>
+  <a id=a>Green Desert<span>1983.USA S
+  <a id=a>Danzig<span>1977.USA
+  <a>Foreign Courier<span>1979.USA <!--bro: Twining-->
+  <a>Sir Ivor<span>1965.USA</a>
+<p>
+  <a id=a>Storm Cat<span>1983.USA S
+  <a>Storm Bird<span>1978.USA
+  <a>Terlingua<span>1976.USA
+  <a id=b>Secretariat<span>1970.USA</a>
+<p>
+  <a id=a>Danzig<span>1977.USA S
+  <a id=b>Northern Dancer<span>1961.CAN
+  <a>Pas de Nom<span>1968.USA
+  <a>Admiral's Voyage<span>1959.USA</a>
+<p>
+  <a id=a>Northern Taste<span>1971.CAN S
+  <a id=b>Northern Dancer<span>1961.CAN
+  <a>Lady Victoria<span>1962.CAN
+  <a>Victoria Park<span>1957.CAN</a>
+<p>
+  <a id=a>Nearctic<span>1954.CAN S
+  <a>Nearco<span>1935.ITY
+  <a id=b>Lady Angela<span>1944.GB
+  <a id=c>Hyperion<span>1930.GB</a>
+<p>
+  <a id=b>-<span>2022.JPN F
+  <a>レイデオロ<span>2014.JPN
+  <a id=b>Higher Love<span>2002.IRE
+  <a id=c>Sadler's Wells<span>1981.USA</a>
+<p>
+  <a id=b>-<span>2022.JPN M
+  <a>シルバーステート<span>2013.JPN
+  <a>Forever Yours<span>2015.FR
+  <a>Motivator<span>2002.GB</a>
+<p>
+  <a id=b>-<span>2022.JPN M
+  <a id=b>オルフェーヴル<span>2008.JPN
+  <a>エレナレジーナ<span>2016.JPN
+  <a id=b>Novellist<span>2009.IRE</a>
+<p>
+  <a id=b>-<span>2022.JPN F
+  <a id=b>ルーラーシップ<span>2007.JPN
+  <a id=c>ステラリード<span>2007.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>
+  <a id=b>-<span>2022.JPN F
+  <a>アジアエクスプレス<span>2010.USA
+  <a id=b>スプリングノート<span>2014.USA
+  <a id=c>シンボリクリスエス<span>1999.USA</a>
+<p>
+  <a id=b>-<span>2022.JPN F
+  <a>サトノクラウン<span>2012.JPN
+  <a>スーンシャイン<span>2016.JPN
+  <a id=b>ジャスタウェイ<span>2009.JPN</a>
+<p>
+  <a id=b>-<span>2022.JPN M
+  <a>レッドファルクス<span>2011.JPN
+  <a>ゼロカラノキセキ<span>2013.JPN
+  <a id=b>キンシャサノキセキ<span>2003.AUS</a>
+<p>
+  <a id=b>-<span>2022.JPN M
+  <a id=a>ロードカナロア<span>2008.JPN
+  <a id=c>ディメンシオン<span>2014.JPN
+  <a id=c>ディープインパクト<span>2002.JPN</a>
+<p>
+  <a id=b>-<span>2022.JPN M
+  <a id=b>ルーラーシップ<span>2007.JPN
+  <a>レトロクラシック<span>2012.JPN
+  <a id=c>ディープインパクト<span>2002.JPN</a>
+<p>
+  <a id=b>-<span>2021.JPN F
+  <a id=b>ミッキーアイル<span>2011.JPN
+  <a>ローズシュクレ<span>2014.JPN
+  <a>スマートファルコン<span>2005.JPN</a>
+<p>
+  <a id=b>アフタヌーンティー<span>2021.JPN F
+  <a id=b>Dunkirk<span>2006.USA
+  <a>ラズベリータイム<span>2003.JPN
+  <a id=b>フジキセキ<span>1992.JPN</a>
+<p>
+  <a id=b>アンモシエラ<span>2021.JPN F
+  <a>Bricks and Mortar<span>2014.USA 
+  <a>サンドクイーン<span>2015.JPN
+  <a>ゴールドアリュール<span>1999.JPN</a>
+<p>
+  <a id=b>カプセル<span>2021.JPN M
+  <a>Majestic Warrior<span>2005.USA
+  <a>フライトオブスワン<span>2007.JPN
+  <a>French Deputy<span>1992.USA</a>
+<p>
+  <a id=b>スプリットキャスト<span>2021.JPN F
+  <a>コパノリッキー<span>2010.JPN
+  <a id=b>スプリングノート<span>2014.JPN
+  <a id=c>シンボリクリスエス<span>1999.USA</a>
+<p>
+  <a id=b>トレベルオール<span>2021.JPN M
+  <a id=b>オルフェーヴル<span>2008.JPN
+  <a>トレサンセール<span>2014.JPN
+  <a>Rip Van Winkle<span>2006.IRE</a>
+<p>
+  <a id=b>ドレアンティア<span>2021.JPN F
+  <a>Drefong<span>2013.USA
+  <a>スズカシャンティー<span>2005.JPN
+  <a id=b>Giant's Causeway<span>1997.USA</a>
+<p>
+  <a id=b>ホームアンドドライ<span>2021.JPN M
+  <a>シュヴァルグラン<span>2012.JPN
+  <a>Sailing Home<span>2015.GB
+  <a>Shamardal<span>2002.USA</a>
+<p>
+  <a id=b>リヤンイヴェール<span>2021.JPN F
+  <a id=b>キズナ<span>2010.JPN
+  <a>デプロマトウショウ<span>2009.JPN
+  <a>Fasliyev<span>1997.USA</a>
+<p>
+  <a id=b>マジックブルー<span>2021.JPN M
+  <a>Majestic Warrior<span>2005.USA <!--sire: A.P. Indy-->
+  <a>エンパイアブルー<span>2012.JPN
+  <a>Empire Maker<span>2000.USA</a>
+<p>
+  <a id=b>メタシアター<span>2021.JPN F
+  <a id=c>エピファネイア<span>2010.JPN
+  <a>ミッシングリンク<span>2014.JPN
+  <a>ヴィクトワールピサ<span>2007.JPN</a>
+<p>
+  <a id=b>ラヴシュプリーム<span>2021.JPN M
+  <a>サトノクラウン<span>2012.JPN
+  <a>パーフェクトラヴ<span>2017.JPN
+  <a id=b>オルフェーヴル<span>2008.JPN</a>
+<p>
+  <a id=b>イエルバブエナ<span>2020.JPN M
+  <a>Majestic Warrior<span>2005.USA
+  <a>ミンティエアー<span>2004.JPN
+  <a>アグネスタキオン<span>1998.JPN</a>
+<p>
+  <a id=b>グランツベリー<span>2020.JPN F
+  <a>エイシンフラッシュ<span>2007.JPN
+  <a>ラズベリータイム<span>2003.JPN
+  <a id=b>フジキセキ<span>1992.JPN</a>
+<p>
+  <a id=b>セントアイヴス<span>2020.JPN M
+  <a>サトノアラジン<span>2011.JPN
+  <a>Quest For Wonder<span>2012.GB
+  <a>Makfi<span>2007.GB</a>
+<p>
+  <a id=b>テラステラ<span>2020.JPN M
+  <a id=b>モーリス<span>2011.JPN
+  <a id=c>ステラリード<span>2007.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>
+  <a id=b>ドンカルロ<span>2020.JPN M
+  <a>Drefong<span>2013.USA
+  <a>レトロクラシック<span>2012.JPN
+  <a id=c>ディープインパクト<span>2002.JPN</a>
+<p>
+  <a id=b>ボンドオブラヴ<span>2020.JPN M
+  <a id=b>キズナ<span>2010.JPN
+  <a id=b>Higher Love<span>2002.IRE
+  <a id=c>Sadler's Wells<span>1981.USA</a>
+<p>
+  <a id=b>メグルキセキ<span>2020.JPN F
+  <a id=b>Dunkirk<span>2006.USA
+  <a>ゼロカラノキセキ<span>2013.JPN
+  <a id=b>キンシャサノキセキ<span>2003.AUS</a>
+<p>
+  <a id=b>モーメントキャッチ<span>2020.JPN M
+  <a id=b>モーリス<span>2011.JPN
+  <a id=b>シュシュブリーズ<span>2011.JPN
+  <a id=b>フジキセキ<span>1992.JPN</a>
+<p>
+  <a id=b>モダナイズクィーン<span>2020.USA F
+  <a>Distorted Humor<span>1993.USA
+  <a>Never Grow Old<span>2014.USA
+  <a>Scat Daddy<span>2004.USA</a>
+<p>
+  <a id=b>ランドオブラヴ<span>2020.JPN F
+  <a id=b>ミッキーアイル<span>2011.JPN
+  <a>ルックオブラヴ<span>2013.JPN <!--mare: Higher Love-->
+  <a>King's Best<span>1997.USA</a>
+<p>
+  <a id=b>レインシュプリーム<span>2020.JPN M
+  <a>サトノクラウン<span>2012.JPN
+  <a>グルーヴィクイーン<span>2008.JPN
+  <a id=b>キングカメハメハ<span>2001.JPN</a>
+<p>
+  <a id=b>-<span>2019.AUS M
+  <a>Adelaide<span>2011.IRE <!--sire: Galileo-->
+  <a>Anantha<span>2010.AUS
+  <a>Hussonet<span>1991.USA</a> <!--sire: Mr.Prospector-->
+<p>
+  <a id=b>-<span>2019.AUS M
+  <a>De Gaulle<span>2014.AUS <!--sire: Exceed And Excel-->
+  <a>Avienus<span>2005.AUS
+  <a>Reset<span>2000.AUS</a>
+<p>
+  <a id=b>アシタカ<span>2019.JPN M
+  <a id=b>キズナ<span>2010.JPN
+  <a>ミスペンバリー<span>2002.IRE
+  <a id=c>Montjeu<span>1996.IRE</a>
+<p>
+  <a id=b>アリシアン<span>2019.JPN M
+  <a id=c>エピファネイア<span>2010.JPN
+  <a>ベネディーレ<span>2007.JPN
+  <a id=b>クロフネ<span>1998.JPN</a>
+<p>
+  <a id=b>アンダーレ<span>2019.JPN M
+  <a>ダノンレジェンド<span>2010.JPN
+  <a>アラマサクロフネ<span>2011.JPN
+  <a id=b>クロフネ<span>1998.USA</a>
+<p>
+  <a id=b>ウィンダミア<span>2019.JPN M
+  <a id=b>ミッキーアイル<span>2011.JPN
+  <a>Quest For Wonder<span>2012.GB
+  <a>Makfi<span>2007.GB</a>
+<p>
+  <a id=b>オトニエル<span>2019.JPN M
+  <a>メイショウサムソン<span>2003.JPN
+  <a>Lady Bountiful<span>2002.GB
+  <a>Spectrum<span>1992.IRE</a>
+<p>
+  <a id=b>キセキノセンシ<span>2019.JPN M
+  <a>Majestic Warrior<span>2005.USA
+  <a>ゼロカラノキセキ<span>2013.JPN
+  <a id=b>キンシャサノキセキ<span>2003.AUS</a>
+<p>
+  <a id=b>キングエルメス<span>2019.JPN M
+  <a id=a>ロードカナロア<span>2008.JPN
+  <a id=b>ステラリード<span>2007.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>
+  <a id=b>スパルタレオニダス<span>2019.JPN M
+  <a id=a>Henny Huges<span>2003.USA
+  <a>ゼフィランサス<span>2008.JPN
+  <a>キングヘイロー<span>1995.JPN</a>
+<p>
+  <a id=b>タレントゥーサ<span>2019.JPN F
+  <a id=b>モーリス<span>2011.JPN
+  <a>ショウナンタレント<span>2004.JPN
+  <a>アグネスタキオン<span>1998.JPN</a>
+<p>
+  <a id=b>ドグマ<span>2019.JPN M
+  <a>キタサンブラック<span>2012.JPN
+  <a>ショウナンカラット<span>2007.JPN
+  <a>Brian's Time<span>1985.USA</a>
+<p>
+  <a id=b>ハキ<span>2019.JPN F
+  <a>Majestic Warrior<span>2005.USA
+  <a>レフィナーダ<span>2000.JPN
+  <a id=c>Sunday Silence<span>1986.USA</a>
+<p>
+  <a id=b>ミルニュイ<span>2019.JPN F
+  <a>アジアエクスプレス<span>2011.USA
+  <a>アルーシュ<span>2011.JPN
+  <a>Chichicastenango<span>1998.FR</a>
+<p>
+  <a id=b>Allur<span>2018.HUN F
+  <a>Chardonney Tcheque<span>2008.FR
+  <a>Allonya<span>2003.GER
+  <a>Protektor<span>1989.GER</a>
+<p>
+  <a id=b>Arnika<span>2018.HUN F
+  <a id=b>Move Your Vision<span>2009.IRE
+  <a>Aeronwy Thomas<span>2011.IRE
+  <a>Dylan Thomas<span>1997.IRE</a> <!--sire: Danehill-->
+<p>
+  <a id=b>Friseur<span>2018.HUN M
+  <a id=b>Move Your Vision<span>2009.IRE
+  <a>Fashion Icon<span>2006.USA
+  <a>Van Nistelrooy<span>1999.US</a> <!--sire: Storm Cat-->
+<p>
+  <a id=b>Juvenile<span>2018.HUN F
+  <a>Simplex<span>2001.FR
+  <a>Jubilantka<span>2008.IRE
+  <a>Byron<span>2001.GB</a> <!--sire: Green Dersert-->
+<p>
+  <a id=b>Mac Swiney<span>2018.IRE M
+  <a id=b>New Approach<span>2005.IRE
+  <a>Halla Na Saoire<span>2010.IRE
+  <a id=b>Teofilo<span>2004.IRE</a>
+<p>
+  <a id=b>Rain Man<span>2018.HUN M
+  <a>Anodin<span>2010.IRE
+  <a>Rainfire<span>2004.FR
+  <a>Rainbow Quest<span>1981.USA</a>
+<p>
+  <a id=b>Schafer<span>2018.HUN F
+  <a id=b>Move Your Vision<span>2009.IRE
+  <a>Saffwah<span>2003.IRE
+  <a>King's Best<span>1997.USA</a>
+<p>
+  <a id=b>Shy Boy<span>2018.HUN M
+  <a id=b>Move Your Vision<span>2009.IRE
+  <a>Sougy<span>2011.FR
+  <a>Naaqoos<span>2006.GB</a>
+<p>
+  <a id=b>Surrogate<span>2018.HUN F
+  <a>Anodin<span>2010.IRE
+  <a>Surveyance<span>2009.USA
+  <a id=b>Broken Vow<span>1997.USA</a> <!--sire: Unbridled-->
+<p>
+  <a id=b>カーディフ<span>2018.JPN M
+  <a>グランプリボス<span>2008.JPN
+  <a>ウェルシュステラ<span>1999.IRE
+  <a>Zafonic<span>1990.USA</a>
+<p>
+  <a id=b>キャットウォーク<span>2018.JPN M
+  <a>スピルバーグ<span>2009.JPN
+  <a>スイートマカロン<span>2006.USA
+  <a id=a>Tale of the Cat<span>1994.USA</a>
+<p>
+  <a id=b>クエストフォーラヴ<span>2018.JPN F
+  <a id=b>キズナ<span>2010.JPN
+  <a>Quest For Wonder<span>2012.GB
+  <a>Makfi<span>2007.GB</a>
+<p>
+  <a id=b>スターリーソング<span>2018.JPN F
+  <a>エスポワールシチー<span>2005.JPN
+  <a>ウディバードソング<span>1999.USA
+  <a>Woodman<span>1983.USA</a>
+<p>
+  <a id=b>バスラットレオン<span>2018.JPN M
+  <a id=b>キズナ<span>2010.JPN
+  <a>バスラットアマル<span>2010.JPN
+  <a id=b>New Approach<span>2005.IRE</a>
+<p>
+  <a id=b>フィルメーザ<span>2018.JPN F
+  <a>タートルボウル<span>2002.JPN
+  <a>コスモライセンス<span>2010.JPN
+  <a>アグネスタキオン<span>1998.JPN</a>
+<p>
+  <a id=b>ランペロニキ<span>2018.JPN M
+  <a id=b>キンシャサノキセキ<span>2003.AUS
+  <a>チェルカ<span>2005.JPN
+  <a id=b>クロフネ<span>1998.USA</a>
+<p>
+  <a id=b>リナーシェ<span>2018.JPN F
+  <a id=b>キングカメハメハ<span>2001.JPN
+  <a>Vapour<span>2008.GB
+  <a id=c>Galileo<span>1998.IRE</a>
+<p>
+  <a id=b>アレアシオン<span>2017.JPN F
+  <a>カジノドライヴ<span>2005.USA
+  <a>レフィナーダ<span>200.JPN
+  <a id=c>Sunday Silence<span>1986.USA</a>
+<p>
+  <a id=b>エピファレーヌ<span>2017.JPN F
+  <a id=c>エピファネイア<span>2010.JPN
+  <a id=b>ウインアルエット<span>2009.JPN
+  <a id=c>ダンスインザダーク<span>1993.JPN</a>
+<p>
+  <a id=b>キャッツアイ<span>2017.JPN F
+  <a>スピルバーグ<span>2009.JPN
+  <a>スイートマカロン<span>2006.USA
+  <a id=a>Tale of the Cat<span>1994.USA</a>
+<p>
+  <a id=b>スマイリンフィット<span>2017.JPN F
+  <a>Workforce<span>2007.GB
+  <a>スマイリンアスク<span>2010.JPN
+  <a id=c>ディープインパクト<span>2002.JPN</a>
+<p>
+  <a id=b>パンサラッサ<span>2017.JPN M
+  <a id=a>ロードカナロア<span>2008.JPN
+  <a>ミスペンバリー<span>2002.IRE
+  <a id=c>Montjeu<span>1996.IRE</a>
+<p>
+  <a id=b>モズピンポン<span>2017.JPN M
+  <a>グランプリボス<span>2008.JPN
+  <a>グランプリエンゼル<span>2006.JPN
+  <a>アグネスデジタル<span>1997.USA</a>
+<p>
+  <a id=b>Dirty Work<span>2016.AUS S
+  <a id=a>Written Tycoon<span>2002.AUS
+  <a>Maidel<span>2008.AUS
+  <a>Ad Valorem<span>2002.USA</a>
+<p>
+  <a id=b>Prince Elzaam<span>2016.IRE M
+  <a>Elzaam<span>2016.AUS <!--sire: Redoute's Choise s__m: Kingmambo-->
+  <a>Emma Princess<span>2000.IRE
+  <a>Bahhare<span>1994.USA</a>
+<p>
+  <a id=b>エレナレジーナ<span>2016.JPN F
+  <a id=b>Novellist<span>2009.IRE
+  <a>フェニーチェ<span>2009.JPN
+  <a>Falbrav<span>1998.IRE</a>
+<p>
+  <a id=b>カナロアガール<span>2016.JPN F
+  <a id=a>ロードカナロア<span>2008.JPN
+  <a>サンデーローザ<span>2002.JPN
+  <a id=c>Sunday Silence<span>1986.USA</a>
+<p>
+  <a id=b>スパーブアゲイン<span>2016.JPN M
+  <a id=b>ジャスタウェイ<span>2009.JPN
+  <a>ウェルシュステラ<span>1999.IRE
+  <a id=c>Zafonic<span>1990.USA</a>
+<p>
+  <a id=b>プシュケ<span>2016.JPN F
+  <a id=b>Novellist<span>2009.IRE
+  <a id=c>ステラリード<span>2007.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>
+  <a id=b>ヴァッシュモン<span>2016.GB M
+  <a>Dubawi<span>2002.IRE
+  <a>Daksha<span>2010.FR
+  <a>Authorized<span>2004.IRE</a>
+<p>
+  <a id=b>Strategic<span>2015.IRE M
+  <a>Kodiac<span>2001.GB <!--sire:Danehill bro: Invincible Spirit-->
+  <a>Run To Jane<span>1997.IRE
+  <a>Doyoun<span>1995.IRE</a>
+<p>
+  <a id=b>インディチャンプ<span>2015.JPN S
+  <a id=c>ステイゴールド<span>1994.JPN
+  <a>ウィルパワー<span>2007.JPN
+  <a id=b>キングカメハメハ<span>2001.JPN</a>
+<p>
+  <a id=b>ウェディングソング<span>2015.JPN F
+  <a id=b>ルーラーシップ<span>2007.JPN
+  <a>Monsoon Wedding<span>2004.GB
+  <a>Monsun<span>1990.GER</a>
+<p>
+  <a id=b>シーザライト<span>2015.JPN F
+  <a id=b>ルーラーシップ<span>2007.JPN
+  <a>ウェルシュステラ<span>1999.IRE
+  <a>Zafonic<span>1990.USA</a>
+<p>
+  <a id=b>ソイカウボーイ<span>2015.JPN M <!--bro: ウォーターナビレラ-->
+  <a>Toby's Corner<span>2008.USA
+  <a>シャイニングサヤカ<span>2007.JPN
+  <a>キングヘイロー<span>1995.JPN</a>
+<p>
+  <a id=b>フッフール<span>2015.JPN F
+  <a>スマートファルコン<span>2005.JPN
+  <a>ベイビーローズ<span>2006.IRE
+  <a>Singspiel<span>1992.IRE</a>
+<p>
+  <a id=b>レイナグラシア<span>2015.JPN M
+  <a id=a>Henny Hughes<span>2003.USA
+  <a>レフィナーダ<span>2000.JPN
+  <a id=c>Sunday Silence<span>1986.USA</a>
+<p>
+  <a id=b>Berkshire Lady<span>2014.AUS F
+  <a id=a>Star Witness<span>2007.AUS
+  <a>Placement<span>2007.NZ
+  <a>Savabeel<span>2001.AUS</a>
+<p>
+  <a id=b>Gold Standard<span>2014.AUS S
+  <a id=b>Sebring<span>2005.AUS
+  <a>Coniston Gem<span>2001.AUS
+  <a>Greig<span>1998.NZ</a>
+<p>
+  <a id=b>Klimt<span>2014.USA S
+  <a>Quality Road<span>2006.USA
+  <a>Inventive<span>2005.USA
+  <a>Dixie Union<span>1997.USA</a>
+<p>
+  <a id=b>Not This Time<span>2014.USA S
+  <a id=b>Giant's Causeway<span>1997.USA
+  <a>Miss Macy Sue<span>2003.USA
+  <a>Trippi<span>1997.USA</a>
+<p>
+  <a id=b>Overshare<span>2014.AUS S
+  <a>I Am Invincible<span>2004.AUS
+  <a>Savannah's Choice<span>2007.AUS
+  <a id=a>Redoute's Choice<span>1996.AUS</a>
+<p>
+  <a id=b>Swing Valley<span>2014.GB F
+  <a>Lawman<span>2004.FR
+  <a>Gaze<span>2003.GB
+  <a id=c>Galileo<span>1998.IRE</a>
+<p>
+  <a id=b>Thunder Snow<span>2014.IRE S
+  <a>Helmet<span>2008.AUS
+  <a>Eastern Joy<span>2006.GB
+  <a>Dubai Destination<span>1999.USA</a>
+<p>
+  <a id=b>Trapeze Artist<span>2014.AUS S
+  <a>Snitzel<span>2002.AUS
+  <a>Trappes<span>2007.AUS
+  <a>Domesday<span>2002.AUS</a>
+<p>
+  <a id=b>オールザベスト<span>2014.JPN S
+  <a>Speightstown<span>1998.USA
+  <a>Fandangle<span>2007.USA
+  <a>Holy Bull<span>1991.USA</a>
+<p>
+  <a id=b>オニダツ<span>2014.JPN M
+  <a>ゴールドアリュール<span>1999.JPN
+  <a>アフィニティ<span>2006.JPN
+  <a id=a>サクラバクシンオー<span>1989.JPN</a>
+<p>
+  <a id=b>クレッシェンドラヴ<span>2014.JPN M
+  <a id=c>ステイゴールド<span>1994.JPN
+  <a id=b>Higher Love<span>2002.IRE
+  <a id=c>Sadler's Wells<span>1981.USA</a>
+<p>
+  <a id=b>コンフォルツァ<span>2014.JPN M
+  <a>ネオユニヴァース<span>2000.JPN
+  <a id=b>グレイスフルソング<span>2005.IRE
+  <a id=a>Rock of Gibraltar<span>1999.IRE</a>
+<p>
+  <a id=b>スプリングノート<span>2014.JPN F
+  <a id=c>シンボリクリスエス<span>1999.USA
+  <a id=b>グリューネワルト<span>2007.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>
+  <a id=b>ディグアップセンス<span>2014.JPN M
+  <a>Street Sense<span>2004.USA
+  <a>Atarama<span>1999.IRE
+  <a id=c>Sadler's Wells<span>1981.USA</a>
+<p>
+  <a id=b>ハニートリップ<span>2014.JPN F
+  <a>マンハッタンカフェ<span>1998.JPN
+  <a>ネヴァーピリオド<span>2002.JPN
+  <a id=b>タイキシャトル<span>1994.USA</a>
+<p>
+  <a id=b>ブライトメモリー<span>2014.JPN F
+  <a>ネオユニヴァース<span>2000.JPN
+  <a>Majestic Bright<span>2007.GB
+  <a>Pivotal<span>1993.GB</a>
+<p>
+  <a id=b>Lycurgus<span>2013.AUS M
+  <a id=a>Star Witness<span>2007.AUS
+  <a>Geblitzt<span>2006.AUS
+  <a>Testa Rossa<span>1996.AUS</a>
+<p>
+  <a id=b>Marcel<span>2013.IRE S
+  <a>Lawman<span>2004.FR
+  <a>Mauresmo<span>2004.IRE
+  <a>Marju<span>1988.IRE</a>
+<p>
+  <a id=b>Moonlight Magic<span>2013.GB M
+  <a>Cape Cross<span>1994.IRE
+  <a>Melikah<span>1997.IRE <!--mare: Urban Sea-->
+  <a>Lammtarra<span>1992.USA</a>
+<p>
+  <a id=b>On The Go Again<span>2013.IRE M
+  <a>Arakan<span>2000.USA
+  <a>Lady Bolino<span>2003.IRE
+  <a>King's Theatre<span>1991.IRE</a> <!--sire: Sadler's Wells-->
+<p>
+  <a id=b>Tay Swift<span>2013.AUS F
+  <a>Rothesay<span>2006.AUS <!--sire: Fastnet Rock-->
+  <a>Perfect Feeling<span>2002.AUS
+  <a>Spinning World<span>1993.USA</a>
+<p>
+  <a id=b>Turret Rocks<span>2013.IRE F
+  <a>Fastnet Rock<span>2001.AUS
+  <a>Beyond Compare<span>2005.IRE
+  <a id=c>Galileo<span>1998.IRE</a>
+<p>
+  <a id=b>エネルワンダー<span>2013.JPN M
+  <a>グラスワンダー<span>1995.USA
+  <a>フラッシュカード<span>1999.JPN
+  <a>Tony Bin<span>1983.IRE</a>
+<p>
+  <a id=b>チタンクレバー<span>2013.JPN F
+  <a>Behkabad<span>2007.FR
+  <a>ウインプラチナム<span>2005.JPN
+  <a>ゼンノエルシド<span>1997.IRE</a>
+<p>
+  <a id=b>リオンディーズ<span>2013.JPN S
+  <a id=b>キングカメハメハ<span>2001.JPN
+  <a>シーザリオ<span>2002.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>
+  <a id=b>American Pharoah<span>2012.USA S
+  <a>Pioneerof the Nile<span>2006.USA
+  <a>Littleprincessemma<span>2006.USA
+  <a>Yankee Gentleman<span>1999.USA</a>
+<p>
+  <a id=b>Just Positive<span>2012.USA M
+  <a id=b>Just As Well<span>2003.USA
+  <a>Positive Thoughts<span>2001.USA
+  <a>King of Kings<span>1995.IRE</a> <!--sire: Sadler's Wells-->
+<p>
+  <a id=b>Pleascach<span>2012.IRE F
+  <a id=b>Teofilo<span>2004.IRE
+  <a>Toirneach<span>2005.USA
+  <a>Thunder Gulch<span>1992.USA</a>
+<p>
+  <a id=b>グランデサムライ<span>2012.JPN M
+  <a>サムライハート<span>2002.JPN
+  <a>パラダイスコースト<span>2006.USA
+  <a>Fusaichi Pegasus<span>1997.USA</a>
+<p>
+  <a id=b>サウンドアラムシャ<span>2012.JPN M
+  <a id=b>ハーツクライ<span>2001.JPN
+  <a>メジロレーマー<span>1995.JPN
+  <a>リンドシェーバー<span>1988.USA</a>
+<p>
+  <a id=b>サウンドジャンゴ<span>2012.USA M
+  <a>Desert Party<span>2006.USA
+  <a>Salt Water Reign<span>2004.USA
+  <a>Salt Lake<span>1989.USA</a>
+<p>
+  <a id=b>サウンドフォース<span>2012.JPN M
+  <a id=b>ダイワメジャー<span>2001.JPN
+  <a>レーヴドゲラン<span>1999.JPN
+  <a>Real Shadai<span>1979.USA</a>
+<p>
+  <a id=b>シェアザジョイフル<span>2012.JPN F
+  <a id=c>ブラックタイド<span>2001.JPN
+  <a>Peridot<span>1995.GB
+  <a id=a>Green Desert<span>1983.USA</a>
+<p>
+  <a id=b>ダノンプラチナ<span>2012.JPN S
+  <a id=c>ディープインパクト<span>2002.JPN
+  <a>Badeelah<span>2008.USA
+  <a>Unbridled's Song<span>1993.USA</a>
+<p>
+  <a id=b>ヒトミヲトジテ<span>2012.JPN F
+  <a>Bago<span>2001.FR
+  <a>セトアフロディーデ<span>1998.JPN
+  <a>Tony Bin<span>1983.IRE</a>
+<p>
+  <a id=b>ドゥラメンテ<span>2012.JPN S
+  <a id=b>キングカメハメハ<span>2001.JPN
+  <a>アドマイヤグルーヴ<span>2002.JPN
+  <a id=c>Sunday Silence<span>1986.USA</a>
+<p>
+  <a id=b>リアルスティール<span>2012.JPN S
+  <a id=c>ディープインパクト<span>2002.JPN
+  <a>Loves Only Me<span>2006.USA
+  <a id=a>Storm Cat<span>1983.USA</a>
+<p>
+  <a id=b>Fascinating Rock<span>2011.IRE S
+  <a>Fastnet Rock<span>2001.AUS
+  <a>Miss Polaris<span>2001.GB
+  <a>Polar Falcon<span>1987.USA</a>
+<p>
+  <a id=b>Ionsai Nua<span>2011.IRE F
+  <a id=b>New Approach<span>2005.IRE
+  <a>Toirneach<span>2005.USA
+  <a>Thunder Gulch<span>1992.USA</a>
+<p>
+  <a id=b>Protonico<span>2011.USA S
+  <a id=b>Giant's Causeway<span>1997.USA
+  <a>Alpha Spirit<span>2006.USA
+  <a id=c>A.P. Indy<span>1989.USA</a>
+<p>
+  <a id=b>Tapiture<span>2011.USA S
+  <a>Tapit<span>2001.USA
+  <a>Free Spin<span>1998.USA
+  <a>Olympio<span>1988.USA</a>
+<p>
+  <a id=b>イスラボニータ<span>2011.JPN S
+  <a id=b>フジキセキ<span>1992.JPN
+  <a>Isla Cozzene<span>2002.USA
+  <a>Cozzene<span>1980.USA</a>
+<p>
+  <a id=b>ウィアーワン<span>2011.JPN F
+  <a>アドマイヤジャパン<span>2002.JPN
+  <a>My Hope<span>2001.IRE
+  <a id=a>Danehill<span>1986.USA</a>
+<p>
+  <a id=b>California Chrome<span>2011.USA S
+  <a>Lucky Pulpit<span>2001.USA
+  <a>Love the Chase<span>2006.USA
+  <a>Not For Love<span>1990.USA</a>
+<p>
+  <a id=b>キングズオブザサン<span>2011.JPN M
+  <a>Chichicastenango<span>1998.FR
+  <a>スティンガー<span>1996.JPN
+  <a id=c>Sunday Silence<span>1986.USA</a>
+<p>  
+  <a id=b>ロゴタイプ<span>2010.JPN S
+  <a>ローエングリン<span>1999.JPN
+  <a>ステレイタイプ<span>2002.JPN
+  <a id=c>Sunday Silence<span>1986.USA</a>
+<p>  
+  <a id=b>Tom Melbourne<span>2001.IRE M
+  <a>Dylan Thomas<span>2003.IRE
+  <a>Roshanak<span>2004.IRE
+  <a>Spinning World<span>1993.USA</a>
+<p>
+  <a id=b>シュシュブリーズ<span>2011.JPN F
+  <a id=b>フジキセキ<span>1992.JPN
+  <a>ブリズデロートンヌ<span>2005.JPN
+  <a id=c>シンボリクリスエス<span>1999.USA</a>
+<p>
+  <a id=b>ミッキーアイル<span>2011.JPN S
+  <a id=c>ディープインパクト<span>2002.JPN
+  <a>スターアイル<span>2004.IRE
+  <a id=a>Rock of Gibraltar<span>1999.IRE</a>
+<p>  
+  <a id=b>モーリス<span>2011.JPN S
+  <a>スクリーンヒーロー<span>2004.JPN
+  <a>メジロフランシス<span>2001.JPN
+  <a>Carnegie<span>1991.IRE</a> <!--sire: Sadler's Wells-->
+<p>  
+  <a id=b>Mshawish<span>2010.USA S
+  <a>Medaglia d'Oro<span>1999.USA
+  <a>Thunder Bayou<span>2003.USA
+  <a>Thunder Gulch<span>1992.USA</a>
+<p>  
+  <a id=b>Shamus Award<span>2010.AUS S
+  <a>Snitzel<span>2002.AUS
+  <a>Sunset Express<span>1999.AUS
+  <a>Success Express<span>1985.USA</a>
+<p>
+  <a id=b>キズナ<span>2010.JPN S
+  <a id=c>ディープインパクト<span>2002.JPN
+  <a>Catequil<span>1990.USA
+  <a id=a>Storm Cat<span>1983.USA</a>
+<p>
+  <a id=b>ゴッドフロアー<span>2010.JPN M
+  <a id=b>ハーツクライ<span>2001.JPN
+  <a>ウェルシュステラ<span>1999.IRE
+  <a>Zafonic<span>1990.USA</a>
+<p>
+  <a id=b>ヒュウマ<span>2010.USA M
+  <a>Any Given Saturday<span>2004.USA
+  <a>Moravia<span>2003.USA
+  <a id=c>A.P. Indy<span>1989.USA</a>
+<p>
+  <a id=b>Camelot<span>2009.GB S
+  <a id=c>Montjeu<span>1996.IRE
+  <a>Tarfah<span>2001.USA
+  <a>Kingmambo<span>1990.USA</a>
+<p>  
+  <a id=b>Estiqbaal<span>2009.GB F
+  <a>Oasis Dream<span>2001.GB
+  <a>Manayer<span>2001.IRE
+  <a id=c>Sadler's Wells<span>1981.USA</a>
+<p>  
+  <a id=b>Graydar<span>2009.USA S
+  <a>Unbridled's Song<span>1993.USA
+  <a>Sweetest Smile<span>1998.USA
+  <a>Dehere<span>1991.USA</a>
+<p>  
+  <a id=b>Janey Muddles<span>2009.IRE F
+  <a>Lawman<span>2004.FR
+  <a>Slip Dance<span>2002.IRE
+  <a>Celtic Swing<span>1992.GB</a>
+<p>  
+  <a id=b>Move Your Vision<span>2009.IRE S
+  <a id=c>Galileo<span>1998.IRE
+  <a>Cash Run<span>1997.USA <!--bro: Frestry-->
+  <a>Seeking The Gold<span>1985.USA</a>
+<p>  
+  <a id=b>Novellist<span>2009.IRE S <!--from: プシュケ-ステラリード-->
+  <a>Monsun<span>1990.GER
+  <a>Night Lagoon<span>2001.GER
+  <a>Lagunas<span>1981.GB</a>
+<p>  
+  <a id=b>Rebel Dane<span>2009.AUS S
+  <a>California Dane<span>2002.AUS <!--sire: Danehill-->
+  <a>Texarcana<span>2002.AUS
+  <a id=b>More Than Ready<span>1997.USA</a>
+<p>  
+  <a id=b>Sky Kingdom<span>2009.USA S
+  <a>Empire Maker<span>2000.USA
+  <a>Sky Beam<span>2004.USA
+  <a>Kingmambo<span>1990.USA</a>
+<p>  
+  <a id=b>Tiffilia<span>2009.IRE F
+  <a>Macho Uno<span>1998.USA
+  <a>Tiffed<span>2003.USA
+  <a>Seattle Slew<span>1974.USA</a>
+<p>  
+  <a id=b>ウインアルエット<span>2009.JPN F
+  <a id=c>ダンスインザダーク<span>1993.JPN
+  <a>Larkwhistle<span>1994.USA
+  <a>Silver Deputy<span>1985.USA</a>
+<p>  
+  <a id=b>ジャスタウェイ<span>2009.JPN S
+  <a id=b>ハーツクライ<span>2001.JPN
+  <a>シビル<span>1999.JPN
+  <a>Wild Again<span>1980.USA</a>
+<p>  
+  <a id=b>ディープブリランテ<span>2009.JPN S
+  <a id=c>ディープインパクト<span>2002.JPN
+  <a>Love And Bubbles<span>2001.USA
+  <a>Loup Sauvage<span>1994.USA</a>
+<p>  
+  <a id=b>フェノーメノ<span>2009.JPN S
+  <a id=c>ステイゴールド<span>1994.JPN
+  <a>De Laroche<span>1999.IRE
+  <a id=a>Danehill<span>1986.USA</a>
+<p>  
+  <a id=b>Albaasil<span>2008.IRE S
+  <a id=b>Dansili<span>1996.GB
+  <a>Wrong Key<span>1999.IRE
+  <a>Key of Luck<span>1991.USA</a>
+<p>  
+  <a id=b>Alternation<span>2008.USA S
+  <a>Distorted Humor<span>1993.USA
+  <a>Alternate<span>1999.USA
+  <a>Seattle Slew<span>1974.USA</a>
+<p>  
+  <a id=b>Astrology<span>2008.USA S
+  <a id=c>A.P. Indy<span>1989.USA
+  <a>Quiet Eclipse<span>1996.USA
+  <a>Quiet American<span>1986.USA</a>
+<p>
+  <a id=b>Boundless Joy<span>2008.AUS F
+  <a id=c>Montjeu<span>1996.IRE
+  <a>Elegant As Always<span>1997.USA
+  <a>Nashwan<span>1986.USA</a>
+<p>  
+  <a id=b>Burn The Floor<span>2008.IRE F
+  <a>Indian Haven<span>2000.GB
+  <a>Dance Time<span>1994.IRE
+  <a id=c>Sadler's Wells<span>1981.USA</a>
+<p>  
+  <a id=b>Frankel<span>2008.GB S
+  <a id=c>Galileo<span>1998.IRE
+  <a>Kind<span>2001.IRE
+  <a id=a>Danehill<span>1986.USA</a>
+<p>  
+  <a id=b>Galicuix<span>2008.GB F
+  <a id=c>Galileo<span>1998.IRE
+  <a>Clizia<span>2002.IRE
+  <a>Machiavellian<span>1987.USA</a>
+<p>
+  <a id=b>Niagara<span>2008.AUS S
+  <a>Encosta De Lago<span>1993.AUS
+  <a>River Song<span>2002.AUS
+  <a>Fusaichi Pegasus<span>1997.USA</a>
+<p>  
+  <a id=b>Reliable Man<span>2008.GB S
+  <a>Dalakhani<span>2000.IRE
+  <a>On Fair Stage<span>1993.IRE
+  <a id=c>Sadler's Wells<span>1981.USA</a>
+<p>  
+  <a id=b>Shackleford<span>2008.USA S
+  <a>Forestry<span>1996.USA
+  <a>Oatsee<span>1997.USA
+  <a>Unbridled<span>1987.USA</a>
+<p>  
+  <a id=b>ウインバリアシオン<span>2008.JPN S
+  <a id=b>ハーツクライ<span>2001.JPN
+  <a>スーパーバレリーナ<span>1994.USA
+  <a>Storm Bird<span>1978.USA</a>
+<p>  
+  <a id=b>オルフェーヴル<span>2008.JPN S
+  <a id=c>ステイゴールド<span>1994.JPN
+  <a>オリエンタルアート<span>1997.JPN
+  <a>メジロマックイーン<span>1987.JPN</a>
+<p>  
+  <a id=b>サウンドボルケーノ<span>2008.USA S
+  <a id=a>Henny Hughes<span>2003.USA
+  <a>Cosmic Wing<span>1996.USA
+  <a>Halo<span>1969.USA</a>
+<p>  
+  <a id=b>Ato<span>2007.SAF S
+  <a>Royal Academy<span>1987.USA
+  <a>Another Legend<span>1992.USA
+  <a>Lyphard's Wish<span>1976.FR</a>
+<p>  
+  <a id=b>Await The Dawn<span>2007.USA S
+  <a id=b>Giant's Causeway<span>1997.USA
+  <a>Valentine Band<span>1997.USA
+  <a>Dixieland Band<span>1980.USA</a>
+<p>  
+  <a id=b>Bullet Train<span>2007.GB S
+  <a id=c>Sadler's Wells<span>1981.USA
+  <a>Kind<span>2001.IRE
+  <a id=a>Danehill<span>1986.USA</a>
+<p>  
+  <a id=b>Cuiseach<span>2007.IRE F
+  <a>Bachelor Duke<span>2001.USA
+  <a>Masnada<span>1997.IRE
+  <a>Erins Isle<span>1978.IRE</a>
+<p>  
+  <a id=b>Go Go Gadget<span>2007.GER S
+  <a>Areion<span>1995.GER
+  <a>Globuli<span>1999.GER
+  <a>Surako<span>1993.GER</a>
+<p>
+  <a id=b>Kitty Kiernan<span>2007.GB F
+  <a>Pivotal<span>1993.GB
+  <a>Alstemeria<span>1999.GB
+  <a id=a>Danehill<span>1986.USA</a>
+<p>
+  <a id=b>Maria Lee<span>2007.IRE F
+  <a id=a>Rock of Gibraltar<span>1999.IRE
+  <a id=b>Elida<span>1994.IRE
+  <a>Royal Academy<span>1987.USA</a>
+<p>
+  <a id=b>Toorak Toff<span>2007.AUS S
+  <a>Show A Heart<span>1997.AUS
+  <a>Orong<span>2002.AUS
+  <a>Grand Lodge<span>1991.USA</a>
+<p>
+  <a id=b>The Apache<span>2007.SAF S
+  <a>Mogok<span>2002.USA <!--sire: Storm Cat-->
+  <a>Apache Rose<span>1996.SAF
+  <a>Dolpour<span>1986.IRE</a> <!--sire: Sadler's Wells-->
+<p>
+  <a id=b>グリューネワルト<span>2007.JPN F
+  <a id=c>スペシャルウィーク<span>1995.JPN
+  <a>シェーンクライト<span>1999.JPN
+  <a>Helissio<span>1993.FR</a>
+<p>
+  <a id=b>ルーラーシップ<span>2007.JPN S
+  <a id=b>キングカメハメハ<span>2001.JPN
+  <a>エアグルーヴ<span>1993.JPN
+  <a>Tony Bin<span>1983.IRE</a>
+<p>
+  <a id=b>Byword<span>2006.GB S
+  <a>Peintre Celebre<span>1994.USA
+  <a>Binche<span>1999.USA
+  <a>Woodman<span>1983.USA</a>
+<p>
+  <a id=b>Haynesfield<span>2006.USA S
+  <a>Speightstown<span>1998.USA
+  <a>Nothing Special<span>1994.CAN
+  <a>Tejabo<span>1985.CAN</a>
+<p>
+  <a id=b>Calimonco<span>2006.USA S
+  <a id=a>Storm Cat<span>1983.USA
+  <a>Sweet Life<span>1996.USA
+  <a>Kris S.<span>1977.USA</a>
+<p>
+  <a id=b>Love Conquers All<span>2006.AUS S
+  <a>Mossman<span>1995.AUS
+  <a>She's a Meanie<span>1995.NZ
+  <a>Prince Salieri<span>1986.AUS</a>
+<p>
+  <a id=b>Monaco Consul<span>2006.NZ S
+  <a id=b>High Chaparral<span>1999.IRE
+  <a>Argante<span>1995.NZ
+  <a>Star Way<span>1977.GB</a>
+<p>
+  <a id=b>Querari<span>2006.GER S
+  <a>Oasis Dream<span>2000.GB
+  <a>Quetena<span>2000.GER
+  <a>Acatenango<span>1982.GER</a>
+<p>
+  <a id=b>Sea The Stars<span>2006.IRE S
+  <a>Cape Cross<span>1994.IRE <!--sire: Green Desert-->
+  <a>Urban Sea<span>1989.USA <!--bro: King's Best-->
+  <a>Miswaki<span>1978.USA</a>
+<p>
+  <a id=b>Tickets<span>2006.AUS S
+  <a id=a>Redoute's Choice<span>1996.AUS
+  <a>Staging<span>1994.AUS
+  <a>Success Express<span>1985.USA</a>
+<p>
+  <a id=b>Dunkirk<span>2006.USA S
+  <a>Unbridled's Song<span>1993.USA
+  <a>Secret Status<span>1997.USA
+  <a id=c>A.P. Indy<span>1989.USA</a>
+<p>
+  <a id=b>A.P. Answer<span>2005.USA S
+  <a id=c>A.P. Indy<span>1989.USA
+  <a>Pas De Response<span>1994.USA
+  <a id=a>Danzig<span>1977.USA</a>
+<p>
+  <a id=b>Dixie Chatter<span>2005.USA S
+  <a>Dixie Union<span>1997.USA
+  <a>Mini Chat<span>1999.USA
+  <a>Deputy Minister<span>1979.CAN</a>
+<p>
+  <a id=b>Many Rivers<span>2005.USA S
+  <a id=a>Storm cat<span>1983.USA
+  <a>Christmas in Aiken<span>1992.USA
+  <a>Affirmed<span>1975.USA</a>
+<p>
+  <a id=b>Montmarie<span>2005.FR F
+  <a id=c>Montjeu<span>1996.IRE
+  <a>Flyamore<span>1995.FR <!--bro: シルヴァースカヤ-->
+  <a>Sanglamore<span>1987.USA</a>
+<p>
+  <a id=b>New Approach<span>2005.IRE S <!--bro: シンコウフォレスト-->
+  <a id=c>Galileo<span>1998.IRE
+  <a id=b>Park Express<span>1983.IRE
+  <a>Ahonoora<span>1975.GB</a>
+<p>
+  <a id=b>Oracy<span>2005.NZ S
+  <a>Zabeel<span>1986.NZ
+  <a>Lady Dehere<span>1999.USA
+  <a>Dehere<span>1991.USA</a>
+<p>
+  <a id=b>Sebring<span>2005.AUS S
+  <a id=b>More Than Ready<span>1997.USA
+  <a>Purespeed<span>1998.AUS
+  <a id=b>Flying Spur<span>1992.AUS</a>
+<p>
+  <a id=b>Twice Over<span>2005.GB S
+  <a>Observatory<span>1997.USA
+  <a>Double Crossed<span>1998.GB
+  <a>Caerleon<span>1980.USA</a>
+<p>
+  <a id=b>グレイスフルソング<span>2005.IRE F
+  <a id=a>Rock of Gibraltar<span>1999.IRE
+  <a>フェアリーバラード<span>1999.IRE
+  <a id=c>Sadler's Wells<span>1981.USA</a>
+<p>
+  <a id=b>Brave Tin Soldier<span>2004.USA S
+  <a id=a>Storm Cat<span>1983.USA
+  <a>Bless<span>1999.USA <!--bro: Fusaichi Pegasus-->
+  <a>Mr. Prospector<span>1970.USA</a>
+<p>
+  <a id=b>King's Apostle<span>2004.IRE S
+  <a>King's Best<span>1997.USA
+  <a>Politesse<span>2000.USA
+  <a>Barathea<span>1990.IRE</a>
+<p>
+  <a id=b>ロックドゥカンブ<span>2004.NZ S
+  <a>Red Ransom<span>1987.USA
+  <a>Fairy Lights<span>1995.IRE
+  <a>Fairy King<span>1982.USA</a>
+<p>
+  <a id=b>Teofilo<span>2004.IRE S
+  <a id=c>Galileo<span>1998.IRE
+  <a>Speirbhean<span>1998.IRE
+  <a id=a>Danehill<span>1986.USA</a>
+<p>
+  <a id=b>Bernardini<span>2003.USA S
+  <a id=c>A.P. Indy<span>1989.USA
+  <a>Cara Rafaela<span>1993.USA
+  <a>Quiet American<span>1986.USA</a>
+<p>
+  <a id=b>Bluegrass Cat<span>2003.USA S
+  <a id=a>Storm Cat<span>1983.USA
+  <a>She's a Winner<span>1996.USA
+  <a id=c>A.P. Indy<span>1989.USA</a>
+<p>
+  <a id=b>Bold Chieftain<span>2003.USA S
+  <a>Chief Seattle<span>1997.USA
+  <a>Hooked On Music<span>1991.USA
+  <a>Seattle Dancer<span>1984.USA</a>
+<p>
+  <a id=b>Jay Peg<span>2003.SAF S
+  <a>Camden Park<span>1998.USA
+  <a>Laptop Lady<span>1996.SAF
+  <a>Al Mufti<span>1985.USA</a>
+<p>
+  <a id=b>Just As Well<span>2003.USA S
+  <a id=c>A.P. Indy<span>1989.USA
+  <a>No Matter What<span>1997.USA
+  <a>Nureyev<span>1997.USA</a>
+<p>
+  <a id=b>Kaphero<span>2003.AUS S
+  <a>Danzero<span>1991.AUS
+  <a>Kapchat<span>1990.NZ
+  <a>Centaine<span>1980.AUS</a>
+<p>
+  <a id=b>Rebel King<span>2003.SAF S
+  <a>National Emblem<span>1991.SAF
+  <a>Cousin Linda<span>1997.SAF
+  <a>Badger Land<span>1983.USA</a>
+<p>
+  <a id=b>Sharkbite<span>2003.AUS S
+  <a id=a>Redoute's Choice<span>1996.AUS
+  <a>Back Pass<span>1998.USA
+  <a>Quest for Fame<span>1987.GB</a>
+<p>
+  <a id=b>Stormy River<span>2003.FR S
+  <a>Verglas<span>1994.IRE
+  <a>Miss Bio<span>1996.FR
+  <a>River Mist<span>1982.USA</a>
+<p>
+  <a id=b>キンシャサノキセキ<span>2003.AUS S
+  <a id=b>フジキセキ<span>1992.JPN
+  <a>Keltshaan<span>1994.USA
+  <a>Pleasant Colony<span>1978.USA</a>
+<p>
+  <a id=b>Chinese Dragon<span>2002.USA S
+  <a>Stravinsky<span>1996.USA
+  <a>Fabulous Fairy<span>1991.USA
+  <a>Alydar<span>1975.USA</a>
+<p>
+  <a id=b>Luminaria<span>2002.IRE F
+  <a id=a>Danehill<span>1986.USA
+  <a>Smaoineamh<span>1986.IRE
+  <a>Tap On Wood<span>1976.IRE</a>
+<p>
+  <a id=b>Saintly Prospect<span>2002.USA S
+  <a>Sweetsouthernsaint<span>1995.USA
+  <a>Hasty Alarm<span>1991.USA
+  <a>Darn That Alarm<span>1981.USA</a>
+<p>
+  <a id=b>Higher Love<span>2002.IRE F
+  <a id=c>Sadler's Wells<span>1981.USA
+  <a>Dollar Bird<span>1997.IRE
+  <a>Kris<span>1976.GB</a>
+<p>
+  <a id=b>Eddington<span>2001.USA S
+  <a>Unbridled<span>1987.USA
+  <a>Fashion Star<span>1992.USA
+  <a>Chief's Crown<span>1982.USA</a>
+<p>
+  <a id=b>Mullins Bay<span>2001.GB S
+  <a>Machiavellian<span>1987.USA
+  <a>Bella Colora<span>1982.GB
+  <a>Bellypha<span>1976.IRE</a>
+<p>
+  <a id=b>Soldier's Tale<span>2001.USA S
+  <a>Stravinsky<span>1996.USA
+  <a>Myrtle<span>1993.GB
+  <a>Batshoof<span>1986.IRE</a> <!--sire: Sadler's Wells-->
+<p>
+  <a id=b>キングカメハメハ<span>2001.JPN S
+  <a>Kingmambo<span>1990.USA
+  <a>Manfath<span>1991.IRE
+  <a>Last Tycoon<span>1983.IRE</a>
+<p>
+  <a id=b>ダイワメジャー<span>2001.JPN S
+  <a id=c>Sunday Silence<span>1986.USA
+  <a>スカーレットブーケ<span>1988.JPN
+  <a id=a>Northern Taste<span>1971.CAN</a>
+<p>
+  <a id=b>ハーツクライ<span>2001.JPN S
+  <a id=c>Sunday Silence<span>1986.USA
+  <a>アイリッシュダンス<span>1990.JPN
+  <a>Tony Bin<span>1983.IRE</a>
+<p>
+  <a id=b>Host<span>2000.CHI S
+  <a>Hussonet<span>1991.USA <!--sire: Mr.Prospector-->
+  <a>Colonna Traiana<span>1993.CHI
+  <a>Roy<span>1983.USA</a>
+<p>
+  <a id=b>Solskjaer<span>2000.IRE S
+  <a id=a>Danehill<span>1986.USA
+  <a>Lyndonville<span>1988.IRE
+  <a>Top Ville<span>1976.IRE</a>
+<p>
+  <a id=b>Family<span>1999.USA F <!--bro: Danehill-->
+  <a id=a>Danzig<span>1977.USA
+  <a id=b>Razyana<span>1981.USA
+  <a>His Majesty<span>1968.USA</a>
+<p>
+  <a id=b>High Chaparral<span>1999.IRE S
+  <a id=c>Sadler's Wells<span>1981.USA
+  <a>Kasora<span>1993.IRE
+  <a>Darshaan<span>1981.GB</a>
+<p>
+  <a id=b>Mineshaft<span>1999.USA S <!--Bro: Monashee Mountain-->
+  <a id=c>A.P. Indy<span>1989.USA
+  <a>Prospectors Delite<span>1989.USA <!--CT ?-->
+  <a>Mr. Prospector<span>1970.USA</a>
+<p>
+  <a id=b>Right Approach<span>1999.GB S
+  <a>Machiavellian<span>1987.USA
+  <a>Abbey Strand<span>1989.USA
+  <a>Shadeed<span>1982.USA</a>
+<p>
+  <a id=b>Westerner<span>1999.GB S
+  <a id=a>Danehill<span>1986.USA
+  <a>Walensee<span>1982.IRE
+  <a>Troy<span>1976.GB</a>
+<p>
+  <a id=b>デュランダル<span>1999.JPN S
+  <a id=c>Sunday Silence<span>1986.USA
+  <a>サワヤカプリンセス<span>1986.JPN
+  <a id=a>Northern Taste<span>1971.CAN</a>
+<p>
+  <a id=b>Broken Vow<span>1998.USA S
+  <a>Unbridled<span>1987.USA
+  <a>Wedding Vow<span>1988.USA
+  <a>Nijinsky<span>1967.CAN</a>
+<p>
+  <a id=b>Count Dubois<span>1998.GB S
+  <a>Zafonic<span>1990.USA
+  <a>Madame Dubois<span>1987.GB
+  <a>Legend of France<span>1989.USA</a> <!--sire: Lyphard-->
+<p>
+  <a id=b>クロフネ<span>1998.USA S
+  <a>French Deputy<span>1992.USA
+  <a>Blue Avenue<span>1990.USA
+  <a>Classic Go Go<span>1978.USA</a>
+<p>
+  <a id=b>Giant's Causeway<span>1997.USA S
+  <a id=a>Storm Cat<span>1983.USA
+  <a>Mariah's Storm<span>1991.USA
+  <a>Rahy<span>1985.USA</a>
+<p>
+  <a id=b>More Than Ready<span>1997.USA S
+  <a>Southern Halo<span>1983.USA
+  <a>Woodman's Girl<span>1990.USA
+  <a>Woodman<span>1983.USA</a>
+<p>
+  <a id=b>Dansili<span>1996.GB S
+  <a id=a>Danehill<span>1986.USA
+  <a>Hasili<span>1991.IRE
+  <a>Kahyasi<span>1985.IRE</a>
+<p>
+  <a id=b>Silvano<span>1996.GER S
+  <a>Lomitas<span>1988.GB
+  <a>Spirit of Eagles<span>1986.USA
+  <a>Beau's Eagle<span>1976.USA</a>
+<p>
+  <a id=b>Tiger Hill<span>1995.IRE S
+  <a id=a>Danehill<span>1986.USA
+  <a>The Filly<span>1981.GER
+  <a>Appiani<span>1963.ITY</a>
+<p>
+  <a id=b>Elida<span>1994.IRE F
+  <a>Royal Academy<span>1987.USA
+  <a>Saviour<span>1987.USA
+  <a>Majestic Light<span>1973.USA</a>
+<p>
+  <a id=b>タイキシャトル<span>1994.USA S
+  <a>Devil's Bag<span>1981.USA
+  <a>Welsh Muffin<span>1987.GB
+  <a>Caerleon<span>1980.USA</a>
+<p>
+  <a id=b>Flying Spur<span>1992.AUS S
+  <a id=a>Danehill<span>1986.USA
+  <a>Rolls<span>1984.USA <!--Encosta De Lago-->
+  <a>Mr. Prospector<span>1970.USA</a>
+<p>
+  <a id=b>フジキセキ<span>1992.JPN S
+  <a id=b>Sunday Silence<span>1986.USA
+  <a>Millracer<span>1983.USA
+  <a>Le Fabuleux<span>1961.FR</a>
+<p>
+  <a id=b>Scenic<span>1986.IRE S
+  <a id=c>Sadler's Wells<span>1981.USA
+  <a>Idylic<span>1982.USA
+  <a>Foolish Pleasure<span>1972.USA</a>
+<p>
+  <a id=b>Park Express<span>1985.IRE F <!--2400m-->
+  <a>Ahonoora<span>1975.GB
+  <a>Helen Nichols<span>1966.CAN
+  <a>Martial<span>1958.FR</a>
+<p>
+  <a id=b>Razyana<span>1981.USA F
+  <a>His Majesty<span>1968.USA
+  <a>Spring Adieu<span>1974.CAN
+  <a>Buckpasser<span>1963.USA</a>
+<p>
+  <a id=b>Weekend Surprise<span>1980.USA F <!--from: A.P. Indy TT-->
+  <a id=b>Secretariat<span>1970.USA
+  <a>Lassie Dear<span>1974.USA
+  <a>Buckpasser<span>1963.USA</a>
+<p>
+  <a id=b>Secretariat<span>1970.USA S <!--bro: Sir Gaylord-->
+  <a>Bold Ruler<span>1954.USA
+  <a>Somethingroyal<span>1952.USA
+  <a>Princequillo<span>1940.IRE</a>
+<p>
+  <a id=b>Northern Dancer<span>1961.CAN S
+  <a id=a>Nearctic<span>1954.CAN
+  <a>Natalma<span>1957.USA
+  <a>Native Dancer<span>1950.USA</a>
+<p>
+  <a id=b>Lady Angela<span>1944.GB F
+  <a id=c>Hyperion<span>1930.GB
+  <a>Sister Sarah<span>1930.GB
+  <a>Abbots Trace<span>1917.GB</a>
+<p>
+  <a id=b>Phalaris<span>1913.GB S
+  <a id=c>Polymelus<span>1902.GB
+  <a>Bromus<span>1905.GB
+  <a>Sainfoin<span>1887.GB</a>
+<p>
+  <a id=c>-<span>2022.JPN F
+  <a>Bricks and Mortar<span>2014.USA
+  <a>Vapour<span>2008.GB
+  <a id=c>Galileo<span>1998.IRE</a>
+<p>
+  <a id=c>-<span>2022.JPN M
+  <a id=b>リオンディーズ<span>2013.JPN
+  <a>エンパイアブルー<span>2012.JPN
+  <a>Empire Maker<span>2000.USA</a>
+<p>
+  <a id=c>-<span>2022.JPN M
+  <a id=b>ミッキーアイル<span>2011.JPN
+  <a>スマートオランプ<span>2014.JPN
+  <a>King's Best<span>1997.USA</a>
+<p>
+  <a id=c>-<span>2022.JPN M
+  <a>ゴールドシップ<span>2009.JPN
+  <a>ルックオブラヴ<span>2013.JPN
+  <a>King's Best<span>1997.USA</a>
+<p>
+  <a id=c>アスロス<span>2021.JPN M
+  <a>レイデオロ<span>2014.JPN
+  <a id=c>ステラリード<span>2007.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>
+  <a id=c>ジーベック<span>2021.JPN M
+  <a>Gun Runner<span>2013.USA
+  <a>Stellar Agent<span>2016.USA
+  <a id=b>More Than Ready<span>1997.USA</a>
+<p>
+  <a id=c>スペリオルパンサー<span>2021.JPN M
+  <a>Sinister Minister<span>2003.USA
+  <a>ビアンカリボン<span>2013.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>
+  <a id=c>マジックオブラブ<span>2021.JPN M
+  <a id=b>イスラボニータ<span>2011.JPN
+  <a>Silver Four<span>2006.USA
+  <a>Majesticperfection<span>1996.USA</a>
+<p>
+  <a id=c>レライタム<span>2021.JPN M
+  <a id=b>Thunder Snow<span>2014.IRE
+  <a id=b>シュシュブリーズ<span>2011.JPN
+  <a id=b>フジキセキ<span>1992.JPN</a>
+<p>
+  <a id=c>ロディニア<span>2021.JPN M
+  <a id=b>キズナ<span>2010.JPN
+  <a>ミスペンバリー<span>2002.IRE
+  <a id=c>Montjeu<span>1996.IRE</a>
+<p>
+  <a id=c>カグヤ<span>2020.JPN F
+  <a id=c>エピファネイア<span>2010.JPN
+  <a>アスカビレン<span>2012.JPN
+  <a id=c>ブラックタイド<span>2001.JPN</a>
+<p>
+  <a id=c>コトヴィア<span>2020.JPN F
+  <a id=b>ルーラーシップ<span>2007.JPN
+  <a id=b>ウインアルエット<span>2009.JPN
+  <a id=c>ダンスインザダーク<span>1993.JPN</a>
+<p>
+  <a id=c>サイブレーカー<span>2020.USA M
+  <a>Uncle Mo<span>2008.USA
+  <a>Downside Scenario<span>2013.USA
+  <a>Scat Daddy<span>2004.USA</a>
+<p> 
+  <a id=c>ソアヴィータ<span>2020.JPN F
+  <a id=b>ドゥラメンテ<span>2012.JPN
+  <a>Gianna's Dream<span>2013.USA
+  <a>Twirling Candy<span>2007.USA</a>
+<p>
+  <a id=c>メリタテス<span>2020.USA F
+  <a id=b>American Pharoah<span>2012.USA
+  <a>Gem Gem<span>2010.USA
+  <a>Tapit<span>2001.USA</a>
+<p>
+  <a id=c>アタビズム<span>2019.JPN M
+  <a>シルバーステート<span>2013.JPN
+  <a id=b>グレイスフルソング<span>2005.IRE
+  <a id=a>Rock of Gibraltar<span>1999.IRE</a>
+<p>
+  <a id=c>アンジアン<span>2019.JPN F
+  <a id=b>キングカメハメハ<span>2001.JPN
+  <a>Satyana<span>2009.USA
+  <a>Street Cry<span>1998.IRE</a>
+<p>
+  <a id=c>キタノキャスター<span>2019.JPN F
+  <a>コパノリッキー<span>2010.JPN
+  <a>キープザサミット<span>2010.JPN
+  <a>Chichicastenango<span>1998.FR</a>
+<p>
+  <a id=c>ケウ<span>2019.JPN F
+  <a>ラニ<span>2013.USA
+  <a>ミヤサンキューティ<span>2008.JPN
+  <a id=b>クロフネ<span>1998.USA</a>
+<p>
+  <a id=c>サクソフォン<span>2019.JPN M
+  <a>エイシンフラッシュ<span>2007.JPN
+  <a>レトロクラシック<span>2012.JPN
+  <a id=c>ディープインパクト<span>2002.JPN</a>
+<p>
+  <a id=c>スリールトウショウ<span>2019.JPN M
+  <a>Pyro<span>2005.USA
+  <a>ソヴールトウショウ<span>2012.JPN
+  <a>スズカフェニックス<span>2002.JPN</a>
+<p>
+  <a id=c>Arc<span>2018.HUN F
+  <a id=b>Stormy River<span>2003.FR
+  <a>Alsace<span>2005.GB
+  <a>King's Best<span>1997.USA</a>
+<p>
+  <a id=c>Meghato<span>2018.HUN M
+  <a id=b>Stormy River<span>2003.FR
+  <a>Megkapo<span>2012.HUN
+  <a>The Bogberry<span>2005.USA</a>
+<p>
+  <a id=c>アイルオブラヴ<span>2018.JPN M
+  <a id=b>ミッキーアイル<span>2011.JPN
+  <a>ルックオブラヴ<span>2013.JPN
+  <a>King's Best<span>1997.USA</a>
+<p>
+  <a id=c>カイザーノヴァ<span>2018.JPN M
+  <a id=b>モーリス<span>2011.JPN
+  <a id=c>ステラリード<span>2007.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>
+  <a id=c>コマンドブルックス<span>2018.JPN M
+  <a>ワールドエース<span>2009.JPN
+  <a>アスクコマンダー<span>1998.JPN
+  <a>Commander in Chief<span>1998.GB</a>
+<p>  
+  <a id=c>ゴッドシエル<span>2018.JPN M
+  <a id=c>エピファネイア<span>2010.JPN
+  <a>ゴッドフロアー<span>2010.JPN
+  <a id=b>ハーツクライ<span>2001.JPN</a>
+<p>  
+  <a id=c>ブライテストダーク<span>2018.JPN M
+  <a id=b>Novellist<span>2009.IRE
+  <a>ビキニスタイル<span>2011.JPN
+  <a id=c>ディープインパクト<span>2002.JPN</a>
+<p>  
+  <a id=c>グラニュエル<span>2017.JPN F
+  <a id=b>クロフネ<span>1998.USA
+  <a>クリヴィア<span>2000.JPN
+  <a>Tony Bin<span>1983.IRE</a>
+<p>  
+  <a id=c>パーフェクトラヴ<span>2017.JPN F
+  <a id=b>オルフェーヴル<span>2008.JPN
+  <a id=b>Higher Love<span>2002.IRE
+  <a id=c>Sadler's Wells<span>1981.USA</a>
+<p>  
+  <a id=c>パープルレディー<span>2018.JPN F
+  <a id=c>ディープインパクト<span>2002.JPN
+  <a>メリッサ<span>2004.JPN
+  <a>White Muzzle<span>1990.GB</a>
+<p>  
+  <a id=c>ペイシャスカイ<span>2018.JPN M
+  <a>ディープスカイ<span>2005.JPN
+  <a>リサプシュケ<span>2011.JPN
+  <a>Wild Rush<span>1994.USA</a>
+<p>  
+  <a id=c>パラスアテナ<span>2017.JPN F
+  <a id=b>ルーラーシップ<span>2007.JPN
+  <a id=c>ステラリード<span>2007.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>  
+  <a id=c>カレンブーケドール<span>2016.JPN F
+  <a id=c>ディープインパクト<span>2002.JPN
+  <a>Solaria<span>2010.USA
+  <a>Scat Daddy<span>2004.USA</a>
+<p>  
+  <a id=c>ナグラーダ<span>2016.JPN M
+  <a id=b>Dunkirk<span>2006.USA
+  <a>レフィナーダ<span>2000.JPN
+  <a id=c>Sunday Silence<span>1986.USA</a>
+<p>  
+  <a id=c>Vow And Declare<span>2015.AUS M
+  <a>Declaration of War<span>2009.USA
+  <a>Geblitzt<span>2006.AUS
+  <a>Testa Rossa<span>1996.AUS</a>
+<p>  
+  <a id=c>エンジェルリード<span>2015.JPN F
+  <a>Workforce<span>2007.GB
+  <a id=c>ステラリード<span>2007.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>  
+  <a id=c>ディアローグ<span>2015.JPN M
+  <a id=b>ハーツクライ<span>2001.JPN
+  <a>ミスペンバリー<span>2002.IRE
+  <a id=c>Montjeu<span>1996.IRE</a>
+<p>  
+  <a id=c>ヘッドストリーム<span>2015.JPN M
+  <a id=b>ダイワメジャー<span>2001.JPN
+  <a>アシュレイリバー<span>2004.JPN
+  <a>Mr. Greeley<span>1992.USA</a>
+<p>  
+  <a id=c>Key Bid<span>2014.GB M
+  <a>Dubawi<span>2002.IRE
+  <a>Silca Chiave<span>2004.GB
+  <a>Pivotal<span>1993.GB</a>
+<p>
+  <a id=c>ウマインボルト<span>2014.JPN M
+  <a id=b>タイキシャトル<span>1994.USA
+  <a id=c>マイカ<span>2007.JPN
+  <a id=c>シンボリクリスエス<span>1999.USA</a>
+<p>  
+  <a id=c>カザキリ<span>2014.JPN F
+  <a>オンファイア<span>2003.JPN
+  <a>フラッシュカード<span>1999.JPN
+  <a>Tony Bin<span>1983.IRE</a>
+<p>  
+  <a id=c>ステラバレット<span>2014.JPN F
+  <a id=c>シンボリクリスエス<span>1999.USA
+  <a id=c>ステラリード<span>2007.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>  
+  <a id=c>ドゥオーモ<span>2013.JPN M
+  <a id=c>ディープインパクト<span>2002.JPN
+  <a>アスクコマンダー<span>1998.JPN
+  <a>Commander in Chief<span>1990.GB</a>
+<p>  
+  <a id=c>ビヨンジオール<span>2012.JPN M
+  <a>サクラプレジデント<span>2000.JPN
+  <a>サムシングナイス<span>1998.JPN
+  <a>Lammtarra<span>1992.USA</a>
+<p>  
+  <a id=c>Latoscana<span>2011.IRE F
+  <a id=b>Sea The Stars<span>2006.IRE
+  <a id=b>Luminaria<span>2002.IRE
+  <a id=a>Danehill<span>1986.USA</a>
+<p>  
+  <a id=c>エイシンソルティー<span>2011.USA F
+  <a>Tapit<span>2001.USA
+  <a>Eightyfivebroadst<span>2000.USA
+  <a>Unbridled's Song<span>1993.USA</a>
+<p>  
+  <a id=c>Halla Na Saoire<span>2010.IRE F
+  <a id=b>Teofilo<span>2004.IRE
+  <a id=c>Siamsa<span>1997.USA
+  <a>Quest for Fame<span>1987.GB</a>
+<p>  
+  <a id=c>エピファネイア<span>2009.JPN S
+  <a id=c>シンボリクリスエス<span>1999.USA
+  <a>シーザリオ<span>2002.JPN
+  <a id=c>スペシャルウィーク<span>1995.JPN</a>
+<p>
+  <a id=c>Green Roller<span>2009.AUS F
+  <a id=b>Flying Spur<span>1992.AUS
+  <a>Given<span>1998.AUS
+  <a>Canny Lad<span>1987.AUS</a>
+<p>  
+  <a id=c>エーシンスピーダー<span>2009.USA S
+  <a id=b>Giant's Causeway<span>1997.USA
+  <a>Myhrr<span>1997.USA <!--bro: Kingmambo-->
+  <a>Mr. Prospector<span>1970.USA</a>
+<p>  
+  <a id=c>Fiorente<span>2008.IRE S
+  <a>Monsun<span>1990.GER
+  <a>Desert Bloom<span>2000.IRE
+  <a>Pilsudski<span>1992.IRE</a>
+<p>  
+  <a id=c>Majestic Harbor<span>2008.USA S
+  <a>RockPort Harbor<span>2002.USA
+  <a>Champagne Royale<span>2001.USA
+  <a>French Deputy<span>1992.USA</a>
+<p>  
+  <a id=c>ステラリード<span>2007.JPN F
+  <a id=c>スベシャルウィーク<span>1995.JPN
+  <a>ウェルシュステラ<span>1999.IRE
+  <a>Zafonic<span>1990.USA</a>
+<p>  
+  <a id=c>マイカ<span>2007.JPN S
+  <a id=c>シンボリクリスエス<span>1999.USA
+  <a>タニノティアラ<span>1997.JPN
+  <a id=c>Sunday Silence<span>1986.USA</a>
+<p>  
+  <a id=c>Golden Sword<span>2006.GB S
+  <a id=b>High Chaparral<span>1999.IRE
+  <a>Sitara<span>1998.GB
+  <a>Salse<span>1985.USA</a>
+<p>  
+  <a id=c>Jukebox Jury<span>2006.IRE S
+  <a id=c>Montjeu<span>1996.IRE
+  <a>Mare Aux Fees<span>1988.GB
+  <a>Kenmare<span>1975.FR</a>
+<p>  
+  <a id=c>Scandal Sheet<span>2006.IRE F
+  <a id=c>Galileo<span>1998.IRE
+  <a>Sandrella<span>1995.IRE
+  <a>Darshaan<span>1981.GB</a>
+<p>  
+  <a id=c>Harbinger<span>2006.GB S
+  <a id=b>Dansili<span>1996.USA
+  <a>Penang Pearl<span>1996.FR
+  <a>Bering<span>1983.GB</a>
+<p>  
+  <a id=c>Tavistock<span>2005.NZ S
+  <a id=c>Montejeu<span>1996.IRE
+  <a>Upstage<span>1998.GB
+  <a>Quest For Fame<span>1987.GB</a>
+<p>  
+  <a id=c>Traffic Guard<span>2004.USA S
+  <a id=b>More Than Ready<span>1997.USA
+  <a>Street Scene<span>1998.IRE
+  <a>Zafonic<span>1990.USA</a>
+<p>  
+  <a id=c>Illustrious Blue<span>2003.GB S
+  <a id=b>Dansili<span>1996.GB
+  <a>Gipsy Moth<span>1995.GB
+  <a>Efisio<span>1982.GB</a>
+<p>  
+  <a id=c>Lord of England<span>2003.GER S
+  <a>Dashing Blade<span>1987.GB
+  <a>Loveria<span>1984.GB
+  <a>Los Santos<span>1978.FR</a>
+<p>  
+  <a id=c>アドマイヤメイン<span>2003.JPN S
+  <a id=c>Sunday Silence<span>1986.USA
+  <a>プロモーション<span>1994.JPN
+  <a>Hector Protector<span>1988.USA</a>
+<p>  
+  <a id=c>A. P. Arrow<span>2002.USA S
+  <a id=c>A.P. Indy<span>1989.USA
+  <a>Garimpeiro<span>1987.USA
+  <a>Mr. Prospector<span>1970.USA</a>
+<p>  
+  <a id=c>ディープインパクト<span>2002.JPN S
+  <a id=c>Sunday Silence<span>1986.USA
+  <a>Wind in Her Hair<span>1991.IRE
+  <a>Alzao<span>1980.USA</a>
+<p>  
+  <a id=c>ブラックタイド<span>2001.JPN S
+  <a id=c>Sunday Silence<span>1986.USA
+  <a>Wind in Her Hair<span>1991.IRE
+  <a>Alzao<span>1980.USA</a>
+<p>  
+  <a id=c>シンボリクリスエス<span>1999.USA S
+  <a>Kris S.<span>1977.USA
+  <a>Tee Kay<span>1969.USA
+  <a>Gold Meridian<span>1982.USA</a>
+<p>  
+  <a id=c>Galileo<span>1998.IRE S
+  <a id=c>Sadler's Wells<span>1981.USA
+  <a>Urban Sea<span>1989.USA
+  <a>Miswaki<span>1978.USA</a>
+<p>  
+  <a id=c>Siamsa<span>1997.USA F
+  <a>Quest for Fame<span>1987.GB
+  <a>Amoura<span>1983.USA
+  <a>NorthFields<span>1968.USA</a>
+<p> 
+  <a id=c>Montjeu<span>1996.IRE S
+  <a id=c>Sadler's Wells<span>1981.USA
+  <a>Floripedes<span>1985.FR
+  <a>Top Ville<span>1976.IRE</a>
+<p>  
+  <a id=c>スペシャルウィーク<span>1995.JPN S
+  <a id=c>Sunday Silence<span>1986.USA
+  <a>キャンペンガール<span>1987.JPN
+  <a>マルゼンスキー<span>1974.JPN</a>
+<p>  
+  <a id=c>ステイゴールド<span>1994.JPN S
+  <a id=c>Sunday Silence<span>1986.USA
+  <a>ゴールデンサッシュ<span>1988.JPN
+  <a>Dictus<span>1967.FR</a>
+<p>
+  <a id=c>ダンスインザダーク<span>1993.JPN S
+  <a id=c>Sunday Silence<span>1986.USA
+  <a>Dancing Key<span>1983.USA
+  <a>Nijinsky<span>1967.CAN
+<p>  
+  <a id=c>A.P. Indy<span>1989.USA S
+  <a>Seattle Slew<span>1974.USA
+  <a id=b>Weekend Surprise<span>1980.USA
+  <a id=b>Secretariat<span>1970.USA</a>
+<p>  
+  <a id=c>Sunday Silence<span>1986.USA S
+  <a>Halo<span>1969.USA
+  <a>Wishing Well<span>1975.USA
+  <a>Understanding<span>1963.USA</a>
+<p>  
+  <a id=c>Sadler's Wells<span>1981.USA S
+  <a id=b>Northern Dancer<span>1961.CAN
+  <a>Fairy Bridge<span>1975.USA
+  <a>Bold Reason<span>1968.USA</a>
+<p>
+  <a id=c>Hyperion<span>1930.GB S
+  <a>Gainsborough<span>1915.GB
+  <a>Selene<span>1919.GB
+  <a>Chaucer<span>1900.GB</a>
+<p> 
+  <a id=c>Polymelus<span>1902.GB S
+  <a>Cyllene<span>1895.GB
+  <a>Maid Marian<span>1886.GB
+  <a>Hampton<span>1872.GB</a>
+<p>  
+  <a id=c>William the Third<span>1898.GB S
+  <a id=c>St. Simon<span>1881.GB
+  <a>Gravity<span>1884.GB
+  <a>Wisdom<span>1873.GB</a>
+<p>  
+  <a id=c>Persimmon<span>1893.GB S
+  <a id=c>St. Simon<span>1881.GB
+  <a>Perdita<span>1881.GB
+  <a>Hampton<span>1872.GB</a>
+<p>  
+  <a id=c>St. Frusquin<span>1893.GB S
+  <a id=c>St. Simon<span>1881.GB
+  <a>Isabel<span>1879.GB
+  <a>Plebeian<span>1872.GB</a>
+<p>  
+  <a id=c>Donovan<span>1886.GB S
+  <a>Galopin<span>1872.GB
+  <a>Mowerina<span>1876.DEN
+  <a>Scottish Chief<span>1861.GB</a>
+<p>  
+  <a id=c>Ormonde<span>1883.GB S
+  <a id=c>Bend Or<span>1877.GB
+  <a>Lily Agnes<span>1871.GB
+  <a>Macaroni<span>1860.GB</a>
+<p>  
+  <a id=c>St. Simon<span>1881.GB S
+  <a>Galopin<span>1872.GB
+  <a>St. Angela<span>1865.GB
+  <a>King Tom<span>1851.GB</a>
+<p>
+  <a id=c>Corrie Roy<span>1878.GB F
+  <a>Galopin<span>1872.GB
+  <a>Corrie<span>1870.GB
+  <a>Stockwell<span>1849.GB</a>
+<p>  
+  <a id=c>Bend Or<span>1877.GB S
+  <a>Doncaster<span>1870.GB
+  <a>Rouge Rose<span>1865.GB
+  <a>Thormanby<span>1857.GB</a>
+<p>  
+  <a id=c>Hermit<span>1864.GB S
+  <a>Newminster<span>1848.GB
+  <a>Seclusion<span>1857.GB
+  <a>Tadmor<span>1846.GB</a>
+<p>  
+  <a id=c>Stockwell<span>1849.GB S
+  <a>The Baron<span>1842.GB
+  <a>Pocahontas<span>1837.GB
+  <a>Glecoe<span>1831.GB</a>
+<p>  
+  <a id=c>Eclipse<span>1764.GB S
+  <a>Marske<span>1750.GB
+  <a>Spilletta<span>1749.GB
+  <a>Regulus<span>1739.GB</a>
+</p>
+<div style=display:flex;z-index:1;width:inherit;align-items:center;position:fixed;top:0;background-color:#ddd>
+  <svg><path d=m28+29-7-7a7+7+0,1,1+.1-.1></svg>
+  <i style=font-family:courier;letter-spacing:-1;color:#999;cursor:pointer>@ariamaranai</i>
+  <input style=all:unset;flex:auto;height:40;color:#222>
+  <span>N=501</span>
+  <svg>
+    <path d=m9+24+3+3+3-3M12+10V26M15+11H28m0+4H17m2+4H28m0+4H20>
