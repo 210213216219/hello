@@ -1,0 +1,23 @@
+{
+  "name": "pwa",
+  "short_name": "PWA",
+  "display": "standalone",
+  "description": "Progressive",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "./192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "mask"
+    },
+    {
+      "src": "./512x512.png",
+      "size": "512x512",
+      "type": "image/png",
+      "purpose": "mask"
+    }
+  ],
+  "start_url": "index.html",
+  "theme_color": "#ff00ff"
+}
