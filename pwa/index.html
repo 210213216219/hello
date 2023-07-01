@@ -1,0 +1,8 @@
+<link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials">
+<body>
+<div style=width:100px;height:100px;background-color:#ddd>agra</div>
+<script>
+  navigator.serviceWorker.register("sw.js").then(r => {
+    console.log("success");
+  })
+</script>
