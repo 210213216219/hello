@@ -2,20 +2,24 @@
   "name": "pwa",
   "short_name": "PWA",
   "display": "standalone",
+  "display_override": ["window-controls-overlay"],
   "description": "Progressive",
   "background_color": "#ffffff",
   "icons": [
     {
-      "src": "192x192.png",
+      "src": "https://www.gstatic.com/youtube/img/branding/favicon/favicon_192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "512x512.png",
+      "src": "https://www.gstatic.com/youtube/img/branding/favicon/favicon_512x512.png",
       "size": "512x512",
       "type": "image/png"
     }
   ],
-  "start_url": "https://www.google.com/",
+  "launch_hander": {
+    "client_mode": "navigate-existing"
+  },
+  "start_url": "https://210213216219.github.io/hello/pwa/index.html",
   "theme_color": "#ff00ff"
 }
