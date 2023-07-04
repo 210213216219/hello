@@ -4,7 +4,7 @@ ondragstart =()=> !1;
 oninput =e=> {
   if ((e = e.target.value) != prev) {
     prev = e, e = 504;
-    while (a[e].attributeStyleMap.set("display", a[e].textContent.includes(prev) ? kFlex : kNone), --e);
+    while (a[e].setAttribute("style", a[e].textContent.includes(prev) ? "display:flex" : "display:none"), --e);
   }
 }
 
@@ -16,16 +16,16 @@ let d = document,
     s,
     mode = 0,
     i = 2012,
-    prev,
-    kNone = new CSSKeywordValue("none"),
-    kFlex = new CSSKeywordValue("flex");
-    kFilter = new CSSUnparsedValue(["invert(1)"]);
+    prev;
+    // kNone = new CSSKeywordValue("none"),
+    // kFlex = new CSSKeywordValue("flex"),
+    // kFilter = new CSSUnparsedValue(["invert(1)"]);
 
 d.title = "Thoroughbred Myostatin List";
 
 header[1].onclick =()=> open("https://twitter.com/ariamaranai");
-header[0].onclick = header[2].onclick =()=> (header[1].attributeStyleMap.set("display", kNone), header[2].focus());
-header[2].onblur =()=> header[2].value || header[1].attributeStyleMap.set("display", new CSSKeywordValue("block"));
+header[0].onclick = header[2].onclick =()=> (header[1].setAttribute("style", "display:none"), header[2].focus());
+header[2].onblur =()=> header[2].value || header[1].setAttribute("style", "display:block");
 header[4].onclick =()=> select.toggleAttribute("hidden");
 
 select.hidden = !0;
@@ -563,21 +563,26 @@ order.push(
 
 
 while (
-  select.appendChild(s = d.createElement("i")).textContent = ["MSTN順", "名前順", "生年順", "国順", "性別順"][i],
+  select.appendChild(s = d.createElement("div")).textContent = ["MSTN順", "名前順", "生年順", "国順", "性別順"][i],
   s.onclick =(n => e => {
     if (n != mode) {
-      select.children[mode].attributeStyleMap.delete("filter"),
-      e.target.attributeStyleMap.set("filter", kFilter),
+      select.children[mode].removeAttribute("style"),
+      e.target.setAttribute("style", "filter:invert(1)"),
       mode = n;
 
       e = n ? 504 : 1;
+      try {
       if (n--) while (body.appendChild(a[order[n][--e]]), e);
       else while (body.appendChild(a[e]), ++e < 505);
+      } catch (e) {
+        alert(e);
+      }
       select.hidden = !0;
+      scroll(0, 0);
     }
   })(i),
   ++i < 5
 );
 
-body.firstChild.appendChild(select).firstChild.attributeStyleMap.set("filter", kFilter);
+body.firstChild.appendChild(select).firstChild.setAttribute("style", "filter:invert(1)");
 }
