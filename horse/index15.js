@@ -14,12 +14,8 @@ let d = document,
     a = d.getElementsByTagName("a"),
     select = d.createElement("b"),
     s,
-    mode = 0,
     i = 2012,
     prev;
-    // kNone = new CSSKeywordValue("none"),
-    // kFlex = new CSSKeywordValue("flex"),
-    // kFilter = new CSSUnparsedValue(["invert(1)"]);
 
 d.title = "Thoroughbred Myostatin List";
 
@@ -561,28 +557,25 @@ order.push(
   ctx.map((v, x) => [v[3], x + 1]).sort((a, b) => a[0] <= b[0] && -1).map(v => v[1])
 );
 
+s = ["MSTN順", "名前順", "生年順", "国順", "性別順"], i = 0;
 
-while (
-  select.appendChild(s = d.createElement("div")).textContent = ["MSTN順", "名前順", "生年順", "国順", "性別順"][i],
-  s.onclick =(n => e => {
-    if (n != mode) {
-      select.children[mode].removeAttribute("style"),
-      e.target.setAttribute("style", "filter:invert(1)"),
-      mode = n;
+while (select.appendChild(s = d.createElement("div")).textContent = s[i], ++i < 5);
 
-      e = n ? 504 : 1;
-      try {
-      if (n--) while (body.appendChild(a[order[n][--e]]), e);
-      else while (body.appendChild(a[e]), ++e < 505);
-      } catch (e) {
-        alert(e);
-      }
-      select.hidden = !0;
-      scroll(0, 0);
-    }
-  })(i),
-  ++i < 5
-);
+select.onclick =e=> {
+  let i = 4;
+  let index = s.indexOf(e.target.textContent);
+  while (!select.children[i].hasAttribute("style") && --i);
+
+  if (index != i) {
+    select.children[i].removeAttribute("style");
+    e.target.setAttribute("style", "filter:invert(1)");
+
+    if (e = index-- ? 504 : 0) while (body.appendChild(a[order[index][--e]]), e);
+    else while (body.appendChild(a[++e]), e < 504);
+    scroll(0, 0);
+  }
+  select.hidden = !0;
+}
 
 body.firstChild.appendChild(select).firstChild.setAttribute("style", "filter:invert(1)");
 }
