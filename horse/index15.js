@@ -557,13 +557,12 @@ order.push(
   ctx.map((v, x) => [v[3], x + 1]).sort((a, b) => a[0] <= b[0] && -1).map(v => v[1])
 );
 
-s = ["MSTN順", "名前順", "生年順", "国順", "性別順"], i = 0;
 
-while (select.appendChild(s = d.createElement("div")).textContent = s[i], ++i < 5);
+s = ["MSTN順", "名前順", "生年順", "国順", "性別順"], i = 0;
+while (select.appendChild(d.createElement("div")).textContent = s[i], ++i < 5);
 
 select.onclick =e=> {
-  let i = 4;
-  let index = s.indexOf(e.target.textContent);
+  let index = s.indexOf(e.target.textContent), i = 4;
   while (!select.children[i].hasAttribute("style") && --i);
 
   if (index != i) {
