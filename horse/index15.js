@@ -1,10 +1,15 @@
-ondragstart =()=> !1;
+ondragstart = ontouchstart =()=> !1;
 
 {
 oninput =e=> {
-  if ((e = e.target.value) != prev) {
-    prev = e, e = 504;
-    while (a[e].setAttribute("style", a[e].textContent.includes(prev) ? "display:flex" : "display:none"), --e);
+  let v = e.target.value, s = "", c, i = v.length;
+  if (i) {
+    while (s = ((12352 < (c = v.charCodeAt(--i)) && c < 12439) ? String.fromCharCode(c + 96) : v[i]) + s, i);
+    i = 504;
+    while (a[i].textContent.includes(s) ? a[i].removeAttribute("style") : a[i].attributeStyleMap.set("content-visibility", hidden), --i);
+  } else {
+    i = 504;
+    while (a[i].removeAttribute("style"), --i);
   }
 }
 
@@ -13,19 +18,21 @@ let d = document,
     header = body.firstChild.children,
     a = d.getElementsByTagName("a"),
     select = d.createElement("b"),
+    hidden = new CSSKeywordValue("hidden"),
     s,
-    i = 2012,
-    prev;
+    i = 2012;
 
 d.title = "Thoroughbred Myostatin List";
 
 header[1].onclick =()=> open("https://twitter.com/ariamaranai");
-header[0].onclick = header[2].onclick =()=> (header[1].setAttribute("style", "display:none"), header[2].focus());
-header[2].onblur =()=> header[2].value || header[1].setAttribute("style", "display:block");
+header[0].onclick = header[2].onclick =()=> 
+  (header[1].getAttribute("style")) ? 
+    header[2].value || header[2].blur() :
+    (header[1].attributeStyleMap.set("content-visibility", hidden), header[2].focus());
+header[2].onblur =()=> header[2].value || header[1].removeAttribute("style");
 header[4].onclick =()=> select.toggleAttribute("hidden");
-
 select.hidden = !0;
-select.setAttribute("style", "position:absolute;top:42;right:0");
+select.setAttribute("style", "position:absolute;top:40;right:0");
 
 while (
   (s = [
@@ -559,9 +566,10 @@ order.push(
 
 
 s = ["MSTN順", "名前順", "生年順", "国順", "性別順"], i = 0;
-while (select.appendChild(d.createElement("div")).textContent = s[i], ++i < 5);
+while (select.appendChild(d.createElement("dt")).textContent = s[i], ++i < 5);
 
 select.onclick =e=> {
+
   let index = s.indexOf(e.target.textContent), i = 4;
   while (!select.children[i].hasAttribute("style") && --i);
 
