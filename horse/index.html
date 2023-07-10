@@ -1,19 +1,62 @@
 <meta charset=utf-8 content="maximum-scale=yes initial-scale=yes"name=viewport>
 <style>
-:root { width: min(100%,960px); margin: -9 auto 40; background-color: #111; font:min(calc(5vw / 8 + 8px),13px) sans-serif; overflow-y: scroll }
+:root {
+  width: min(100%,960px);
+  margin: -9 auto 40;
+  background-color: #111;
+  font: min(calc(5vw / 8 + 8px),13px) sans-serif;
+  overflow-y: scroll;
+  user-select: none
+}
 ::-webkit-scrollbar { width: 8 }
 ::-webkit-scrollbar-thumb { background-color: #888 }
-a { width: 25%; padding: 8 0; background-color: #111; color: #bbb; text-align: center; text-decoration: none }
-a:hover, div:hover { filter: invert(1) }
-span { display: block; font-family: courier; letter-spacing: -1; color: #999; user-select: none }
-p { display: flex; gap: 1px; margin: -1 -8 0; padding: 1; background-color: #888 }
-div { width: 96; padding: 4; background-color: #366; text-align: center; color: #fff; user-select: none; cursor: pointer }
-svg { width: 40; height: 40; fill: none; stroke: #888; stroke-width: 2; cursor: pointer }
+a {
+  width: 25%;
+  padding: 8 0;
+  background-color: #111;
+  text-align: center;
+  text-decoration: none;
+  color: #bbb
+}
+a:hover, dt:hover { filter: invert(1) }
+span {
+  display: block;
+  font-family: courier;
+  letter-spacing: -1;
+  color: #999;
+}
+p {
+  display: flex;
+  gap: 1px;
+  margin: 0 -8;
+  padding: 0 1;
+  background-color: #888
+}
+dt {
+  width: 96;
+  padding: 4;
+  background-color: #366;
+  text-align: center;
+  color: #ddd;
+  cursor: pointer;
+}
+svg {
+  width: 40;
+  height: 40;
+  fill: none;
+  stroke: #888;
+  stroke-width: 2;
+  cursor: pointer
+}
+svg + span {
+  text-decoration: underline;
+  cursor:pointer
+}
 #a { background-color: #503 }
 #b { background-color: #040 }
 #c { background-color: #035 }
 </style>
-<script defer src=index15.js></script>
+<script defer src=index16.js></script>
 <base href=https://www.jbis.or.jp/horse/ target=_blank>
 <p style=position:sticky;top:0;;z-index:1;background-color:#ddd;line-height:40px>
   <svg><path d=m28+29-7-7a7+7+0,1,1+.1-.1></svg><span>@ariamaranai</span>
