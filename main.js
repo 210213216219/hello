@@ -1,6 +1,5 @@
 ondragstart =()=> !1;
 
-// 通常のクリック時にイベントを発生させる
 {
 onpointerdown =a=> {
   if (a.button) return 1;
@@ -11,10 +10,11 @@ onpointerdown =a=> {
     point_y = a.y;
     target_0.attributeStyleMap.set("filter", filter);
     target_not_tier = member_container.contains(target_0);
+    member_container.ontouchmove =a=> a.preventDefault();
+
     onpointermove = target_not_tier ?
       a=> {
         if (a.y - point_y < -8) {
-          member_container.ontouchmove =a=> a.preventDefault();
           octx.drawImage(target_0.firstChild, 0, 0);
           bmp.transferFromImageBitmap(ocvs.transferToImageBitmap());
           (onpointermove = moveMember)(a);
@@ -24,7 +24,6 @@ onpointerdown =a=> {
         }
       } :
       (
-        member_container.ontouchmove =a=> a.preventDefault(),
         octx.drawImage(target_0.firstChild, 0, 0),
         bmp.transferFromImageBitmap(ocvs.transferToImageBitmap()),
         moveMember(a),
@@ -42,7 +41,9 @@ onpointerdown =a=> {
          target_not_tier && target_0.attributeStyleMap.set("display", none)) :
         target_0.attributeStyleMap.clear();
       
+      octx.clearRect(0, 0, 240, 240);
       bmp.transferFromImageBitmap(ocvs.transferToImageBitmap());
+
       onpointermove =
       onpointerover =
       onpointerup =
@@ -105,6 +106,7 @@ let none = new CSSKeywordValue("none");
 let moveMember =a=> cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform));
 let insertMember =a=> {
   a.preventDefault();
+  alert(1);
   a = a.target;
   if (a.tagName == "I") {
     if (a == member_container) {
@@ -135,7 +137,7 @@ let point_y;
 
 member_container.addEventListener("wheel", a=> member_container.scrollBy(a.deltaY < 0 ? -64 : 64, 0), {passive: !0});
 
-octx.arc(120, 120, 120, 0, Math.PI * 2);
+octx.arc(120, 120, 120, 0, 7);
 octx.clip();
 d.body.appendChild(cvs);
 }
