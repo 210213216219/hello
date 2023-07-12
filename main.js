@@ -14,9 +14,7 @@ onpointerdown =a=> {
     onpointermove = target_not_tier ?
       a=> {
         if (a.y - point_y < -8) {
-          onscroll =
           member_container.ontouchmove =a=> a.preventDefault();
-
           octx.drawImage(target_0.firstChild, 0, 0);
           bmp.transferFromImageBitmap(ocvs.transferToImageBitmap());
           (onpointermove = moveMember)(a);
@@ -26,10 +24,7 @@ onpointerdown =a=> {
         }
       } :
       (
-        member_container.onscroll =
-        member_container.ontouchmove =
-        ontouchmove =
-        onscroll =a=> a.preventDefault(),
+        member_container.ontouchmove =a=> a.preventDefault(),
         octx.drawImage(target_0.firstChild, 0, 0),
         bmp.transferFromImageBitmap(ocvs.transferToImageBitmap()),
         moveMember(a),
@@ -107,8 +102,9 @@ let octx = ocvs.getContext("2d");
 let transform = new CSSTransformValue([new CSSTranslate(CSS.px(0), CSS.px(0))]);
 let filter = new CSSUnparsedValue(["brightness(.6)"]);
 let none = new CSSKeywordValue("none");
-let moveMember =a=> (a.preventDefault(), cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
+let moveMember =a=> cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform));
 let insertMember =a=> {
+  a.preventDefault();
   a = a.target;
   if (a.tagName == "I") {
     if (a == member_container) {
@@ -139,7 +135,7 @@ let point_y;
 
 member_container.addEventListener("wheel", a=> member_container.scrollBy(a.deltaY < 0 ? -64 : 64, 0), {passive: !0});
 
-octx.arc(120, 120, 120, 0, 6.28);
+octx.arc(120, 120, 120, 0, Math.PI * 2);
 octx.clip();
 d.body.appendChild(cvs);
 }
