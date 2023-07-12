@@ -1,24 +1,39 @@
 ondragstart =()=> !1;
 
+
+// 通常のクリック時にイベントを発生させる
 {
 onpointerdown =a=> {
   if (a.button) return 1;
   let tagName = (target_0 = a.target).tagName;
   if (tagName == "P") {
+    if (target_0.textContent == "◢") {
+    } else {
     point_y = a.y;
     target_0.attributeStyleMap.set("filter", filter);
     target_not_tier = member_container.contains(target_0);
     onpointermove = target_not_tier ?
       a=> {
         if (a.y - point_y < -8) {
+          // member_container.onscroll =a=> a.preventDefault();
+          member_container.onscroll =
+          member_container.ontouchmove =
+          ontouchmove =
+          onscroll =a=> a.preventDefault();
+
           octx.drawImage(target_0.firstChild, 0, 0);
           bmp.transferFromImageBitmap(ocvs.transferToImageBitmap());
           (onpointermove = moveMember)(a);
           onpointerover = insertMember;
         } else {
+
         }
       } :
       (
+        member_container.onscroll =
+        member_container.ontouchmove =
+        ontouchmove =
+        onscroll =a=> a.preventDefault(),
         octx.drawImage(target_0.firstChild, 0, 0),
         bmp.transferFromImageBitmap(ocvs.transferToImageBitmap()),
         moveMember(a),
@@ -40,6 +55,7 @@ onpointerdown =a=> {
       member_container.onscroll =
       target_0 =
       target_1 = null;
+    }
     }
   } else if (tagName == "H4") {
     point_y = a.y;
@@ -75,6 +91,8 @@ onpointerdown =a=> {
       target_0 =
       target_1 = null;
     }
+  } else if (tagName == "B") {
+    
   }
 }
 
@@ -87,7 +105,7 @@ let octx = ocvs.getContext("2d");
 let transform = new CSSTransformValue([new CSSTranslate(CSS.px(0), CSS.px(0))]);
 let filter = new CSSUnparsedValue(["brightness(.6)"]);
 let none = new CSSKeywordValue("none");
-let moveMember =a=> (a.preventDefault(), cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
+let moveMember =a=> (cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
 let insertMember =a=> {
   a = a.target;
   if (a.tagName == "I") {
@@ -116,10 +134,8 @@ let target_1;
 let target_not_tier;
 let point_y;
 
-member_container.addEventListener("wheel",
-  a=> member_container.scrollBy(a.deltaY < 0 ? -64 : 64, 0),
-  {passive: !0}
-)
+
+member_container.addEventListener("wheel", a=> member_container.scrollBy(a.deltaY < 0 ? -64 : 64, 0), {passive: !0});
 
 octx.arc(120, 120, 120, 0, 7);
 octx.clip();
