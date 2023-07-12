@@ -15,9 +15,7 @@ onpointerdown =a=> {
           bmp.transferFromImageBitmap(ocvs.transferToImageBitmap());
           (onpointermove = moveMember)(a);
           onpointerover = insertMember;
-          member_container.onscroll =a=> a.preventDefault();
         } else {
-
         }
       } :
       (
@@ -88,7 +86,10 @@ let ocvs = new OffscreenCanvas(cvs.width = 240, cvs.height = 240);
 let octx = ocvs.getContext("2d");
 let filter = new CSSUnparsedValue(["brightness(.6)"]);
 let none = new CSSKeywordValue("none");
-let moveMember =a=> cvs.attributeStyleMap.set("transform", new CSSTransformValue([new CSSTranslate(CSS.px(a.x), CSS.px(a.y))]));
+let moveMember =a=> (
+  a.preventDefault(),
+  cvs.attributeStyleMap.set("transform", new CSSTransformValue([new CSSTranslate(CSS.px(a.x), CSS.px(a.y))]))
+);
 let insertMember =a=> {
   a = a.target;
   if (a.tagName == "I") {
