@@ -1,6 +1,5 @@
 ondragstart =()=> !1;
 
-
 // 通常のクリック時にイベントを発生させる
 {
 onpointerdown =a=> {
@@ -16,10 +15,9 @@ onpointerdown =a=> {
       a=> {
         if (a.y - point_y < -8) {
           // member_container.onscroll =a=> a.preventDefault();
-          member_container.onscroll =
-          member_container.ontouchmove =
-          ontouchmove =
-          onscroll =a=> a.preventDefault();
+          //member_container.onscroll =
+          //member_container.ontouchmove =
+          ontouchmove =a=> a.preventDefault();
 
           octx.drawImage(target_0.firstChild, 0, 0);
           bmp.transferFromImageBitmap(ocvs.transferToImageBitmap());
@@ -41,8 +39,11 @@ onpointerdown =a=> {
         moveMember
       )
 
+    onpointerup =a=> {
+      if (!(a.y ^ point_y)) {
 
-    onpointerup =()=> {
+      }
+
       target_1 ?
         (target_1.attributeStyleMap.clear(),
          target_not_tier && target_0.attributeStyleMap.set("display", none)) :
@@ -52,10 +53,12 @@ onpointerdown =a=> {
       onpointermove =
       onpointerover =
       onpointerup =
-      member_container.onscroll =
+      ontouchmove =
       target_0 =
       target_1 = null;
+
     }
+
     }
   } else if (tagName == "H4") {
     point_y = a.y;
@@ -105,7 +108,7 @@ let octx = ocvs.getContext("2d");
 let transform = new CSSTransformValue([new CSSTranslate(CSS.px(0), CSS.px(0))]);
 let filter = new CSSUnparsedValue(["brightness(.6)"]);
 let none = new CSSKeywordValue("none");
-let moveMember =a=> (cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
+let moveMember =a=> cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform));
 let insertMember =a=> {
   a = a.target;
   if (a.tagName == "I") {
@@ -137,7 +140,7 @@ let point_y;
 
 member_container.addEventListener("wheel", a=> member_container.scrollBy(a.deltaY < 0 ? -64 : 64, 0), {passive: !0});
 
-octx.arc(120, 120, 120, 0, 7);
+octx.arc(120, 120, 120, 0, 6.28);
 octx.clip();
 
 d.body.appendChild(cvs);
