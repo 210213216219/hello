@@ -84,12 +84,10 @@ let cvs = d.createElement("canvas");
 let bmp = cvs.getContext("bitmaprenderer");
 let ocvs = new OffscreenCanvas(cvs.width = 240, cvs.height = 240);
 let octx = ocvs.getContext("2d");
+let transform = new CSSTransformValue([new CSSTranslate(CSS.px(0), CSS.px(0))]);
 let filter = new CSSUnparsedValue(["brightness(.6)"]);
 let none = new CSSKeywordValue("none");
-let moveMember =a=> (
-  a.preventDefault(),
-  cvs.attributeStyleMap.set("transform", new CSSTransformValue([new CSSTranslate(CSS.px(a.x), CSS.px(a.y))]))
-);
+let moveMember =a=> (a.preventDefault(), cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
 let insertMember =a=> {
   a = a.target;
   if (a.tagName == "I") {
