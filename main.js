@@ -17,7 +17,8 @@ onpointerdown =a=> {
           // member_container.onscroll =a=> a.preventDefault();
           //member_container.onscroll =
           //member_container.ontouchmove =
-          ontouchmove =a=> a.preventDefault();
+          member_container.onscroll =
+          onscroll =a=> a.preventDefault();
 
           octx.drawImage(target_0.firstChild, 0, 0);
           bmp.transferFromImageBitmap(ocvs.transferToImageBitmap());
@@ -54,6 +55,7 @@ onpointerdown =a=> {
       onpointerover =
       onpointerup =
       ontouchmove =
+      onscroll =
       target_0 =
       target_1 = null;
 
@@ -108,7 +110,7 @@ let octx = ocvs.getContext("2d");
 let transform = new CSSTransformValue([new CSSTranslate(CSS.px(0), CSS.px(0))]);
 let filter = new CSSUnparsedValue(["brightness(.6)"]);
 let none = new CSSKeywordValue("none");
-let moveMember =a=> cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform));
+let moveMember =a=> (a.preventDefault(),cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
 let insertMember =a=> {
   a = a.target;
   if (a.tagName == "I") {
@@ -142,6 +144,5 @@ member_container.addEventListener("wheel", a=> member_container.scrollBy(a.delta
 
 octx.arc(120, 120, 120, 0, 6.28);
 octx.clip();
-
 d.body.appendChild(cvs);
 }
