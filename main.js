@@ -14,11 +14,8 @@ onpointerdown =a=> {
     onpointermove = target_not_tier ?
       a=> {
         if (a.y - point_y < -8) {
-          // member_container.onscroll =a=> a.preventDefault();
-          //member_container.onscroll =
-          //member_container.ontouchmove =
-          member_container.onscroll =
-          onscroll =a=> a.preventDefault();
+          onscroll =
+          member_container.ontouchmove =a=> a.preventDefault();
 
           octx.drawImage(target_0.firstChild, 0, 0);
           bmp.transferFromImageBitmap(ocvs.transferToImageBitmap());
@@ -55,7 +52,7 @@ onpointerdown =a=> {
       onpointerover =
       onpointerup =
       ontouchmove =
-      onscroll =
+      member_container.ontouchmove =
       target_0 =
       target_1 = null;
 
@@ -110,7 +107,7 @@ let octx = ocvs.getContext("2d");
 let transform = new CSSTransformValue([new CSSTranslate(CSS.px(0), CSS.px(0))]);
 let filter = new CSSUnparsedValue(["brightness(.6)"]);
 let none = new CSSKeywordValue("none");
-let moveMember =a=> (a.preventDefault(),cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
+let moveMember =a=> (a.preventDefault(), cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
 let insertMember =a=> {
   a = a.target;
   if (a.tagName == "I") {
