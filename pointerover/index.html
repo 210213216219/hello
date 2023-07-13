@@ -5,6 +5,8 @@
 let cvs = document.body.firstChild;
 let transform = new CSSTransformValue([new CSSTranslate(CSS.px(0), CSS.px(0))]);
 
+ontouchmove =a=> a.preventDefault();
+
 onpointerdown =a=> {
   onpointermove =a=> (a.preventDefault(),cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
   onpointerover =a=> {
