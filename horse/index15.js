@@ -1,4 +1,4 @@
-ondragstart = ontouchstart =()=> !1;
+//ondragstart = ontouchstart =()=> !1;
 
 {
 oninput =e=> {
