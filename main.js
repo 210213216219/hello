@@ -2,8 +2,9 @@ ondragstart =()=> !1;
 
 {
 onpointerdown =a=> {
-  if (a.button) return 1;
+  if (a.button) return;
   let tagName = (target_0 = a.target).tagName;
+  
   if (tagName == "P") {
     if (target_0.textContent == "◢") {
     } else {
@@ -15,10 +16,10 @@ onpointerdown =a=> {
     onpointermove = target_not_tier ?
       a=> {
         if (a.y - point_y < -8) {
+          onpointerover = insertMember;
           octx.drawImage(target_0.firstChild, 0, 0);
           bmp.transferFromImageBitmap(ocvs.transferToImageBitmap());
           (onpointermove = moveMember)(a);
-          onpointerover = insertMember;
         } else {
 
         }
@@ -47,7 +48,6 @@ onpointerdown =a=> {
       onpointermove =
       onpointerover =
       onpointerup =
-      ontouchmove =
       member_container.ontouchmove =
       target_0 =
       target_1 = null;
@@ -56,6 +56,7 @@ onpointerdown =a=> {
 
     }
   } else if (tagName == "H4") {
+    /*
     point_y = a.y;
     let styleMap = target_0.attributeStyleMap;
     styleMap.set("filter", filter);
@@ -88,7 +89,7 @@ onpointerdown =a=> {
 
       target_0 =
       target_1 = null;
-    }
+    }*/
   } else if (tagName == "B") {
     
   }
@@ -105,7 +106,6 @@ let filter = new CSSUnparsedValue(["brightness(.6)"]);
 let none = new CSSKeywordValue("none");
 let moveMember =a=> cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform));
 let insertMember =a=> {
-  a.preventDefault();
   alert(1);
   a = a.target;
   if (a.tagName == "I") {
