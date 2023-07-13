@@ -6,7 +6,7 @@ let cvs = document.body.firstChild;
 let transform = new CSSTransformValue([new CSSTranslate(CSS.px(0), CSS.px(0))]);
 
 onpointerdown =a=> {
-  onpointermove =a=> cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform));
+  onpointermove =a=> (a.preventDefault(),cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
   onpointerover =a=> {
     txt.textContent = "true"
   }
