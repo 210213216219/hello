@@ -1,22 +1,18 @@
-<body style=touch-action:none><canvas width=100 height=100 style=position:fixed;left:-32px;top:-32px;z-index:8;width:100;height:100;background-color:#f00;pointer-events:none></canvas>
+<body style=touch-action:none><canvas width=100 height=100 style=position:fixed;left:-32px;top:-32px;z-index:8;width:100;height:100;background-color:#f00;touch-action:none></canvas>
 <div style=width:100;height:100;background-color:#00f></div>
 <div id=txt style=user-select:none;touch-action:none>false</div>
 <script>
 let cvs = document.body.firstChild;
 let transform = new CSSTransformValue([new CSSTranslate(CSS.px(0), CSS.px(0))]);
 
-ontouchmove =
-onscroll =
-ontouchstart =a=> a.preventDefault();
-
 onpointerdown =a=> {
-  onpointermove =a=> (a.preventDefault(),cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
-  onpointerover =a=> {
-    txt.textContent = "true"
-  }
-  onpointerup =()=> {
+  cvs.setPointerCapture(a.pointerId);
+  cvs.onpointermove =a=> (a.preventDefault(),cvs.attributeStyleMap.set("transform", (transform[0].x.value = a.x, transform[0].y.value = a.y, transform)));
+  onpointerover =a=> { txt.textContent = a.target.tagName }
+  cvs.onpointerup =a=> {
+    cvs.releasePointerCapture(a.pointerId);
     txt.textContent = "false";
-    onpointermove = null;
+    cvs.onpointermove = null;
     onpointerover = null;
   }
   
