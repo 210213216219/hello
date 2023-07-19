@@ -1,10 +1,10 @@
 ondragstart =()=> !1;
-
 {
 let d = document;
 let body = d.body;
 let tierContainer = body.firstChild.lastChild;
 let memberContainer = body.lastChild;
+alert(memberContainer.getBoundingClientRect().height);
 let addContainer = document.getElementsByTagName("h4")[5];
 let cvs = d.createElement("canvas");
 let ctx = cvs.getContext("2d");
