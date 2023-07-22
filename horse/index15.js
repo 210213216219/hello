@@ -5,10 +5,10 @@ oninput =e=> {
   let v = e.target.value, s = "", c, i = v.length;
   if (i) {
     while (s = ((12352 < (c = v.charCodeAt(--i)) && c < 12439) ? String.fromCharCode(c + 96) : v[i]) + s, i);
-    i = 504;
-    while (a[i].textContent.includes(s) ? a[i].removeAttribute("style") : a[i].attributeStyleMap.set("content-visibility", hidden), --i);
+    i = 516;
+    while (a[i].textContent.includes(s) ? a[i].attributeStyleMap.clear() : a[i].attributeStyleMap.set("content-visibility", hidden), --i);
   } else {
-    i = 504;
+    i = 516;
     while (a[i].removeAttribute("style"), --i);
   }
 }
@@ -20,7 +20,7 @@ let d = document,
     select = d.createElement("b"),
     hidden = new CSSKeywordValue("hidden"),
     s,
-    i = 2012;
+    i = 2048;
 
 d.title = "Thoroughbred Myostatin List";
 
@@ -29,18 +29,21 @@ header[0].onclick = header[2].onclick =()=>
   (header[1].getAttribute("style")) ? 
     header[2].value || header[2].blur() :
     (header[1].attributeStyleMap.set("content-visibility", hidden), header[2].focus());
-header[2].onblur =()=> header[2].value || header[1].removeAttribute("style");
+header[2].onblur =()=> header[2].value || header[1].attributeStyleMap.clear();
 header[4].onclick =()=> select.toggleAttribute("hidden");
 select.hidden = !0;
 select.setAttribute("style", "position:absolute;top:40;right:0");
 
 while (
   (s = [
+  "","1192943","11","1000885",             // -,So You Think,Coralina,Dylan Thomas
   "", "1209439", "1234092", "1110914",     // -,タワーオブロンドン,キャッツアイ,スピルバーグ
   "1355121","1213491","1122613","722158",  // -,モズアスコット,ゴッドフロアー,ハーツクライ
+  "1360842","989072","1189700","615577",   // -,トランセンド,シュダイカ,クロフネ
   "1358351","1213491","1188202","725485",  // -,モズアスコット,シンボリバーグ,ダイワメジャー
+  "1356876","1110454","1155659","225628",  // -,カレンブラックヒル,シンラバンショウ,サクラバクシンオー
   "1361510","1157711","1296859","1240926", // -,リアルスティール,ストームハート,Uncaptured
-  "","1192943","11","1000885",             // -,So You Think,Coralina,Dylan Thomas
+  "1355695","1226963","1135626","1085636", //-,Thunder Snow,ブルーボサノヴァ,Pyro
   "","1351610","7","375619",               // -,Blue Point,Tack,Redoute's Choice
   "1334656","1173702","1096989","1039506", // スカイキャンバス,ファインニードル,アポロフィオリーナ,Snitzel
   "1338824","1162685","1186655","310467",  // ズングリムックリ,ダノンレジェンド,ハタノオヌール,サウスヴィグラス
@@ -204,16 +207,23 @@ while (
   "336082","334002","389652","334079",     // Danzig,Northern Dancer,Pas de Nom,Admiral's Voyage
   "333544","334002","386266","335344",     // Northern Taste,Northern Dancer,Lady Victoria,Victoria Park
   "334378","334377","387922","338878",     // Nearctic,Nearco,Lady Angela,Hyperion
+  "1360541","1298815","1346789","1051353", // -,New Year's Day,Ava Malone,Curlin
   "1352732","1189721","899740","336572",   // -,レイデオロ,Higher Love,Sadler's Wells
   "1360501","1171845","1328547","897467",  // -,シルバーステート,Forever Yours,Motivator
+  "1360287","1155349","1281991","361091",        // -,キタサンブラック,Well Away,Monsun
   "","1090360","1222746","1178418",        // -,オルフェーヴル,エレナレジーナ,Novellist
+  "1357576","760877","1171210","729458",   // -,アドマイヤムーン,クラリティーアイズ,キングカメハメハ
   "1353543","1042049","1048499","293624",  // -,ルーラーシップ,ステラリード,スペシャルウィーク
   "1358728","1177896","1192324","700008",  // -,アジアエクスプレス,スプリングノート,シンボリクリスエス
   "1359791","1162905","1218594","1106251", // -,サトノクラウン,スーンシャイン,ジャスタウェイ
   "1357867","1134867","1174487","901749",  // -,レッドファルクス,ゼロカラノキセキ,キンシャサノキセキ
   "","1089850","1188244","742976",         // -,ロードカナロア,ディメンシオン,ディープインパクト 
+  "1358848","1175221","1194122","1127380", // -,サトノダイヤモンド,トレサンセール,Rip Van Winkle
+  "1361852","1186327","1267800","1170063", // -,エピカリス,トーキー,リオンディーズ
+  "1359842","1152403","1219666","801447",  // -,シュヴァルグラン,ブロードハースト,スクリーンヒーロー
+  "1360714","992448","1231412","1127395",  // -,ナカヤマフェスタ,ポポラリタ,Dunkirk
   "1356575","1042049","1151934","742976",  // -,ルーラーシップ,レトロクラシック,ディープインパクト
-  "1338680","1141719","11836982","881793",  // -,ミッキーアイル,ローズシュクレ,スマートファルコン
+  "1338680","1141719","11836982","881793", // -,ミッキーアイル,ローズシュクレ,スマートファルコン
   "1332230","1127395","758780","262443",   // アフタヌーンティー,Dunkirk,ラズベリータイム,フジキセキ
   "1339626","1293348","1207115","619768",  // アンモシエラ,Bricks and Mortar,サンドクイーン,ゴールドアリュール
   "1333830","1083691","1046156","362799",  // カプセル,Majestic Warrior,フライトオブスワン,French Deputy
@@ -452,6 +462,7 @@ while (
   "1360202","1293348","1239592","714343",  // -,Bricks and Mortar,Vapour,Galileo
   "1356559","1170063","1151744","749845",  // -,リオンディーズ,エンパイアブルー,Empire Maker
   "1358048","1141719","1183660","372784",  // -,ミッキーアイル,スマートオランプ,King's Best
+  "1356905","1124297","1156090","729458",  // -,エピファネイア,ランウェイ,キングカメハメハ
   "1358795","1104811","1192967","372784",  // -,ゴールドシップ,ルックオブラヴ,King's Best
   "1333938","1189721","1048499","293624",  // アスロス,レイデオロ,ステラリード,スペシャルウィーク
   "1349554","1288621","1313933","372626",  // ジーベック,Gun Runner,Stellar Agent,More Than Ready
@@ -527,6 +538,7 @@ while (
   "339653","335964","404842","333978",     // A.P. Indy,Seattle Slew,Weekend Surprise,Secretariat
   "333862","335154","393162","336892",     // Sunday Silence,Halo,Wishing Well,Understanding
   "336572","334002","392264","334859",     // Sadler's Wells,Northern Dancer,Fairy Bridge,Bold Reason
+  "333996","334002","387574","335434",     // Nijinsky,Northern Dancer,Flaming Page,Bull Page
   "338878","334816","388664","334884",     // Hyperion,Gainsborough,Selene,Chaucer
   "334813","334814","398297","338150",     // Polymelus,Cyllene,Maid Marian,Hampton
   "338605","334782","398853","338157",     // William the Third,St. Simon,Gravity,Wisdom
@@ -545,8 +557,8 @@ i);
 
 a = [...d.body.children];
 
-i = 504;
-let ctx = new Array(504), order = [], e, f;
+i = 516;
+let ctx = new Array(516), order = [], e, f;
 while (
   ctx[--i] = [
     (e = (a[i + 1]).firstElementChild).firstChild.data,
@@ -569,7 +581,6 @@ s = ["MSTN順", "名前順", "生年順", "国順", "性別順"], i = 0;
 while (select.appendChild(d.createElement("dt")).textContent = s[i], ++i < 5);
 
 select.onclick =e=> {
-
   let index = s.indexOf(e.target.textContent), i = 4;
   while (!select.children[i].hasAttribute("style") && --i);
 
@@ -577,8 +588,8 @@ select.onclick =e=> {
     select.children[i].removeAttribute("style");
     e.target.setAttribute("style", "filter:invert(1)");
 
-    if (e = index-- ? 504 : 0) while (body.appendChild(a[order[index][--e]]), e);
-    else while (body.appendChild(a[++e]), e < 504);
+    if (e = index-- ? 516 : 0) while (body.appendChild(a[order[index][--e]]), e);
+    else while (body.appendChild(a[++e]), e < 516);
     scroll(0, 0);
   }
   select.hidden = !0;
