@@ -1,97 +1,80 @@
 <meta charset=utf-8 content="maximum-scale=yes initial-scale=yes"name=viewport>
-<title>Equine MSTN List</title>
-<!--<script defer src=index19.js></script>-->
+<title>Equine Myostatin List</title>
 <style>
 @media (hover) {
   a:hover { filter: invert(1) }
-  svg:hover { stroke: #c2d }
-  u:hover { color: #c2d }
+  svg:hover { stroke: #b5c }
+  u:hover { color: #b5c }
 }
 ::-webkit-scrollbar { width: 16 }
-::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 2px
+::-webkit-scrollbar-thumb { background-color: #999 }
+#s {
+  background-color: #ddd;
+  outline: 1px solid #ddd;
+  line-height: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1
 }
 a {
-  background-color: #222;
+  background-color: #110;
   color: #999;
-  font: min(calc(.625vw + 8px),13px) courier;
   outline: 1px solid #555;
   padding: 8 0;
   text-align: center;
   text-decoration: none;
-  white-space: pre;
+  white-space: pre-wrap;
   width: 25%;
 }
 a::first-line {
-  color: #bbb;
-  font-family: sans-serif;
-  letter-spacing: 0
+  color: #ccc;
+  font: clamp(10px, 2vw ,13px) hiragino kaku gothic pro,meiryo,sans-serif;
+  letter-spacing: 0;
 }
 p {
   display: flex;
   margin: 0;
 }
-#x {
-  background-color: inherit;
-  border: 1px solid #ddd;
-  border-radius: 2px;
-  font: 13px/3 courier;
-  position: sticky;
-  top: 0;
-  z-index: 1
-}
-option {
-  font: 16px/2 sans-serif;
-  border: 1px solid #ff9
+dt {
+
 }
 svg {
   cursor: pointer;
   fill: none;
   height: 40;
-  stroke: #999;
+  stroke: #888;
   stroke-width: 2;
   width: 40
-}
-u {
-  color: #699;
-  cursor: pointer
 }
 input {
   all: unset;
   flex: 1
 }
-select {
-  appearance: none;
-  border: 0;
-  border-radius: 2px;
-  outline: 0;
-  text-align: center;
-  width: 80
-}
 body {
-  background-color: #111;
-  letter-spacing: -1;
+  background-color: #110;
+  color: #555;
+  font: 12px courier;
+  letter-spacing: -.5;
   margin: 0 auto 60;
   overflow: clip scroll;
   user-select: none;
-  width: min(100%, 960px)
+  width: min(100%, 960px);
+}
+nav {
+  position: fixed;
+
 }
 #a { background-color: #503 }
 #b { background-color: #040 }
 #c { background-color: #035 }
 </style>
-<base href=https://www.jbis.or.jp/horse/ target=_blank>
-<p id=x>
-  <svg><path d=m28+29-7-7a7+7+0,1,1+.1-.1></svg><u>@ariamaranai</u>[516]
+<!--<script src=index21.js defer></script>-->
+<p id=s>
+  <svg><path d=m30+30-7-7a7+7+0,1,0-.1+.1></svg>
+  <u style=cursor:pointer>@ariamaranai</u>
   <input>
-  <select>
-    <option checked>MSTN</option>
-    <option>名前</option>
-    <option>生年</option>
-    <option>国</option>
-    <option>性別</option>
-  </select>
+  [<span>519</span>]
+  <svg id=xxx><path d=M12+14H28M12+20H28M12+26H28></svg>
 <p><a id=a>-
 2022.AUS M<a>So You Think
 2006.NZ<a>Coralina
@@ -193,7 +176,7 @@ body {
 2001.JPN</a>
 <p><a id=a>Brung King
 2019.AUS M<a>Crackerjack King
-2008,IRE<a>Wild Cliffs
+2008.IRE<a>Wild Cliffs
 2013.AUS<a>Canford Cliffs
 2007.IRE</a>
 <p><a id=a>カリグラフィー
@@ -1151,6 +1134,11 @@ body {
 2014.AUS<a>Avienus
 2005.AUS<a>Reset
 2000.AUS</a>
+<p><a id=b>アウトパフォーム
+2019.GB M<a>Outstrip
+2011.GB<a>Triple Cee
+2006.IRE<a>Cape Cross
+1994.IRE</a>
 <p><a id=b>アシタカ
 2019.JPN M<a id=b>キズナ
 2010.JPN<a>ミスペンバリー
@@ -1276,6 +1264,11 @@ body {
 2005.JPN<a>ウディバードソング
 1999.USA<a>Woodman
 1983.USA</a>
+<p><a id=b>テリーヌ
+2018.JPN F<a>ダノンシャーク
+2008.JPN<a>ピサノグレース
+2005.JPN<a>French Deputy
+1992.USA</a>
 <p><a id=b>バスラットレオン
 2018.JPN M<a id=b>キズナ
 2010.JPN<a>バスラットアマル
@@ -1799,7 +1792,7 @@ body {
 <p><a id=b>サウンドボルケーノ
 2008.USA S<a id=a>Henny Hughes
 2003.USA<a>Cosmic Wing
-1996.USA<a>Halo
+1996.USA<a id=b>Halo
 1969.USA</a>
 <p><a id=b>Ato
 2007.SAF S<a>Royal Academy
@@ -2191,6 +2184,11 @@ body {
 1954.USA<a>Somethingroyal
 1952.USA<a>Princequillo
 1940.IRE</a>
+<p><a id=b>Halo
+1969.USA S<a>Hail to Reason
+1958.USA<a>Cosmah
+1953.USA<a>Cosmic Bomb
+1944.USA</a>
 <p><a id=b>Northern Dancer
 1961.CAN S<a id=a>Nearctic
 1954.CAN<a>Natalma
@@ -2592,7 +2590,7 @@ body {
 1980.USA<a id=b>Secretariat
 1970.USA</a>
 <p><a id=c>Sunday Silence
-1986.USA S<a>Halo
+1986.USA S<a id=b>Halo
 1969.USA<a>Wishing Well
 1975.USA<a>Understanding
 1963.USA</a>
@@ -2670,4 +2668,5 @@ body {
 1764.GB S<a>Marske
 1750.GB<a>Spilletta
 1749.GB<a>Regulus
-1739.GB
+1739.GB</a>
+</p>
